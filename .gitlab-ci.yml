@@ -16,7 +16,7 @@ coverage:
     - ctest -V
     # collect code coverage data
     - lcov -c --directory . --output-file main_coverage.info
-    - lcov --remove main_coverage.info '/usr/include/*' '*tests/*' -o main_coverage_filtered.info
+    - lcov --remove main_coverage.info '/usr/include/*' '*tests/*' '*third-party/*' -o main_coverage_filtered.info
     - genhtml main_coverage_filtered.info --output-directory ../public
   coverage: /^[\t ]*lines\.*:\s*\d+.\d+\%/
   artifacts:
