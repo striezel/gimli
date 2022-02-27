@@ -19,6 +19,7 @@
 */
 
 #include "Image.hpp"
+#include <cstring>
 #include <stdexcept>
 
 namespace gimli
@@ -29,11 +30,35 @@ Image Image::load(const std::string_view& path, const Format format)
   throw std::runtime_error("load() is not implemented yet.");
 }
 
-Image::Image(const Dimension& d, const PixelLayout lo, unsigned char _data[])
+Image::Image(const Dimension& d, const PixelLayout lo, std::uint8_t _data[])
 : dim(d),
   pxLayout(lo),
-  data(_data)
+  pxData(_data)
 {
+}
+
+Image::Image(const Image& other)
+: dim(other.dimension()),
+  pxLayout(other.layout()),
+  pxData(nullptr)
+{
+  std::size_t pixels = dim.width() * dim.height();
+  switch (pxLayout)
+  {
+    case PixelLayout::RGB:
+         pixels *= 3;
+         break;
+    case PixelLayout::RGBA:
+         pixels *= 4;
+         break;
+    case PixelLayout::Grey:
+         pixels *= 3;
+         break;
+    default:
+         throw std::runtime_error("Unknown pixel layout.");
+  }
+  pxData = std::make_unique<std::uint8_t[]>(pixels);
+  std::memcpy(pxData.get(), other.data(), pixels);
 }
 
 const Dimension& Image::dimension() const
@@ -44,6 +69,11 @@ const Dimension& Image::dimension() const
 PixelLayout Image::layout() const
 {
   return pxLayout;
+}
+
+const std::uint8_t* Image::data() const
+{
+  return pxData.get();
 }
 
 } // namespace

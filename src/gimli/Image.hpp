@@ -33,14 +33,16 @@ class Image
 {
   public:
     static Image load(const std::string_view& path, const Format format);
-    Image(const Dimension& d = Dimension(), const PixelLayout l = PixelLayout::RGB, unsigned char _data[] = nullptr);
+    Image(const Dimension& d = Dimension(), const PixelLayout l = PixelLayout::RGB, std::uint8_t _data[] = nullptr);
+    Image(const Image& other);
 
     const Dimension& dimension() const;
     PixelLayout layout() const;
+    const std::uint8_t* data() const;
   private:
     Dimension dim;
     PixelLayout pxLayout;
-    std::unique_ptr<unsigned char[]> data;
+    std::unique_ptr<std::uint8_t[]> pxData;
 };
 
 } // namespace

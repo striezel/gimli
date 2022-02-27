@@ -122,7 +122,7 @@ nonstd::expected<Image, std::string> PngLoader::load(const std::string_view& pat
   const auto row_size_in_bytes = png_get_rowbytes(png_ptr,info_ptr);
 
   // prepare the array for the data
-  unsigned char* v_ptr = (unsigned char*) malloc(row_size_in_bytes * height * sizeof(png_byte));
+  std::uint8_t* v_ptr = (std::uint8_t*) malloc(row_size_in_bytes * height * sizeof(png_byte));
   if (v_ptr == nullptr)
   {
     png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);

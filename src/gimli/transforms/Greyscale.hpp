@@ -18,27 +18,27 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_FORMAT_HPP
-#define GIMLI_FORMAT_HPP
+#ifndef GIMLI_TRANSFORM_GREYSCALE_HPP
+#define GIMLI_TRANSFORM_GREYSCALE_HPP
 
-#include <cstdint>
+#include "../../../third-party/nonstd/expected.hpp"
+#include "../Image.hpp"
 
 namespace gimli
 {
 
-enum class Format: std::uint_least8_t
+struct Greyscale
 {
-  Jpeg = 1,
-  Png  = 2
-};
-
-enum class PixelLayout
-{
-  RGB,  // red, green, blue, using 8 bits each
-  RGBA, // red, green, blue, alpha, using 8 bits each
-  Grey  // greyscale channel, using 8 bits
+  public:
+    /** \brief Transforms a non-greyscale image to greyscale.
+     *
+     * \param source   the source image
+     * \return Returns the transformation result, if successful.
+     *         Returns an error message otherwise.
+     */
+    static nonstd::expected<Image, std::string> transform(const Image& source);
 };
 
 } // namespace
 
-#endif // GIMLI_FORMAT_HPP
+#endif // GIMLI_TRANSFORM_GREYSCALE_HPP

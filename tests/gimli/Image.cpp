@@ -33,6 +33,7 @@ TEST_CASE("Image")
     REQUIRE( img.dimension().width() == 0 );
     REQUIRE( img.dimension().height() == 0 );
     REQUIRE( img.layout() == PixelLayout::RGB );
+    REQUIRE( img.data() == nullptr );
   }
 
   SECTION("load")
