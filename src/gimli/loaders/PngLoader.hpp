@@ -18,32 +18,38 @@
  -------------------------------------------------------------------------------
 */
 
-#include "Image.hpp"
-#include <stdexcept>
+#ifndef GIMLI_PNG_LOADER_HPP
+#define GIMLI_PNG_LOADER_HPP
+
+#include <string>
+#include "Loader.hpp"
 
 namespace gimli
 {
 
-Image Image::load(const std::string_view& path, const Format format)
+/** \brief Loads PNG images.
+ */
+class PngLoader: Loader
 {
-  throw std::runtime_error("load() is not implemented yet.");
-}
+  public:
+    /** \brief Indicates whether the loader supports a certain image format.
+     *
+     * \param fmt   the format to check
+     * \return Returns true, if the loader supports loading the specified image
+     *         format. Returns false, if the format is not supported.
+     */
+    bool supportsFormat(const Format fmt) const final;
 
-Image::Image(const Dimension& d, const PixelLayout lo, unsigned char _data[])
-: dim(d),
-  pxLayout(lo),
-  data(_data)
-{
-}
-
-const Dimension& Image::dimension() const
-{
-  return dim;
-}
-
-PixelLayout Image::layout() const
-{
-  return pxLayout;
-}
+    /** \brief Loads an image from the given path.
+     *
+     * \param path    the file path of the image to load
+     * \param format  the format of the image
+     * \return Returns an Image, if the image could be loaded.
+     *         Returns an error message otherwise.
+     */
+    nonstd::expected<Image, std::string> load(const std::string_view& path, const Format format) final;
+};
 
 } // namespace
+
+#endif // GIMLI_PNG_LOADER_HPP

@@ -32,6 +32,12 @@ enum class Format: std::uint_least8_t
   Png  = 2
 };
 
+enum class PixelLayout
+{
+  RGB, // red, green, blue, using 8 bits each
+  RGBA // red, green, blue, alpha, using 8 bits each
+};
+
 } // namespace
 
 #endif // GIMLI_FORMAT_HPP

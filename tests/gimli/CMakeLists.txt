@@ -7,8 +7,10 @@ project(gimli_tests)
 set(gimli_tests_sources
     ../../src/gimli/Dimension.cpp
     ../../src/gimli/Image.cpp
+    ../../src/gimli/loaders/PngLoader.cpp
     Dimension.cpp
     Image.cpp
+    loaders/PngLoader.cpp
     main.cpp)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
@@ -24,6 +26,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s" )
 add_executable(gimli_tests ${gimli_tests_sources})
+
+# libpng for reading PNG images
+find_package (PNG)
+if (PNG_FOUND)
+  include_directories(${PNG_INCLUDE_DIRS})
+  target_link_libraries (gimli_tests ${PNG_LIBRARIES})
+else ()
+  message ( FATAL_ERROR "libpng was not found!" )
+endif (PNG_FOUND)
 
 # add test case
 add_test(NAME test_gimli

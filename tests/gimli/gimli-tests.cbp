@@ -34,13 +34,20 @@
 			<Add option="-std=c++17" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Linker>
+			<Add library="png" />
+		</Linker>
 		<Unit filename="../../src/gimli/Dimension.cpp" />
 		<Unit filename="../../src/gimli/Dimension.hpp" />
 		<Unit filename="../../src/gimli/Format.hpp" />
 		<Unit filename="../../src/gimli/Image.cpp" />
 		<Unit filename="../../src/gimli/Image.hpp" />
+		<Unit filename="../../src/gimli/loaders/Loader.hpp" />
+		<Unit filename="../../src/gimli/loaders/PngLoader.cpp" />
+		<Unit filename="../../src/gimli/loaders/PngLoader.hpp" />
 		<Unit filename="Dimension.cpp" />
 		<Unit filename="Image.cpp" />
+		<Unit filename="loaders/PngLoader.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

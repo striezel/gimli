@@ -26,14 +26,14 @@ TEST_CASE("Image")
 {
   using namespace gimli;
 
-  /*SECTION("constructor")
+  SECTION("constructor")
   {
     Image img;
 
     REQUIRE( img.dimension().width() == 0 );
     REQUIRE( img.dimension().height() == 0 );
-    REQUIRE( img.format() == Format::Jpeg );
-  }*/
+    REQUIRE( img.layout() == PixelLayout::RGB );
+  }
 
   SECTION("load")
   {
