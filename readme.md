@@ -11,7 +11,7 @@ very few features._
 ### Prerequisites
 
 To build gimli from source you need a C++ compiler with support for C++17,
-CMake 3.8 or later, the libjpeg library, and thelibpng library.
+CMake 3.8 or later, the libjpeg library, and the libpng library.
 pkg-config is required to make it easier to find compiler options for the
 installed libraries. Additionally, the library uses Catch (C++ Automated Test
 Cases in Headers) to perform some tests.

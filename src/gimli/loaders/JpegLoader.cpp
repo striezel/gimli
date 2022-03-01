@@ -18,27 +18,27 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_FORMAT_HPP
-#define GIMLI_FORMAT_HPP
-
-#include <cstdint>
+#include "JpegLoader.hpp"
+#include <boost/gil/extension/io/jpeg.hpp>
 
 namespace gimli
 {
 
-enum class Format: std::uint_least8_t
+nonstd::expected<Image, std::string> JpegLoader::load(const std::string& path)
 {
-  Jpeg = 1,
-  Png  = 2
-};
+  using namespace boost::gil;
 
-enum class PixelLayout
-{
-  RGB,  // red, green, blue, using 8 bits each
-  RGBA, // red, green, blue, alpha, using 8 bits each
-  Grey  // greyscale channel, using 8 bits
-};
+  Image image;
+  try
+  {
+    read_image(path, image, jpeg_tag());
+  }
+  catch (const std::exception& ex)
+  {
+    return nonstd::make_unexpected(ex.what());
+  }
+
+  return image;
+}
 
 } // namespace
-
-#endif // GIMLI_FORMAT_HPP

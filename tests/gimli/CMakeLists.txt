@@ -5,14 +5,10 @@ cmake_minimum_required (VERSION 3.8)
 project(gimli_tests)
 
 set(gimli_tests_sources
-    ../../src/gimli/Dimension.cpp
-    ../../src/gimli/Image.cpp
+    ../../src/gimli/loaders/JpegLoader.cpp
     ../../src/gimli/loaders/PngLoader.cpp
-    ../../src/gimli/transforms/Greyscale.cpp
-    Dimension.cpp
-    Image.cpp
+    loaders/JpegLoader.cpp
     loaders/PngLoader.cpp
-    transforms/Greyscale.cpp
     main.cpp)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
@@ -28,6 +24,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s" )
 add_executable(gimli_tests ${gimli_tests_sources})
+
+# libjpeg for reading JPEG images
+find_package (JPEG)
+if (JPEG_FOUND)
+  include_directories(${JPEG_INCLUDE_DIR})
+  target_link_libraries (gimli_tests ${JPEG_LIBRARIES})
+else ()
+  message ( FATAL_ERROR "libjpeg was not found!" )
+endif (JPEG_FOUND)
 
 # libpng for reading PNG images
 find_package (PNG)

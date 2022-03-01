@@ -36,22 +36,17 @@
 		</Compiler>
 		<Linker>
 			<Add library="png" />
+			<Add library="jpeg" />
 		</Linker>
-		<Unit filename="../../src/gimli/Dimension.cpp" />
-		<Unit filename="../../src/gimli/Dimension.hpp" />
-		<Unit filename="../../src/gimli/Format.hpp" />
-		<Unit filename="../../src/gimli/Image.cpp" />
 		<Unit filename="../../src/gimli/Image.hpp" />
+		<Unit filename="../../src/gimli/loaders/JpegLoader.cpp" />
+		<Unit filename="../../src/gimli/loaders/JpegLoader.hpp" />
 		<Unit filename="../../src/gimli/loaders/Loader.hpp" />
 		<Unit filename="../../src/gimli/loaders/PngLoader.cpp" />
 		<Unit filename="../../src/gimli/loaders/PngLoader.hpp" />
-		<Unit filename="../../src/gimli/transforms/Greyscale.cpp" />
-		<Unit filename="../../src/gimli/transforms/Greyscale.hpp" />
-		<Unit filename="Dimension.cpp" />
-		<Unit filename="Image.cpp" />
+		<Unit filename="loaders/JpegLoader.cpp" />
 		<Unit filename="loaders/PngLoader.cpp" />
 		<Unit filename="main.cpp" />
-		<Unit filename="transforms/Greyscale.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

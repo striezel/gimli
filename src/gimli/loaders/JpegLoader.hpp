@@ -18,40 +18,29 @@
  -------------------------------------------------------------------------------
 */
 
-#include "Dimension.hpp"
+#ifndef GIMLI_JPEG_LOADER_HPP
+#define GIMLI_JPEG_LOADER_HPP
+
+#include <string>
+#include "Loader.hpp"
 
 namespace gimli
 {
 
-Dimension::Dimension()
-: w(0),
-  h(0)
+/** \brief Loads JPEG images.
+ */
+class JpegLoader: Loader
 {
-}
-
-std::uint32_t Dimension::width() const
-{
-  return w;
-}
-
-void Dimension::setWidth(const std::uint32_t new_width)
-{
-  w = new_width;
-}
-
-std::uint32_t Dimension::height() const
-{
-  return h;
-}
-
-void Dimension::setHeight(const std::uint32_t new_height)
-{
-  h = new_height;
-}
-
-bool Dimension::operator==(const Dimension& other) const
-{
-  return (w == other.w) && (h == other.h);
-}
+  public:
+    /** \brief Loads an image from the given path.
+     *
+     * \param path    the file path of the image to load
+     * \return Returns an Image, if the image could be loaded.
+     *         Returns an error message otherwise.
+     */
+    nonstd::expected<Image, std::string> load(const std::string& path) final;
+};
 
 } // namespace
+
+#endif // GIMLI_JPEG_LOADER_HPP

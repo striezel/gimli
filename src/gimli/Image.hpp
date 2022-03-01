@@ -21,29 +21,16 @@
 #ifndef GIMLI_IMAGE_HPP
 #define GIMLI_IMAGE_HPP
 
-#include <memory>
-#include <string_view>
-#include "Dimension.hpp"
-#include "Format.hpp"
+#include <boost/gil/extension/dynamic_image/any_image.hpp>
+#include <boost/mpl/vector.hpp>
 
 namespace gimli
 {
 
-class Image
-{
-  public:
-    static Image load(const std::string_view& path, const Format format);
-    Image(const Dimension& d = Dimension(), const PixelLayout l = PixelLayout::RGB, std::uint8_t _data[] = nullptr);
-    Image(const Image& other);
+typedef boost::mpl::vector<boost::gil::rgb8_image_t, boost::gil::rgba8_image_t, boost::gil::gray8_image_t> image_types;
+using Image = boost::gil::any_image<image_types>;
 
-    const Dimension& dimension() const;
-    PixelLayout layout() const;
-    const std::uint8_t* data() const;
-  private:
-    Dimension dim;
-    PixelLayout pxLayout;
-    std::unique_ptr<std::uint8_t[]> pxData;
-};
+/* Note: Image might change to boost::gil::rgb8_image_t later. */
 
 } // namespace
 

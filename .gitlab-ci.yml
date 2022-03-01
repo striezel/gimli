@@ -3,7 +3,8 @@ coverage:
   stage: test
   before_script:
     - apt-get update && apt-get -y upgrade
-    - apt-get install -y catch cmake g++-10 lcov libpng-dev pkg-config
+    - apt-get install -y catch cmake g++-10 lcov libjpeg-dev libpng-dev pkg-config
+    - apt-get install -y --no-install-recommends --no-install-suggests libboost-dev
   script:
     # build
     - export CXX=g++-10

@@ -23,7 +23,6 @@
 
 #include <string>
 #include "../../../third-party/nonstd/expected.hpp"
-#include "../Format.hpp"
 #include "../Image.hpp"
 
 namespace gimli
@@ -34,22 +33,13 @@ namespace gimli
 class Loader
 {
   public:
-    /** \brief Indicates whether the loader supports a certain image format.
-     *
-     * \param fmt   the format to check
-     * \return Returns true, if the loader supports loading the specified image
-     *         format. Returns false, if the format is not supported.
-     */
-    virtual bool supportsFormat(const Format fmt) const = 0;
-
     /** \brief Loads an image from the given path.
      *
      * \param path    the file path of the image to load
-     * \param format  the format of the image
      * \return Returns an Image, if the image could be loaded.
      *         Returns an error message otherwise.
      */
-    virtual nonstd::expected<Image, std::string> load(const std::string_view& path, const Format format) = 0;
+    virtual nonstd::expected<Image, std::string> load(const std::string& path) = 0;
 
     virtual ~Loader() = default;
 };
