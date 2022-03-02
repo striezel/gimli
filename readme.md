@@ -11,7 +11,8 @@ very few features._
 ### Prerequisites
 
 To build gimli from source you need a C++ compiler with support for C++17,
-CMake 3.8 or later, the libjpeg library, and the libpng library.
+CMake 3.8 or later, the Boost libraries, the libjpeg library, and the libpng
+library.
 pkg-config is required to make it easier to find compiler options for the
 installed libraries. Additionally, the library uses Catch (C++ Automated Test
 Cases in Headers) to perform some tests.
@@ -21,11 +22,11 @@ system to get the latest source code directly from the Git repository.
 
 All of that can usually be installed be typing
 
-    apt-get install catch cmake g++ git libjpeg-dev libpng-dev pkg-config
+    apt-get install catch cmake g++ git libboost-dev libjpeg-dev libpng-dev pkg-config
 
 or
 
-    yum install catch cmake gcc-c++ git libjpeg-devel libpng-devel pkgconfig
+    yum install boost-devel catch cmake gcc-c++ git libjpeg-devel libpng-devel pkgconfig
 
 into a root terminal.
 
