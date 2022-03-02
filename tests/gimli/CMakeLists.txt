@@ -7,8 +7,10 @@ project(gimli_tests)
 set(gimli_tests_sources
     ../../src/gimli/loaders/JpegLoader.cpp
     ../../src/gimli/loaders/PngLoader.cpp
+    ../../src/gimli/transforms/Greyscale.cpp
     loaders/JpegLoader.cpp
     loaders/PngLoader.cpp
+    transforms/Greyscale.cpp
     main.cpp)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")

@@ -31,7 +31,7 @@ nonstd::expected<Image, std::string> PngLoader::load(const std::string& path)
   Image image;
   try
   {
-    read_image(path, image, png_tag());
+    read_and_convert_image(path, image, png_tag());
   }
   catch (const std::exception& ex)
   {

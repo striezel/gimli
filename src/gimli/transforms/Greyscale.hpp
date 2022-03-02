@@ -36,7 +36,7 @@ struct Greyscale
      * \return Returns the transformation result, if successful.
      *         Returns an error message otherwise.
      */
-    static nonstd::expected<Image, std::string> transform(const Image& source);
+    static nonstd::expected<boost::gil::gray8_image_t, std::string> transform(const Image& source);
 };
 
 } // namespace

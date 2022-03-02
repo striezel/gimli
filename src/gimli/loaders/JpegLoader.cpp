@@ -31,7 +31,7 @@ nonstd::expected<Image, std::string> JpegLoader::load(const std::string& path)
   Image image;
   try
   {
-    read_image(path, image, jpeg_tag());
+    read_and_convert_image(path, image, jpeg_tag());
   }
   catch (const std::exception& ex)
   {
