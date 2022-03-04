@@ -8,9 +8,11 @@ set(gimli_tests_sources
     ../../src/gimli/loaders/JpegLoader.hpp
     ../../src/gimli/loaders/PngLoader.hpp
     ../../src/gimli/transforms/Greyscale.cpp
+    ../../src/gimli/transforms/Resize.hpp
     loaders/JpegLoader.cpp
     loaders/PngLoader.cpp
     transforms/Greyscale.cpp
+    transforms/Resize.cpp
     main.cpp)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
