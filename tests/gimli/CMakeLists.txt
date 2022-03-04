@@ -5,8 +5,8 @@ cmake_minimum_required (VERSION 3.8)
 project(gimli_tests)
 
 set(gimli_tests_sources
-    ../../src/gimli/loaders/JpegLoader.cpp
-    ../../src/gimli/loaders/PngLoader.cpp
+    ../../src/gimli/loaders/JpegLoader.hpp
+    ../../src/gimli/loaders/PngLoader.hpp
     ../../src/gimli/transforms/Greyscale.cpp
     loaders/JpegLoader.cpp
     loaders/PngLoader.cpp

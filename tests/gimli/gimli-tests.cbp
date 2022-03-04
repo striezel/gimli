@@ -39,10 +39,8 @@
 			<Add library="jpeg" />
 		</Linker>
 		<Unit filename="../../src/gimli/Image.hpp" />
-		<Unit filename="../../src/gimli/loaders/JpegLoader.cpp" />
 		<Unit filename="../../src/gimli/loaders/JpegLoader.hpp" />
 		<Unit filename="../../src/gimli/loaders/Loader.hpp" />
-		<Unit filename="../../src/gimli/loaders/PngLoader.cpp" />
 		<Unit filename="../../src/gimli/loaders/PngLoader.hpp" />
 		<Unit filename="../../src/gimli/transforms/Greyscale.cpp" />
 		<Unit filename="../../src/gimli/transforms/Greyscale.hpp" />

@@ -21,7 +21,7 @@
 #ifndef GIMLI_PNG_LOADER_HPP
 #define GIMLI_PNG_LOADER_HPP
 
-#include <string>
+#include <boost/gil/extension/io/png.hpp>
 #include "Loader.hpp"
 
 namespace gimli
@@ -34,20 +34,7 @@ namespace gimli
  *          versions of Boost GIL. So make sure the image you try to load is
  *          really a PNG file and not something else.
  */
-class PngLoader: Loader
-{
-  public:
-    /** \brief Loads an image from the given path.
-     *
-     * \param path    the file path of the image to load
-     * \return Returns an Image, if the image could be loaded.
-     *         Returns an error message otherwise.
-     * \remarks This method may cause program termination in some versions of
-     *          Boost GIL, if it is used to load anything other than a PNG
-     *          image file.
-     */
-    nonstd::expected<Image, std::string> load(const std::string& path) final;
-};
+using PngLoader = Loader<boost::gil::png_tag>;
 
 } // namespace
 

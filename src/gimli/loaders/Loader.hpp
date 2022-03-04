@@ -28,8 +28,9 @@
 namespace gimli
 {
 
-/** \brief Interface for loading a certain image type.
+/** \brief Template for loading a certain image type.
  */
+template<typename tag_t>
 class Loader
 {
   public:
@@ -39,9 +40,22 @@ class Loader
      * \return Returns an Image, if the image could be loaded.
      *         Returns an error message otherwise.
      */
-    virtual nonstd::expected<Image, std::string> load(const std::string& path) = 0;
+    nonstd::expected<Image, std::string> load(const std::string& path)
+    {
+      using namespace boost::gil;
 
-    virtual ~Loader() = default;
+      Image image;
+      try
+      {
+        read_and_convert_image(path, image, tag_t());
+      }
+      catch (const std::exception& ex)
+      {
+        return nonstd::make_unexpected(ex.what());
+      }
+
+      return image;
+    }
 };
 
 } // namespace

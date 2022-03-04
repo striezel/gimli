@@ -21,7 +21,7 @@
 #ifndef GIMLI_JPEG_LOADER_HPP
 #define GIMLI_JPEG_LOADER_HPP
 
-#include <string>
+#include <boost/gil/extension/io/jpeg.hpp>
 #include "Loader.hpp"
 
 namespace gimli
@@ -29,17 +29,7 @@ namespace gimli
 
 /** \brief Loads JPEG images.
  */
-class JpegLoader: Loader
-{
-  public:
-    /** \brief Loads an image from the given path.
-     *
-     * \param path    the file path of the image to load
-     * \return Returns an Image, if the image could be loaded.
-     *         Returns an error message otherwise.
-     */
-    nonstd::expected<Image, std::string> load(const std::string& path) final;
-};
+using JpegLoader = Loader<boost::gil::jpeg_tag>;
 
 } // namespace
 
