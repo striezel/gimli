@@ -26,7 +26,7 @@ All of that can usually be installed be typing
 
 or
 
-    yum install boost-devel catch cmake gcc-c++ git libjpeg-devel libpng-devel pkgconfig
+    yum install boost-devel catch-devel cmake gcc-c++ git libjpeg-devel libpng-devel pkgconfig
 
 into a root terminal.
 

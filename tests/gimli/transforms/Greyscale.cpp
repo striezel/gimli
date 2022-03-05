@@ -18,7 +18,7 @@
  -------------------------------------------------------------------------------
 */
 
-#include <catch.hpp>
+#include "../find_catch.hpp"
 #include <cstdio> // for std::remove
 #include <fstream>
 #include <string_view>

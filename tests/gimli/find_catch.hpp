@@ -18,5 +18,15 @@
  -------------------------------------------------------------------------------
 */
 
-#define CATCH_CONFIG_MAIN
-#include "find_catch.hpp"
+// This header tries to find the matching header for Catch (C++ Automated Test
+// Cases in Headers).
+#if defined(__has_include)
+  #if __has_include(<catch.hpp>)
+    #include <catch.hpp>
+  #elif __has_include(<catch2/catch.hpp>)
+    #include <catch2/catch.hpp>
+  #endif
+#else
+  // If there is no __has_include, just go with catch v1.
+  #include <catch.hpp>
+#endif
