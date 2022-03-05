@@ -59,8 +59,6 @@ TEST_CASE("Resize")
 
       REQUIRE( point_t(10, 12) == shrink_image.dimensions() );
 
-      boost::gil::write_view("/tmp/test_resized.png", const_view(shrink_image), boost::gil::png_tag());
-
       auto shrink_view = const_view(shrink_image);
       auto locator = shrink_view.xy_at(0, 0);
       // check first half of image (i. e. red pixels)
