@@ -31,8 +31,6 @@ TEST_CASE("Greyscale")
 
   SECTION("transform")
   {
-    Greyscale xform;
-
     SECTION("transform RGB to greyscale")
     {
       using namespace std::string_view_literals;

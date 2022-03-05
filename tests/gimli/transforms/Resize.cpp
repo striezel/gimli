@@ -32,8 +32,6 @@ TEST_CASE("Resize")
 
   SECTION("transform")
   {
-    Resize xform;
-
     SECTION("resize RGB image")
     {
       using namespace std::string_view_literals;
