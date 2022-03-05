@@ -26,6 +26,23 @@ coverage:
     paths:
       - public
 
+fedora:
+  image: fedora:35
+  stage: test
+  before_script:
+    - yum update -y
+    - yum install -y boost-devel catch-devel cmake gcc-c++ git libjpeg-devel libpng-devel pkgconfig
+  script:
+    # build
+    - export CXX=g++
+    - export CC=gcc
+    - mkdir build
+    - cd build
+    - cmake ../
+    - make -j4
+    # tests
+    - ctest -V
+
 pages:
   image: debian:11-slim
   stage: deploy
