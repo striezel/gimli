@@ -42,12 +42,15 @@
 		<Unit filename="../../src/gimli/loaders/JpegLoader.hpp" />
 		<Unit filename="../../src/gimli/loaders/Loader.hpp" />
 		<Unit filename="../../src/gimli/loaders/PngLoader.hpp" />
+		<Unit filename="../../src/gimli/numeric/hamming.cpp" />
+		<Unit filename="../../src/gimli/numeric/hamming.hpp" />
 		<Unit filename="../../src/gimli/transforms/Greyscale.cpp" />
 		<Unit filename="../../src/gimli/transforms/Greyscale.hpp" />
 		<Unit filename="../../src/gimli/transforms/Resize.hpp" />
 		<Unit filename="loaders/JpegLoader.cpp" />
 		<Unit filename="loaders/PngLoader.cpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="numeric/hamming.cpp" />
 		<Unit filename="transforms/Greyscale.cpp" />
 		<Unit filename="transforms/Resize.cpp" />
 		<Extensions />
