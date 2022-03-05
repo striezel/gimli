@@ -27,6 +27,7 @@
 
 TEST_CASE("Resize")
 {
+  using namespace boost::gil;
   using namespace gimli;
 
   SECTION("transform")
@@ -36,7 +37,6 @@ TEST_CASE("Resize")
     SECTION("resize RGB image")
     {
       using namespace std::string_view_literals;
-      using namespace boost::gil;
 
       const auto data = "\x89PNG\x0D\x0A\x1A\x0A\0\0\0\x0D\x49\x48\x44\x52\0\0\0\x14\0\0\0\x1E\x08\x02\0\0\0\xA3p\xA9<\0\0\0\x09pHYs\0\0.#\0\0.#\x01x\xA5?v\0\0\0\x19tEXtComment\0Created with GIMPW\x81\x0E\x17\0\0\0%IDAT8\xCB\x63\xFC\xCF@>`b\x18\xD5<\xAAyT3u5320\xFC\x1F\x0D\xB0Q\xCD\xA3\x9A\x07\x8D\x66\0\x84\xF7\x02\x39v\x01\xB2\x02\0\0\0\0IEND\xAE\x42`\x82"sv;
       // write PNG file
@@ -93,6 +93,15 @@ TEST_CASE("Resize")
           REQUIRE( blue_matches );
         }
       }
+    }
+
+    SECTION("resize fails")
+    {
+      rgb8_image_t source(point_t(128, 128));
+      // Use an insanely huge size to trigger allocation failure.
+      const auto insane_size = point_t(100000000, 120000000);
+      auto transformed = Resize::transform<rgb8_image_t>(source, insane_size);
+      REQUIRE_FALSE( transformed.has_value() );
     }
   }
 }

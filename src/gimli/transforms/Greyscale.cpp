@@ -28,14 +28,20 @@ nonstd::expected<boost::gil::gray8_image_t, std::string> Greyscale::transform(co
 {
   using namespace boost::gil;
 
-  gray8_image_t img(source.dimensions());
-  // Boost GIL's conversion seems to be based on Rec. 601 luma, i. e.:
-  //   grey value = 0.299 * red + 0.587 * green + 0.114 * blue
-  copy_pixels(
-    color_converted_view<gray8_pixel_t>(const_view(source)),
-    view(img));
-
-  return img;
+  try
+  {
+    gray8_image_t img(source.dimensions());
+    // Boost GIL's conversion seems to be based on Rec. 601 luma, i. e.:
+    //   grey value = 0.299 * red + 0.587 * green + 0.114 * blue
+    copy_pixels(
+      color_converted_view<gray8_pixel_t>(const_view(source)),
+      view(img));
+    return img;
+  }
+  catch (const std::exception& ex)
+  {
+    return nonstd::make_unexpected(ex.what());
+  }
 }
 
 } // namespace
