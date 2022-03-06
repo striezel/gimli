@@ -18,8 +18,8 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_HASH_AVERAGE_HPP
-#define GIMLI_HASH_AVERAGE_HPP
+#ifndef GIMLI_HASH_DIFFERENCE_HPP
+#define GIMLI_HASH_DIFFERENCE_HPP
 
 #include <cstdint>
 #include <string>
@@ -39,4 +39,4 @@ nonstd::expected<uint64_t, std::string> difference(const Image& img);
 
 } // namespace
 
-#endif // GIMLI_HASH_AVERAGE_HPP
+#endif // GIMLI_HASH_DIFFERENCE_HPP
