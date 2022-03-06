@@ -6,12 +6,14 @@ project(gimli_tests)
 
 set(gimli_tests_sources
     ../../src/gimli/hash/average.cpp
+    ../../src/gimli/hash/difference.cpp
     ../../src/gimli/loaders/JpegLoader.hpp
     ../../src/gimli/loaders/PngLoader.hpp
     ../../src/gimli/numeric/hamming.cpp
     ../../src/gimli/transforms/Greyscale.cpp
     ../../src/gimli/transforms/Resize.hpp
     hash/average.cpp
+    hash/difference.cpp
     loaders/JpegLoader.cpp
     loaders/PngLoader.cpp
     numeric/hamming.cpp

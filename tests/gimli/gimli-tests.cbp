@@ -41,6 +41,8 @@
 		<Unit filename="../../src/gimli/Image.hpp" />
 		<Unit filename="../../src/gimli/hash/average.cpp" />
 		<Unit filename="../../src/gimli/hash/average.hpp" />
+		<Unit filename="../../src/gimli/hash/difference.cpp" />
+		<Unit filename="../../src/gimli/hash/difference.hpp" />
 		<Unit filename="../../src/gimli/loaders/JpegLoader.hpp" />
 		<Unit filename="../../src/gimli/loaders/Loader.hpp" />
 		<Unit filename="../../src/gimli/loaders/PngLoader.hpp" />
@@ -50,6 +52,7 @@
 		<Unit filename="../../src/gimli/transforms/Greyscale.hpp" />
 		<Unit filename="../../src/gimli/transforms/Resize.hpp" />
 		<Unit filename="hash/average.cpp" />
+		<Unit filename="hash/difference.cpp" />
 		<Unit filename="loaders/JpegLoader.cpp" />
 		<Unit filename="loaders/PngLoader.cpp" />
 		<Unit filename="main.cpp" />
