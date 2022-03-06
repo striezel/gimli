@@ -9,6 +9,7 @@ set(gimli_tests_sources
     ../../lib/gimli/hash/difference.cpp
     ../../lib/gimli/loaders/JpegLoader.hpp
     ../../lib/gimli/loaders/PngLoader.hpp
+    ../../lib/gimli/loaders/TargaLoader.hpp
     ../../lib/gimli/numeric/hamming.hpp
     ../../lib/gimli/transforms/Greyscale.cpp
     ../../lib/gimli/transforms/Resize.hpp
@@ -16,6 +17,7 @@ set(gimli_tests_sources
     hash/difference.cpp
     loaders/JpegLoader.cpp
     loaders/PngLoader.cpp
+    loaders/TargaLoader.cpp
     numeric/hamming.cpp
     transforms/Greyscale.cpp
     transforms/Resize.cpp

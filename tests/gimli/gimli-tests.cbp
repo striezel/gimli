@@ -46,6 +46,7 @@
 		<Unit filename="../../lib/gimli/loaders/JpegLoader.hpp" />
 		<Unit filename="../../lib/gimli/loaders/Loader.hpp" />
 		<Unit filename="../../lib/gimli/loaders/PngLoader.hpp" />
+		<Unit filename="../../lib/gimli/loaders/TargaLoader.hpp" />
 		<Unit filename="../../lib/gimli/numeric/hamming.hpp" />
 		<Unit filename="../../lib/gimli/transforms/Greyscale.cpp" />
 		<Unit filename="../../lib/gimli/transforms/Greyscale.hpp" />
@@ -54,6 +55,7 @@
 		<Unit filename="hash/difference.cpp" />
 		<Unit filename="loaders/JpegLoader.cpp" />
 		<Unit filename="loaders/PngLoader.cpp" />
+		<Unit filename="loaders/TargaLoader.cpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="numeric/hamming.cpp" />
 		<Unit filename="transforms/Greyscale.cpp" />
