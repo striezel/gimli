@@ -9,7 +9,7 @@ set(gimli_tests_sources
     ../../src/gimli/hash/difference.cpp
     ../../src/gimli/loaders/JpegLoader.hpp
     ../../src/gimli/loaders/PngLoader.hpp
-    ../../src/gimli/numeric/hamming.cpp
+    ../../src/gimli/numeric/hamming.hpp
     ../../src/gimli/transforms/Greyscale.cpp
     ../../src/gimli/transforms/Resize.hpp
     hash/average.cpp

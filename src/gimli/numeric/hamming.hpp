@@ -22,6 +22,7 @@
 #define GIMLI_NUMERIC_HAMMING_HPP
 
 #include <cstdint>
+#include <limits>
 
 namespace gimli::numeric
 {
@@ -33,7 +34,19 @@ namespace gimli::numeric
  * \return Returns the Hamming distance of a and b.
  *
  */
-unsigned int hamming_distance(const uint64_t a, const uint64_t b);
+template<typename uint_t>
+unsigned int hamming_distance(const uint_t a, const uint_t b)
+{
+  static_assert(std::numeric_limits<uint_t>::is_integer && !std::numeric_limits<uint_t>::is_signed);
+  constexpr unsigned int digits = std::numeric_limits<uint_t>::digits;
+  unsigned int distance = 0;
+  for (unsigned int i = 0; i < digits; ++i)
+  {
+    const uint_t shifted = static_cast<uint_t>(1u) << i;
+    distance += (shifted & a) != (shifted & b);
+  }
+  return distance;
+}
 
 } // namespace
 

@@ -25,19 +25,46 @@ TEST_CASE("Hamming distance")
 {
   using namespace gimli::numeric;
 
-  SECTION("hamming_distance")
+  SECTION("hamming_distance: u16")
   {
-    REQUIRE( hamming_distance(0, 0) == 0 );
-    REQUIRE( hamming_distance(1, 1) == 0 );
-    REQUIRE( hamming_distance(0x0123456789ABCDEF, 0x0123456789ABCDEF) == 0 );
+    REQUIRE( hamming_distance<uint16_t>(0, 0) == 0 );
+    REQUIRE( hamming_distance<uint16_t>(1, 1) == 0 );
+    REQUIRE( hamming_distance<uint16_t>(0x1234, 0x1234) == 0 );
 
-    REQUIRE( hamming_distance(0b00001111, 0b00001001) == 2 );
-    REQUIRE( hamming_distance(0b00001111, 0b00000000) == 4 );
-    REQUIRE( hamming_distance(0b00001111, 0b11110000) == 8 );
-    REQUIRE( hamming_distance(0b00000000, 0b11111111) == 8 );
-    REQUIRE( hamming_distance(0b01010101, 0b10101010) == 8 );
-    REQUIRE( hamming_distance(0xFFFFFFFFFFFFFFFF, 0xFF00FF00FF00FF00) == 32 );
-    REQUIRE( hamming_distance(0xFFFFFFFFFFFFFFFF, 0x00000000FF00FF00) == 48 );
-    REQUIRE( hamming_distance(0, 0xFFFFFFFFFFFFFFFF) == 64 );
+    REQUIRE( hamming_distance<uint16_t>(0b0000000011111111, 0b0000000011111100) == 2 );
+    REQUIRE( hamming_distance<uint16_t>(0b0000000011111111, 0b0000000011110000) == 4 );
+    REQUIRE( hamming_distance<uint16_t>(0b0000000011111111, 0b0000000000000000) == 8 );
+    REQUIRE( hamming_distance<uint16_t>(0b0000000011111111, 0b0000111100000000) == 12 );
+    REQUIRE( hamming_distance<uint16_t>(0b0000000011111111, 0b1111111100000000) == 16 );
+  }
+
+  SECTION("hamming_distance: u32")
+  {
+    REQUIRE( hamming_distance<uint32_t>(0, 0) == 0 );
+    REQUIRE( hamming_distance<uint32_t>(1, 1) == 0 );
+    REQUIRE( hamming_distance<uint32_t>(0x12345678, 0x12345678) == 0 );
+    REQUIRE( hamming_distance<uint32_t>(0x00000080, 0x00000000) == 1 );
+    REQUIRE( hamming_distance<uint32_t>(0x00000090, 0x00000000) == 2 );
+    REQUIRE( hamming_distance<uint32_t>(0x0000000F, 0x00000000) == 4 );
+    REQUIRE( hamming_distance<uint32_t>(0xFF000000, 0x00000000) == 8 );
+    REQUIRE( hamming_distance<uint32_t>(0xFFFF0000, 0x00000000) == 16 );
+    REQUIRE( hamming_distance<uint32_t>(0xFFFFFF00, 0x00000000) == 24 );
+    REQUIRE( hamming_distance<uint32_t>(0xFFFFFFFF, 0x00000000) == 32 );
+  }
+
+  SECTION("hamming_distance: u64")
+  {
+    REQUIRE( hamming_distance<uint64_t>(0, 0) == 0 );
+    REQUIRE( hamming_distance<uint64_t>(1, 1) == 0 );
+    REQUIRE( hamming_distance<uint64_t>(0x0123456789ABCDEF, 0x0123456789ABCDEF) == 0 );
+
+    REQUIRE( hamming_distance<uint64_t>(0b00001111, 0b00001001) == 2 );
+    REQUIRE( hamming_distance<uint64_t>(0b00001111, 0b00000000) == 4 );
+    REQUIRE( hamming_distance<uint64_t>(0b00001111, 0b11110000) == 8 );
+    REQUIRE( hamming_distance<uint64_t>(0b00000000, 0b11111111) == 8 );
+    REQUIRE( hamming_distance<uint64_t>(0b01010101, 0b10101010) == 8 );
+    REQUIRE( hamming_distance<uint64_t>(0xFFFFFFFFFFFFFFFF, 0xFF00FF00FF00FF00) == 32 );
+    REQUIRE( hamming_distance<uint64_t>(0xFFFFFFFFFFFFFFFF, 0x00000000FF00FF00) == 48 );
+    REQUIRE( hamming_distance<uint64_t>(0, 0xFFFFFFFFFFFFFFFF) == 64 );
   }
 }
