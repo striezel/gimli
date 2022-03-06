@@ -13,6 +13,7 @@ set(gimli_tests_sources
     ../../lib/gimli/numeric/hamming.hpp
     ../../lib/gimli/transforms/Greyscale.cpp
     ../../lib/gimli/transforms/Resize.hpp
+    ../../lib/gimli/types/get_type.cpp
     ../../lib/gimli/types/is_jpeg.cpp
     ../../lib/gimli/types/is_png.cpp
     ../../lib/gimli/types/is_targa.cpp
@@ -24,6 +25,7 @@ set(gimli_tests_sources
     numeric/hamming.cpp
     transforms/Greyscale.cpp
     transforms/Resize.cpp
+    types/get_type.cpp
     types/is_jpeg.cpp
     types/is_png.cpp
     types/is_targa.cpp
