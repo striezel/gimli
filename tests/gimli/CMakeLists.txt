@@ -15,6 +15,7 @@ set(gimli_tests_sources
     ../../lib/gimli/transforms/Resize.hpp
     ../../lib/gimli/types/is_jpeg.cpp
     ../../lib/gimli/types/is_png.cpp
+    ../../lib/gimli/types/is_targa.cpp
     hash/average.cpp
     hash/difference.cpp
     loaders/JpegLoader.cpp
@@ -25,6 +26,7 @@ set(gimli_tests_sources
     transforms/Resize.cpp
     types/is_jpeg.cpp
     types/is_png.cpp
+    types/is_targa.cpp
     main.cpp)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")

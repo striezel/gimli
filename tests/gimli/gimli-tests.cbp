@@ -55,6 +55,8 @@
 		<Unit filename="../../lib/gimli/types/is_jpeg.hpp" />
 		<Unit filename="../../lib/gimli/types/is_png.cpp" />
 		<Unit filename="../../lib/gimli/types/is_png.hpp" />
+		<Unit filename="../../lib/gimli/types/is_targa.cpp" />
+		<Unit filename="../../lib/gimli/types/is_targa.hpp" />
 		<Unit filename="hash/average.cpp" />
 		<Unit filename="hash/difference.cpp" />
 		<Unit filename="loaders/JpegLoader.cpp" />
@@ -66,6 +68,7 @@
 		<Unit filename="transforms/Resize.cpp" />
 		<Unit filename="types/is_jpeg.cpp" />
 		<Unit filename="types/is_png.cpp" />
+		<Unit filename="types/is_targa.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
