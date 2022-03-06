@@ -51,6 +51,8 @@
 		<Unit filename="../../lib/gimli/transforms/Greyscale.cpp" />
 		<Unit filename="../../lib/gimli/transforms/Greyscale.hpp" />
 		<Unit filename="../../lib/gimli/transforms/Resize.hpp" />
+		<Unit filename="../../lib/gimli/types/is_jpeg.cpp" />
+		<Unit filename="../../lib/gimli/types/is_jpeg.hpp" />
 		<Unit filename="../../lib/gimli/types/is_png.cpp" />
 		<Unit filename="../../lib/gimli/types/is_png.hpp" />
 		<Unit filename="hash/average.cpp" />
@@ -62,6 +64,7 @@
 		<Unit filename="numeric/hamming.cpp" />
 		<Unit filename="transforms/Greyscale.cpp" />
 		<Unit filename="transforms/Resize.cpp" />
+		<Unit filename="types/is_jpeg.cpp" />
 		<Unit filename="types/is_png.cpp" />
 		<Extensions />
 	</Project>

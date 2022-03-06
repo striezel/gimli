@@ -13,6 +13,7 @@ set(gimli_tests_sources
     ../../lib/gimli/numeric/hamming.hpp
     ../../lib/gimli/transforms/Greyscale.cpp
     ../../lib/gimli/transforms/Resize.hpp
+    ../../lib/gimli/types/is_jpeg.cpp
     ../../lib/gimli/types/is_png.cpp
     hash/average.cpp
     hash/difference.cpp
@@ -22,6 +23,7 @@ set(gimli_tests_sources
     numeric/hamming.cpp
     transforms/Greyscale.cpp
     transforms/Resize.cpp
+    types/is_jpeg.cpp
     types/is_png.cpp
     main.cpp)
 

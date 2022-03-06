@@ -19,40 +19,46 @@
 */
 
 #include "../find_catch.hpp"
-#include "../../../lib/gimli/types/is_png.hpp"
+#include "../../../lib/gimli/types/is_jpeg.hpp"
 
-TEST_CASE("file format checks: PNG")
+TEST_CASE("file format checks: JPEG")
 {
   using namespace gimli::types;
 
-  SECTION("is_png")
+  SECTION("is_jpeg")
   {
-    SECTION("valid data")
+    SECTION("valid JPEG data")
     {
-      std::vector<uint8_t> data = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00 };
-      REQUIRE( is_png(data) );
+      std::vector<uint8_t> data = { 0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46, 0x49, 0x46 };
+      REQUIRE( is_jpeg(data) );
 
-      data = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
-      REQUIRE( is_png(data) );
+      data = { 0xFF, 0xD8, 0xFF, 0xE0 };
+      REQUIRE( is_jpeg(data) );
 
-      data = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52 };
-      REQUIRE( is_png(data) );
+      data = { 0xFF, 0xD8 };
+      REQUIRE( is_jpeg(data) );
     }
 
     SECTION("data is too short")
     {
-      std::vector<uint8_t> data = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
+      std::vector<uint8_t> data = { 0xFF, 0xD8 };
       while (!data.empty())
       {
         data.pop_back();
-        REQUIRE_FALSE( is_png(data) );
+        REQUIRE_FALSE( is_jpeg(data) );
       }
     }
 
-    SECTION("data from a JPEG file is not a PNG")
+    SECTION("data is not from a JPEG file")
     {
-      std::vector<uint8_t> data = { 0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46, 0x49, 0x46 };
-      REQUIRE_FALSE( is_png(data) );
+      std::vector<uint8_t> data = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+      REQUIRE_FALSE( is_jpeg(data) );
+    }
+
+    SECTION("data from a PNG file is not a JPEG")
+    {
+      std::vector<uint8_t> data = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00 };
+      REQUIRE_FALSE( is_jpeg(data) );
     }
   }
 }
