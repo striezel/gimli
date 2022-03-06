@@ -22,8 +22,8 @@
 #include <cstdio> // for std::remove
 #include <fstream>
 #include <string_view>
-#include "../../../src/gimli/loaders/PngLoader.hpp"
-#include "../../../src/gimli/transforms/Resize.hpp"
+#include "../../../lib/gimli/loaders/PngLoader.hpp"
+#include "../../../lib/gimli/transforms/Resize.hpp"
 
 TEST_CASE("Resize")
 {

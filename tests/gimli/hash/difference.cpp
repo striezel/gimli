@@ -19,7 +19,7 @@
 */
 
 #include "../find_catch.hpp"
-#include "../../../src/gimli/hash/difference.hpp"
+#include "../../../lib/gimli/hash/difference.hpp"
 
 TEST_CASE("Hashing: dHash")
 {

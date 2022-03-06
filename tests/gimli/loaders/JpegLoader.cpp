@@ -22,7 +22,7 @@
 #include <cstdio> // for std::remove
 #include <fstream>
 #include <string_view>
-#include "../../../src/gimli/loaders/JpegLoader.hpp"
+#include "../../../lib/gimli/loaders/JpegLoader.hpp"
 
 TEST_CASE("JpegLoader")
 {

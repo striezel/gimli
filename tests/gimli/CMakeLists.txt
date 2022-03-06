@@ -5,13 +5,13 @@ cmake_minimum_required (VERSION 3.8)
 project(gimli_tests)
 
 set(gimli_tests_sources
-    ../../src/gimli/hash/average.cpp
-    ../../src/gimli/hash/difference.cpp
-    ../../src/gimli/loaders/JpegLoader.hpp
-    ../../src/gimli/loaders/PngLoader.hpp
-    ../../src/gimli/numeric/hamming.hpp
-    ../../src/gimli/transforms/Greyscale.cpp
-    ../../src/gimli/transforms/Resize.hpp
+    ../../lib/gimli/hash/average.cpp
+    ../../lib/gimli/hash/difference.cpp
+    ../../lib/gimli/loaders/JpegLoader.hpp
+    ../../lib/gimli/loaders/PngLoader.hpp
+    ../../lib/gimli/numeric/hamming.hpp
+    ../../lib/gimli/transforms/Greyscale.cpp
+    ../../lib/gimli/transforms/Resize.hpp
     hash/average.cpp
     hash/difference.cpp
     loaders/JpegLoader.cpp

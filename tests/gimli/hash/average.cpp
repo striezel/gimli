@@ -19,7 +19,7 @@
 */
 
 #include "../find_catch.hpp"
-#include "../../../src/gimli/hash/average.hpp"
+#include "../../../lib/gimli/hash/average.hpp"
 
 TEST_CASE("Hashing: aHash")
 {
