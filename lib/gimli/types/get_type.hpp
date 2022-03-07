@@ -24,8 +24,8 @@
 #include <cstdint>
 #include <filesystem>
 #include <string>
-#include <vector>
 #include "../../../third-party/nonstd/expected.hpp"
+#include "../../../third-party/nonstd/span.hpp"
 
 namespace gimli::types
 {
@@ -57,7 +57,7 @@ nonstd::expected<ImageType, std::string> get_type(const std::filesystem::path& p
  *         Returns ImageType::Unknown, if the file did not contain any
  *         detectable image data.
  */
-ImageType get_type(const std::vector<uint8_t>& data);
+ImageType get_type(const nonstd::span<uint8_t>& data);
 
 } // namespace
 

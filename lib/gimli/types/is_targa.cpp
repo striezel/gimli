@@ -23,7 +23,7 @@
 namespace gimli::types
 {
 
-bool is_targa(const std::vector<uint8_t>& data)
+bool is_targa(const nonstd::span<uint8_t>& data)
 {
   return (data.size() >= 17)
   // Byte zero can have any vaue.

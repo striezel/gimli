@@ -22,7 +22,7 @@
 #define GIMLI_IS_JPEG_HPP
 
 #include <cstdint>
-#include <vector>
+#include "../../../third-party/nonstd/span.hpp"
 
 namespace gimli::types
 {
@@ -33,7 +33,7 @@ namespace gimli::types
  * \return Returns true, if the data indicates that it was read from a JPEG file.
  *         Returns false otherwise.
  */
-bool is_jpeg(const std::vector<uint8_t>& data);
+bool is_jpeg(const nonstd::span<uint8_t>& data);
 
 } // namespace
 

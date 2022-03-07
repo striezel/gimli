@@ -23,7 +23,7 @@
 namespace gimli::types
 {
 
-bool is_jpeg(const std::vector<uint8_t>& data)
+bool is_jpeg(const nonstd::span<uint8_t>& data)
 {
   return (data.size() >= 2) && (data[0] == 0xFF) && (data[1] == 0xD8);
 }

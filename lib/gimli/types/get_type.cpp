@@ -52,17 +52,17 @@ nonstd::expected<ImageType, std::string> get_type(const std::filesystem::path& p
   try
   {
     constexpr std::streamsize bytes_to_read = 17;
-    std::vector<uint8_t> buffer(bytes_to_read, 0);
+    uint8_t buffer[bytes_to_read];
     {
       std::ifstream input(path, std::ios_base::binary | std::ios_base::in);
-      input.read(reinterpret_cast<char*>(buffer.data()), bytes_to_read);
+      input.read(reinterpret_cast<char*>(buffer), bytes_to_read);
       if (!input.good() || input.gcount() < bytes_to_read)
       {
         return nonstd::make_unexpected("File is too short to determine the image type.");
       }
       input.close();
     }
-    return get_type(buffer);
+    return get_type(nonstd::span_lite::span(buffer, bytes_to_read));
   }
   catch (const std::exception& ex)
   {
@@ -70,7 +70,7 @@ nonstd::expected<ImageType, std::string> get_type(const std::filesystem::path& p
   }
 }
 
-ImageType get_type(const std::vector<uint8_t>& data)
+ImageType get_type(const nonstd::span<uint8_t>& data)
 {
   if (is_jpeg(data))
     return ImageType::Jpeg;

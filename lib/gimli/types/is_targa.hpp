@@ -22,7 +22,7 @@
 #define GIMLI_IS_TARGA_HPP
 
 #include <cstdint>
-#include <vector>
+#include "../../../third-party/nonstd/span.hpp"
 
 namespace gimli::types
 {
@@ -33,7 +33,7 @@ namespace gimli::types
  * \return Returns true, if the data indicates that it was read from a Targa
  *         image file. Returns false otherwise.
  */
-bool is_targa(const std::vector<uint8_t>& data);
+bool is_targa(const nonstd::span<uint8_t>& data);
 
 } // namespace
 

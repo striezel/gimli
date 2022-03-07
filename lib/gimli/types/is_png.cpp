@@ -24,7 +24,7 @@
 namespace gimli::types
 {
 
-bool is_png(const std::vector<uint8_t>& data)
+bool is_png(const nonstd::span<uint8_t>& data)
 {
   if (data.size() < 8)
   {

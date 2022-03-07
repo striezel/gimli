@@ -59,6 +59,8 @@
 		<Unit filename="../../lib/gimli/types/is_png.hpp" />
 		<Unit filename="../../lib/gimli/types/is_targa.cpp" />
 		<Unit filename="../../lib/gimli/types/is_targa.hpp" />
+		<Unit filename="../../third-party/nonstd/expected.hpp" />
+		<Unit filename="../../third-party/nonstd/span.hpp" />
 		<Unit filename="hash/average.cpp" />
 		<Unit filename="hash/difference.cpp" />
 		<Unit filename="loaders/JpegLoader.cpp" />
