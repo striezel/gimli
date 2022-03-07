@@ -7,10 +7,12 @@ project(gimli_tests)
 set(gimli_tests_sources
     ../../lib/hash/average.cpp
     ../../lib/hash/difference.cpp
-    ../../lib/loaders/JpegLoader.hpp
-    ../../lib/loaders/PngLoader.hpp
-    ../../lib/loaders/TargaLoader.hpp
-    ../../lib/loaders/load_any.cpp
+    ../../lib/io/JpegLoader.hpp
+    ../../lib/io/PngLoader.hpp
+    ../../lib/io/TargaLoader.hpp
+    ../../lib/io/Writer.hpp
+    ../../lib/io/load_any.cpp
+    ../../lib/io/write_any.cpp
     ../../lib/numeric/hamming.hpp
     ../../lib/transforms/Greyscale.cpp
     ../../lib/transforms/Resize.hpp
@@ -20,10 +22,11 @@ set(gimli_tests_sources
     ../../lib/types/is_targa.cpp
     hash/average.cpp
     hash/difference.cpp
-    loaders/JpegLoader.cpp
-    loaders/PngLoader.cpp
-    loaders/TargaLoader.cpp
-    loaders/load_any.cpp
+    io/JpegLoader.cpp
+    io/PngLoader.cpp
+    io/TargaLoader.cpp
+    io/load_any.cpp
+    io/write_any.cpp
     numeric/hamming.cpp
     transforms/Greyscale.cpp
     transforms/Resize.cpp

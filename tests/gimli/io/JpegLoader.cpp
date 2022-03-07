@@ -22,7 +22,7 @@
 #include <cstdio> // for std::remove
 #include <fstream>
 #include <string_view>
-#include "../../../lib/loaders/JpegLoader.hpp"
+#include "../../../lib/io/JpegLoader.hpp"
 
 TEST_CASE("JpegLoader")
 {

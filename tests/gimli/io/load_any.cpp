@@ -22,7 +22,7 @@
 #include <cstdio> // for std::remove
 #include <fstream>
 #include <string_view>
-#include "../../../lib/loaders/load_any.hpp"
+#include "../../../lib/io/load_any.hpp"
 
 TEST_CASE("load_any")
 {

@@ -22,7 +22,7 @@
 #include <cstdio> // for std::remove
 #include <fstream>
 #include <string_view>
-#include "../../../lib/loaders/PngLoader.hpp"
+#include "../../../lib/io/PngLoader.hpp"
 #include "../../../lib/transforms/Resize.hpp"
 
 TEST_CASE("Resize")
