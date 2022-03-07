@@ -30,11 +30,9 @@ TEST_CASE("PngLoader")
 
   SECTION("load")
   {
-    PngLoader loader;
-
     SECTION("missing file")
     {
-      const auto result = loader.load("does-not-exist.png");
+      const auto result = PngLoader::load("does-not-exist.png");
       REQUIRE_FALSE( result.has_value() );
       const auto& error = result.error();
       REQUIRE( error.find("failed to open") != std::string::npos );
@@ -53,7 +51,7 @@ TEST_CASE("PngLoader")
         file.close();
       }
 
-      const auto result = loader.load(name);
+      const auto result = PngLoader::load(name);
       REQUIRE( result.has_value() );
       const auto& img = result.value();
       REQUIRE( img.width() == 20 );
@@ -75,7 +73,7 @@ TEST_CASE("PngLoader")
         file.close();
       }
 
-      const auto result = loader.load(name);
+      const auto result = PngLoader::load(name);
       REQUIRE_FALSE( result.has_value() );
       const auto& error = result.error();
       REQUIRE( error.find("not a PNG") != std::string::npos );

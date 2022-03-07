@@ -30,11 +30,9 @@ TEST_CASE("TargaLoader")
 
   SECTION("load")
   {
-    TargaLoader loader;
-
     SECTION("missing file")
     {
-      const auto result = loader.load("does-not-exist.tga");
+      const auto result = TargaLoader::load("does-not-exist.tga");
       REQUIRE_FALSE( result.has_value() );
       const auto& error = result.error();
       REQUIRE( error.find("failed to open") != std::string::npos );
@@ -53,7 +51,7 @@ TEST_CASE("TargaLoader")
         file.close();
       }
 
-      const auto result = loader.load(name);
+      const auto result = TargaLoader::load(name);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE( result.has_value() );
       const auto& img = result.value();
@@ -74,7 +72,7 @@ TEST_CASE("TargaLoader")
         file.close();
       }
 
-      const auto result = loader.load(name);
+      const auto result = TargaLoader::load(name);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE_FALSE( result.has_value() );
       const auto& error = result.error();

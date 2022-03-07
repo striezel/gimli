@@ -18,46 +18,41 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_LOADER_HPP
-#define GIMLI_LOADER_HPP
-
-#include <string>
-#include "../../third-party/nonstd/expected.hpp"
-#include "../Image.hpp"
+#include "load_any.hpp"
+#include "JpegLoader.hpp"
+#include "PngLoader.hpp"
+#include "TargaLoader.hpp"
+#include "../types/get_type.hpp"
 
 namespace gimli
 {
 
-/** \brief Template for loading a certain image type.
- */
-template<typename tag_t>
-class Loader
+nonstd::expected<Image, std::string> load_any(const std::string& path)
 {
-  public:
-    /** \brief Loads an image from the given path.
-     *
-     * \param path    the file path of the image to load
-     * \return Returns an Image, if the image could be loaded.
-     *         Returns an error message otherwise.
-     */
-    static nonstd::expected<Image, std::string> load(const std::string& path)
-    {
-      using namespace boost::gil;
+  const auto maybe_type = gimli::types::get_type(path);
+  if (!maybe_type.has_value())
+  {
+    return nonstd::make_unexpected(maybe_type.error());
+  }
+  return load_any(path, maybe_type.value());
+}
 
-      Image image;
-      try
-      {
-        read_and_convert_image(path, image, tag_t());
-      }
-      catch (const std::exception& ex)
-      {
-        return nonstd::make_unexpected(ex.what());
-      }
+nonstd::expected<Image, std::string> load_any(const std::string& path, const types::ImageType type)
+{
+  using namespace gimli::types;
 
-      return image;
-    }
-};
+  switch(type)
+  {
+    case ImageType::Jpeg:
+         return JpegLoader::load(path);
+    case ImageType::Png:
+         return PngLoader::load(path);
+    case ImageType::Targa:
+         return TargaLoader::load(path);
+    case ImageType::Unknown:
+    default:
+         return nonstd::make_unexpected("Cannot load image of unknown type.");
+  }
+}
 
-} // namespace
-
-#endif // GIMLI_LOADER_HPP
+}

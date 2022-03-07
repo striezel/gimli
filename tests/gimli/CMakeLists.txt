@@ -10,6 +10,7 @@ set(gimli_tests_sources
     ../../lib/loaders/JpegLoader.hpp
     ../../lib/loaders/PngLoader.hpp
     ../../lib/loaders/TargaLoader.hpp
+    ../../lib/loaders/load_any.cpp
     ../../lib/numeric/hamming.hpp
     ../../lib/transforms/Greyscale.cpp
     ../../lib/transforms/Resize.hpp
@@ -22,6 +23,7 @@ set(gimli_tests_sources
     loaders/JpegLoader.cpp
     loaders/PngLoader.cpp
     loaders/TargaLoader.cpp
+    loaders/load_any.cpp
     numeric/hamming.cpp
     transforms/Greyscale.cpp
     transforms/Resize.cpp
