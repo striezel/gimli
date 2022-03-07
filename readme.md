@@ -6,6 +6,12 @@ and perform some basic operations on them.
 _Note: The library is still in an early stage of development. So far it has only
 very few features._
 
+## Build status
+
+[![GitHub CI Clang status](https://github.com/striezel/gimli/workflows/Clang/badge.svg)](https://github.com/striezel/gimli/actions)
+[![GitHub CI GCC status](https://github.com/striezel/gimli/workflows/GCC/badge.svg)](https://github.com/striezel/gimli/actions)
+[![GitLab pipeline status](https://gitlab.com/striezel/gimli/badges/main/pipeline.svg)](https://gitlab.com/striezel/gimli/)
+
 ## Building from source
 
 ### Prerequisites
