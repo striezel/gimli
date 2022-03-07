@@ -18,27 +18,23 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_TRANSFORM_GREYSCALE_HPP
-#define GIMLI_TRANSFORM_GREYSCALE_HPP
+#ifndef GIMLI_IS_PNG_HPP
+#define GIMLI_IS_PNG_HPP
 
-#include "../../../third-party/nonstd/expected.hpp"
-#include "../Image.hpp"
+#include <cstdint>
+#include "../../third-party/nonstd/span.hpp"
 
-namespace gimli
+namespace gimli::types
 {
 
-struct Greyscale
-{
-  public:
-    /** \brief Transforms a non-greyscale image to greyscale.
-     *
-     * \param source   the source image
-     * \return Returns the transformation result, if successful.
-     *         Returns an error message otherwise.
-     */
-    static nonstd::expected<boost::gil::gray8_image_t, std::string> transform(const Image& source);
-};
+/** \brief Checks whether a file is a PNG image.
+ *
+ * \param data   the first few bytes (>= 8 bytes) read from the file
+ * \return Returns true, if the data indicates that it was read from a PNG file.
+ *         Returns false otherwise.
+ */
+bool is_png(const nonstd::span<uint8_t>& data);
 
 } // namespace
 
-#endif // GIMLI_TRANSFORM_GREYSCALE_HPP
+#endif // GIMLI_IS_PNG_HPP

@@ -19,7 +19,7 @@
 */
 
 #include "../find_catch.hpp"
-#include "../../../lib/gimli/numeric/hamming.hpp"
+#include "../../../lib/numeric/hamming.hpp"
 
 TEST_CASE("Hamming distance")
 {

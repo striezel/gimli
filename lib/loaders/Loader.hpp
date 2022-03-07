@@ -18,23 +18,46 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_IS_PNG_HPP
-#define GIMLI_IS_PNG_HPP
+#ifndef GIMLI_LOADER_HPP
+#define GIMLI_LOADER_HPP
 
-#include <cstdint>
-#include "../../../third-party/nonstd/span.hpp"
+#include <string>
+#include "../../third-party/nonstd/expected.hpp"
+#include "../Image.hpp"
 
-namespace gimli::types
+namespace gimli
 {
 
-/** \brief Checks whether a file is a PNG image.
- *
- * \param data   the first few bytes (>= 8 bytes) read from the file
- * \return Returns true, if the data indicates that it was read from a PNG file.
- *         Returns false otherwise.
+/** \brief Template for loading a certain image type.
  */
-bool is_png(const nonstd::span<uint8_t>& data);
+template<typename tag_t>
+class Loader
+{
+  public:
+    /** \brief Loads an image from the given path.
+     *
+     * \param path    the file path of the image to load
+     * \return Returns an Image, if the image could be loaded.
+     *         Returns an error message otherwise.
+     */
+    nonstd::expected<Image, std::string> load(const std::string& path)
+    {
+      using namespace boost::gil;
+
+      Image image;
+      try
+      {
+        read_and_convert_image(path, image, tag_t());
+      }
+      catch (const std::exception& ex)
+      {
+        return nonstd::make_unexpected(ex.what());
+      }
+
+      return image;
+    }
+};
 
 } // namespace
 
-#endif // GIMLI_IS_PNG_HPP
+#endif // GIMLI_LOADER_HPP

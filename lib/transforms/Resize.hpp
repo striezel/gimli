@@ -23,7 +23,7 @@
 
 #include <boost/gil/extension/numeric/resample.hpp>
 #include <boost/gil/extension/numeric/sampler.hpp>
-#include "../../../third-party/nonstd/expected.hpp"
+#include "../../third-party/nonstd/expected.hpp"
 
 namespace gimli
 {

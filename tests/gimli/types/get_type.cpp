@@ -23,7 +23,7 @@
 #include <sstream>
 #include <string_view>
 #include "../find_catch.hpp"
-#include "../../../lib/gimli/types/get_type.hpp"
+#include "../../../lib/types/get_type.hpp"
 
 TEST_CASE("image type detection")
 {

@@ -5,18 +5,18 @@ cmake_minimum_required (VERSION 3.8)
 project(gimli_tests)
 
 set(gimli_tests_sources
-    ../../lib/gimli/hash/average.cpp
-    ../../lib/gimli/hash/difference.cpp
-    ../../lib/gimli/loaders/JpegLoader.hpp
-    ../../lib/gimli/loaders/PngLoader.hpp
-    ../../lib/gimli/loaders/TargaLoader.hpp
-    ../../lib/gimli/numeric/hamming.hpp
-    ../../lib/gimli/transforms/Greyscale.cpp
-    ../../lib/gimli/transforms/Resize.hpp
-    ../../lib/gimli/types/get_type.cpp
-    ../../lib/gimli/types/is_jpeg.cpp
-    ../../lib/gimli/types/is_png.cpp
-    ../../lib/gimli/types/is_targa.cpp
+    ../../lib/hash/average.cpp
+    ../../lib/hash/difference.cpp
+    ../../lib/loaders/JpegLoader.hpp
+    ../../lib/loaders/PngLoader.hpp
+    ../../lib/loaders/TargaLoader.hpp
+    ../../lib/numeric/hamming.hpp
+    ../../lib/transforms/Greyscale.cpp
+    ../../lib/transforms/Resize.hpp
+    ../../lib/types/get_type.cpp
+    ../../lib/types/is_jpeg.cpp
+    ../../lib/types/is_png.cpp
+    ../../lib/types/is_targa.cpp
     hash/average.cpp
     hash/difference.cpp
     loaders/JpegLoader.cpp

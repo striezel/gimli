@@ -19,7 +19,7 @@
 */
 
 #include "../find_catch.hpp"
-#include "../../../lib/gimli/types/is_targa.hpp"
+#include "../../../lib/types/is_targa.hpp"
 
 TEST_CASE("file format checks: Targa")
 {

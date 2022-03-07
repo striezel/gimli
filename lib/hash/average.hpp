@@ -18,23 +18,25 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_IS_JPEG_HPP
-#define GIMLI_IS_JPEG_HPP
+#ifndef GIMLI_HASH_AVERAGE_HPP
+#define GIMLI_HASH_AVERAGE_HPP
 
 #include <cstdint>
-#include "../../../third-party/nonstd/span.hpp"
+#include <string>
+#include "../../third-party/nonstd/expected.hpp"
+#include "../Image.hpp"
 
-namespace gimli::types
+namespace gimli::hash
 {
 
-/** \brief Checks whether a file is a JPEG image.
+/** \brief Calculates the average hash ("aHash") of an image.
  *
- * \param data   the first few bytes (>= two bytes) read from the file
- * \return Returns true, if the data indicates that it was read from a JPEG file.
- *         Returns false otherwise.
+ * \param img  the input image
+ * \return Returns the hash of the image in case of success.
+ *         Returns an error message otherwise.
  */
-bool is_jpeg(const nonstd::span<uint8_t>& data);
+nonstd::expected<uint64_t, std::string> average(const Image& img);
 
 } // namespace
 
-#endif // GIMLI_IS_JPEG_HPP
+#endif // GIMLI_HASH_AVERAGE_HPP

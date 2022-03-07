@@ -24,8 +24,8 @@
 #include <cstdint>
 #include <filesystem>
 #include <string>
-#include "../../../third-party/nonstd/expected.hpp"
-#include "../../../third-party/nonstd/span.hpp"
+#include "../../third-party/nonstd/expected.hpp"
+#include "../../third-party/nonstd/span.hpp"
 
 namespace gimli::types
 {

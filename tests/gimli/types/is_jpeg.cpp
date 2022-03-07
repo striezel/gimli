@@ -19,7 +19,7 @@
 */
 
 #include "../find_catch.hpp"
-#include "../../../lib/gimli/types/is_jpeg.hpp"
+#include "../../../lib/types/is_jpeg.hpp"
 
 TEST_CASE("file format checks: JPEG")
 {

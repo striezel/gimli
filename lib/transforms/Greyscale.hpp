@@ -18,46 +18,27 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_LOADER_HPP
-#define GIMLI_LOADER_HPP
+#ifndef GIMLI_TRANSFORM_GREYSCALE_HPP
+#define GIMLI_TRANSFORM_GREYSCALE_HPP
 
-#include <string>
-#include "../../../third-party/nonstd/expected.hpp"
+#include "../../third-party/nonstd/expected.hpp"
 #include "../Image.hpp"
 
 namespace gimli
 {
 
-/** \brief Template for loading a certain image type.
- */
-template<typename tag_t>
-class Loader
+struct Greyscale
 {
   public:
-    /** \brief Loads an image from the given path.
+    /** \brief Transforms a non-greyscale image to greyscale.
      *
-     * \param path    the file path of the image to load
-     * \return Returns an Image, if the image could be loaded.
+     * \param source   the source image
+     * \return Returns the transformation result, if successful.
      *         Returns an error message otherwise.
      */
-    nonstd::expected<Image, std::string> load(const std::string& path)
-    {
-      using namespace boost::gil;
-
-      Image image;
-      try
-      {
-        read_and_convert_image(path, image, tag_t());
-      }
-      catch (const std::exception& ex)
-      {
-        return nonstd::make_unexpected(ex.what());
-      }
-
-      return image;
-    }
+    static nonstd::expected<boost::gil::gray8_image_t, std::string> transform(const Image& source);
 };
 
 } // namespace
 
-#endif // GIMLI_LOADER_HPP
+#endif // GIMLI_TRANSFORM_GREYSCALE_HPP

@@ -19,7 +19,7 @@
 */
 
 #include "../find_catch.hpp"
-#include "../../../lib/gimli/types/is_png.hpp"
+#include "../../../lib/types/is_png.hpp"
 
 TEST_CASE("file format checks: PNG")
 {

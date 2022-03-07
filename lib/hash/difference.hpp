@@ -18,23 +18,25 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_IS_TARGA_HPP
-#define GIMLI_IS_TARGA_HPP
+#ifndef GIMLI_HASH_DIFFERENCE_HPP
+#define GIMLI_HASH_DIFFERENCE_HPP
 
 #include <cstdint>
-#include "../../../third-party/nonstd/span.hpp"
+#include <string>
+#include "../../third-party/nonstd/expected.hpp"
+#include "../Image.hpp"
 
-namespace gimli::types
+namespace gimli::hash
 {
 
-/** \brief Checks whether a file is a Targa image file.
+/** \brief Calculates the difference hash ("dHash") of an image.
  *
- * \param data   the first few bytes read from the file
- * \return Returns true, if the data indicates that it was read from a Targa
- *         image file. Returns false otherwise.
+ * \param img  the input image
+ * \return Returns the hash of the image in case of success.
+ *         Returns an error message otherwise.
  */
-bool is_targa(const nonstd::span<uint8_t>& data);
+nonstd::expected<uint64_t, std::string> difference(const Image& img);
 
 } // namespace
 
-#endif // GIMLI_IS_TARGA_HPP
+#endif // GIMLI_HASH_DIFFERENCE_HPP

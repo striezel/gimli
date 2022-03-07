@@ -22,7 +22,7 @@
 #include <cstdio> // for std::remove
 #include <fstream>
 #include <string_view>
-#include "../../../lib/gimli/loaders/TargaLoader.hpp"
+#include "../../../lib/loaders/TargaLoader.hpp"
 
 TEST_CASE("TargaLoader")
 {

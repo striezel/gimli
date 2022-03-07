@@ -22,8 +22,8 @@
 #include <cstdio> // for std::remove
 #include <fstream>
 #include <string_view>
-#include "../../../lib/gimli/loaders/PngLoader.hpp"
-#include "../../../lib/gimli/transforms/Greyscale.hpp"
+#include "../../../lib/loaders/PngLoader.hpp"
+#include "../../../lib/transforms/Greyscale.hpp"
 
 TEST_CASE("Greyscale")
 {

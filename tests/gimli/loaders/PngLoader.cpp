@@ -22,7 +22,7 @@
 #include <cstdio> // for std::remove
 #include <fstream>
 #include <string_view>
-#include "../../../lib/gimli/loaders/PngLoader.hpp"
+#include "../../../lib/loaders/PngLoader.hpp"
 
 TEST_CASE("PngLoader")
 {
