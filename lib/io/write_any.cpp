@@ -26,7 +26,7 @@
 namespace gimli
 {
 
-std::optional<std::string> write_any(const std::string& path, const Image& image, const types::ImageType type)
+std::optional<std::string> write_any_rgb(const std::string& path, const Image& image, const types::ImageType type)
 {
   using namespace gimli::types;
 
@@ -38,6 +38,24 @@ std::optional<std::string> write_any(const std::string& path, const Image& image
          return PngWriter::write(path, image);
     case ImageType::Targa:
          return TargaWriter::write(path, image);
+    case ImageType::Unknown:
+    default:
+         return "Cannot write image of unknown type.";
+  }
+}
+
+std::optional<std::string> write_any_grey(const std::string& path, const boost::gil::gray8_image_t& image, const types::ImageType type)
+{
+  using namespace gimli::types;
+
+  switch(type)
+  {
+    case ImageType::Jpeg:
+         return JpegWriterGrey::write(path, image);
+    case ImageType::Png:
+         return PngWriterGrey::write(path, image);
+    case ImageType::Targa:
+         return TargaWriterGrey::write(path, image);
     case ImageType::Unknown:
     default:
          return "Cannot write image of unknown type.";

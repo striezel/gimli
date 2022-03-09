@@ -29,7 +29,7 @@
 namespace gimli
 {
 
-/** \brief Writes an image of the specified type to the given path.
+/** \brief Writes an RGB image of the specified type to the given path.
  *
  * \param path    the file path of the image to load
  * \param image   the image data that shall be written
@@ -37,7 +37,17 @@ namespace gimli
  * \return Returns an empty optional, if the image was written successfully.
  *         Returns an error message otherwise.
  */
-std::optional<std::string> write_any(const std::string& path, const Image& image, const types::ImageType type);
+std::optional<std::string> write_any_rgb(const std::string& path, const Image& image, const types::ImageType type);
+
+/** \brief Writes a greyscale image of the specified type to the given path.
+ *
+ * \param path    the file path of the image to load
+ * \param image   the image data that shall be written
+ * \param type    the type of the image
+ * \return Returns an empty optional, if the image was written successfully.
+ *         Returns an error message otherwise.
+ */
+std::optional<std::string> write_any_grey(const std::string& path, const boost::gil::gray8_image_t& image, const types::ImageType type);
 
 }
 

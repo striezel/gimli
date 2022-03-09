@@ -28,39 +28,39 @@ TEST_CASE("write_any")
   using namespace gimli::types;
   using namespace boost::gil;
 
-  SECTION("write_any")
+  SECTION("write_any_rgb")
   {
     Image img(point_t(1, 1));
     view(img)(0, 0) = rgb8_pixel_t(255, 0, 0);
 
     SECTION("JPEG format")
     {
-      const auto name = "write_any.jpeg";
-      const auto result = write_any(name, img, ImageType::Jpeg);
+      const auto name = "write_any_rgb.jpeg";
+      const auto result = write_any_rgb(name, img, ImageType::Jpeg);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE_FALSE( result.has_value() );
     }
 
     SECTION("PNG format")
     {
-      const auto name = "write_any.png";
-      const auto result = write_any(name, img, ImageType::Png);
+      const auto name = "write_any_rgb.png";
+      const auto result = write_any_rgb(name, img, ImageType::Png);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE_FALSE( result.has_value() );
     }
 
     SECTION("Targa image format")
     {
-      const auto name = "write_any.tga";
-      const auto result = write_any(name, img, ImageType::Targa);
+      const auto name = "write_any_rgb.tga";
+      const auto result = write_any_rgb(name, img, ImageType::Targa);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE_FALSE( result.has_value() );
     }
 
     SECTION("unknown format")
     {
-      const auto name = "write_any.unk";
-      const auto result = write_any(name, img, ImageType::Unknown);
+      const auto name = "write_any_rgb.unk";
+      const auto result = write_any_rgb(name, img, ImageType::Unknown);
       REQUIRE_FALSE( std::remove(name) == 0 );
       // Write should fail and have an error message.
       REQUIRE( result.has_value() );
@@ -70,8 +70,60 @@ TEST_CASE("write_any")
 
     SECTION("failure to write to file")
     {
-      const auto name = "/foo/bar/write_any.fail";
-      const auto result = write_any(name, img, ImageType::Jpeg);
+      const auto name = "/foo/bar/write_any_rgb.fail";
+      const auto result = write_any_rgb(name, img, ImageType::Jpeg);
+      REQUIRE_FALSE( std::remove(name) == 0 );
+      // Write should fail and have an error message.
+      REQUIRE( result.has_value() );
+      bool contains_fail_or_error = (result.value().find("fail") != std::string::npos) || (result.value().find("error") != std::string::npos);
+      REQUIRE( contains_fail_or_error );
+    }
+  }
+
+  SECTION("write_any_grey")
+  {
+    gray8_image_t img(point_t(1, 1));
+    view(img)(0, 0) = gray8_pixel_t(128);
+
+    SECTION("JPEG format")
+    {
+      const auto name = "write_any_grey.jpeg";
+      const auto result = write_any_grey(name, img, ImageType::Jpeg);
+      REQUIRE( std::remove(name) == 0 );
+      REQUIRE_FALSE( result.has_value() );
+    }
+
+    SECTION("PNG format")
+    {
+      const auto name = "write_any_grey.png";
+      const auto result = write_any_grey(name, img, ImageType::Png);
+      REQUIRE( std::remove(name) == 0 );
+      REQUIRE_FALSE( result.has_value() );
+    }
+
+    SECTION("Targa image format")
+    {
+      const auto name = "write_any_grey.tga";
+      const auto result = write_any_grey(name, img, ImageType::Targa);
+      REQUIRE( std::remove(name) == 0 );
+      REQUIRE_FALSE( result.has_value() );
+    }
+
+    SECTION("unknown format")
+    {
+      const auto name = "write_any_grey.unk";
+      const auto result = write_any_grey(name, img, ImageType::Unknown);
+      REQUIRE_FALSE( std::remove(name) == 0 );
+      // Write should fail and have an error message.
+      REQUIRE( result.has_value() );
+      // Error message should contain hint about unknown format.
+      REQUIRE( result.value().find("unknown") != std::string::npos );
+    }
+
+    SECTION("failure to write to file")
+    {
+      const auto name = "/foo/bar/write_any_grey.fail";
+      const auto result = write_any_grey(name, img, ImageType::Jpeg);
       REQUIRE_FALSE( std::remove(name) == 0 );
       // Write should fail and have an error message.
       REQUIRE( result.has_value() );
