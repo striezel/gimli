@@ -54,5 +54,8 @@ if (NOT MINGW AND ${CMAKE_CXX_COMPILER} MATCHES "mingw")
   set(MINGW 1)
 endif()
 
+# Recurse into subdirectory for apps.
+add_subdirectory (apps)
+
 # Recurse into subdirectory for tests.
 add_subdirectory (tests)
