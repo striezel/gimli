@@ -14,8 +14,12 @@ jobs:
       - name: Install Debian packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y catch cmake clang-${{ matrix.version }} libc++-${{ matrix.version }}-dev libjpeg-dev libpng-dev pkg-config
+          sudo apt-get install -y catch cmake clang-${{ matrix.version }} libjpeg-dev libpng-dev pkg-config
           sudo apt-get install -y --no-install-recommends --no-install-suggests libboost-dev
+      - name: Install Clang's standard C++ library
+        run: |
+          sudo apt-get install -y libc++-${{ matrix.version }}-dev
+        if: matrix.version != 11
       - name: Build with Clang ${{ matrix.version }}
         run: |
           export CXX=clang++-${{ matrix.version }}
