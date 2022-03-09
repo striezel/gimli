@@ -43,6 +43,40 @@ fedora:
     # tests
     - ctest -V
 
+boost_1_75:
+  image: alpine:3.14
+  stage: test
+  before_script:
+    - apk update
+    - apk add boost1.75-dev catch2 cmake g++ jpeg-dev libpng-dev make pkgconf
+  script:
+    # build
+    - export CXX=g++
+    - export CC=gcc
+    - mkdir build
+    - cd build
+    - cmake ../
+    - make -j4
+    # tests
+    - ctest -V
+
+boost_1_72:
+  image: alpine:3.12
+  stage: test
+  before_script:
+    - apk update
+    - apk add boost-dev catch2 cmake g++ jpeg-dev libpng-dev make pkgconf
+  script:
+    # build
+    - export CXX=g++
+    - export CC=gcc
+    - mkdir build
+    - cd build
+    - cmake ../
+    - make -j4
+    # tests
+    - ctest -V
+
 pages:
   image: debian:11-slim
   stage: deploy
