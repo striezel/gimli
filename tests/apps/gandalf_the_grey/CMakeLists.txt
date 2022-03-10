@@ -17,6 +17,10 @@ add_test(NAME gandalf_the_grey_type_detection_failure
 add_test(NAME gandalf_the_grey_unknown_file_type
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/file-type-unknown.sh $<TARGET_FILE:gandalf-the-grey> "${CMAKE_CURRENT_SOURCE_DIR}")
 
+# test: file cannot be loaded
+add_test(NAME gandalf_the_grey_fail_to_load
+         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/fail-to-load.sh $<TARGET_FILE:gandalf-the-grey> "${CMAKE_CURRENT_SOURCE_DIR}")
+
 # test: valid RGB JPEG file
 add_test(NAME gandalf_the_grey_valid_jpeg_image
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/valid-file.sh $<TARGET_FILE:gandalf-the-grey> "${CMAKE_CURRENT_SOURCE_DIR}")

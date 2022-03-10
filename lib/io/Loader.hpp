@@ -21,6 +21,8 @@
 #ifndef GIMLI_LOADER_HPP
 #define GIMLI_LOADER_HPP
 
+#define NDEBUG
+
 #include <string>
 #include "../../third-party/nonstd/expected.hpp"
 #include "../Image.hpp"
