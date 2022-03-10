@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Script to test executable when started with no arguments.
 #
@@ -18,7 +18,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # get first parameter
-if [[ -z $1 ]]
+if [ -z "$1" ]
 then
   echo "First parameter must be executable file!"
   exit 1

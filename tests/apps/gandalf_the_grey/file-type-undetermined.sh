@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Script to test executable when file with undeterminable type is given.
 #
@@ -18,14 +18,14 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # 1st parameter = executable path
-if [[ -z $1 ]]
+if [ -z "$1" ]
 then
   echo "First parameter must be executable file!"
   exit 1
 fi
 
 # 2nd parameter = current directory
-if [[ -z $2 ]]
+if [ -z "$2" ]
 then
   echo "Second parameter must be current directory!"
   exit 1
