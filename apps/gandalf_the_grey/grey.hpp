@@ -18,48 +18,24 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_LOADER_HPP
-#define GIMLI_LOADER_HPP
-
-#define NDEBUG
+#ifndef GIMLI_GANDALF_GREY_HPP
+#define GIMLI_GANDALF_GREY_HPP
 
 #include <string>
-#include "../../third-party/nonstd/expected.hpp"
-#include "../Image.hpp"
 
-namespace gimli
-{
-
-/** \brief Template for loading a certain image type.
+/** \brief Converts the given image to greyscale and saves it.
+ *
+ * \param file   path to the image file
+ * \return Returns zero, if operation was successful.
+ *         Returns non-zero exit code, if an error occurred.
  */
-template<typename tag_t>
-class Loader
-{
-  public:
-    /** \brief Loads an image from the given path.
-     *
-     * \param path    the file path of the image to load
-     * \return Returns an Image, if the image could be loaded.
-     *         Returns an error message otherwise.
-     */
-    static nonstd::expected<Image, std::string> load(const std::string& path)
-    {
-      using namespace boost::gil;
+int gandalf_the_grey(const std::string& file);
 
-      Image image;
-      try
-      {
-        read_and_convert_image(path, image, tag_t());
-      }
-      catch (const std::exception& ex)
-      {
-        return nonstd::make_unexpected(ex.what());
-      }
+/** \brief Generates a file name for the greyscale version of an image.
+ *
+ * \param file   the original file name
+ * \return Returns a suitable file name for the grey image.
+ */
+std::string grey_name(const std::string& file);
 
-      return image;
-    }
-};
-
-} // namespace
-
-#endif // GIMLI_LOADER_HPP
+#endif // GIMLI_GANDALF_GREY_HPP

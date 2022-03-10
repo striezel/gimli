@@ -18,48 +18,11 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_LOADER_HPP
-#define GIMLI_LOADER_HPP
+#ifndef GIMLI_GANDALF_RETURN_CODES_HPP
+#define GIMLI_GANDALF_RETURN_CODES_HPP
 
-#define NDEBUG
+const int rcInvalidParameter = 1;
+const int rcInputOutputError = 2;
+const int rcUnsupportedFormat = 3;
 
-#include <string>
-#include "../../third-party/nonstd/expected.hpp"
-#include "../Image.hpp"
-
-namespace gimli
-{
-
-/** \brief Template for loading a certain image type.
- */
-template<typename tag_t>
-class Loader
-{
-  public:
-    /** \brief Loads an image from the given path.
-     *
-     * \param path    the file path of the image to load
-     * \return Returns an Image, if the image could be loaded.
-     *         Returns an error message otherwise.
-     */
-    static nonstd::expected<Image, std::string> load(const std::string& path)
-    {
-      using namespace boost::gil;
-
-      Image image;
-      try
-      {
-        read_and_convert_image(path, image, tag_t());
-      }
-      catch (const std::exception& ex)
-      {
-        return nonstd::make_unexpected(ex.what());
-      }
-
-      return image;
-    }
-};
-
-} // namespace
-
-#endif // GIMLI_LOADER_HPP
+#endif // GIMLI_GANDALF_RETURN_CODES_HPP
