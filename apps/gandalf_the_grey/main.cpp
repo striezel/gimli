@@ -35,9 +35,9 @@
 
 void showVersion()
 {
-  std::cout << "gandalf-the-grey, version 0.1.0, 2022-03-09\n"
+  std::cout << "gandalf-the-grey, version 0.1.1, 2022-03-10\n"
             << "\n"
-            << "Libraries:" << std::endl
+            << "Library versions:" << std::endl
             << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl
             #if defined(__has_include)
               #if __has_include(<boost/gil/version.hpp>)
@@ -52,13 +52,16 @@ void showHelp()
 {
   std::cout << "gandalf-the-grey [OPTIONS] [FILE]\n"
             << "\n"
-            << "Converts images to greyscale.\n"
+            << "Produces greyscale versions of images.\n"
+            << "The original images will not be changed, greyscale versions are saved as\n"
+            << "separate files with a file name suffix (usually '_grey').\n"
             << "\n"
             << "options:\n"
-            << "  -? | --help     - shows this help message\n"
-            << "  -v | --version  - shows version information\n"
-            << "  FILE            - sets the file name of image to convert to greyscale.\n"
-            << "                    This option can occur multiple times.\n";
+            << "  -? | --help     - Shows this help message.\n"
+            << "  -v | --version  - Shows version information.\n"
+            << "  FILE            - Sets the file name of image to convert to greyscale.\n"
+            << "                    This option can occur multiple times, if multiple files\n"
+            << "                    need to be processed.\n";
 }
 
 int main(int argc, char** argv)

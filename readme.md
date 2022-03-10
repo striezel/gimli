@@ -1,16 +1,19 @@
 # gimli - the Generic Image Library
 
-gimli will be a library that can load common image formats (such as JPEG or PNG)
+[![GitHub CI Clang status](https://github.com/striezel/gimli/workflows/Clang/badge.svg)](https://github.com/striezel/gimli/actions)
+[![GitHub CI GCC status](https://github.com/striezel/gimli/workflows/GCC/badge.svg)](https://github.com/striezel/gimli/actions)
+[![GitLab pipeline status](https://gitlab.com/striezel/gimli/badges/main/pipeline.svg)](https://gitlab.com/striezel/gimli/)
+
+gimli is a library that can load common image formats (such as JPEG or PNG)
 and perform some basic operations on them.
 
 _Note: The library is still in an early stage of development. So far it has only
 very few features._
 
-## Build status
+Furthermore, some example applications are provided that make use of the library
+and its features. Currently, this includes the following applications:
 
-[![GitHub CI Clang status](https://github.com/striezel/gimli/workflows/Clang/badge.svg)](https://github.com/striezel/gimli/actions)
-[![GitHub CI GCC status](https://github.com/striezel/gimli/workflows/GCC/badge.svg)](https://github.com/striezel/gimli/actions)
-[![GitLab pipeline status](https://gitlab.com/striezel/gimli/badges/main/pipeline.svg)](https://gitlab.com/striezel/gimli/)
+* [`gandalf-the-grey`](./apps/gandalf_the_grey/readme.md) - produces greyscale versions of images
 
 ## Building from source
 
