@@ -26,7 +26,7 @@ namespace gimli::types
 bool is_targa(const nonstd::span<uint8_t>& data)
 {
   return (data.size() >= 17)
-  // Byte zero can have any vaue.
+  // Byte zero can have any value.
   // Byte one indicates palette type: 0 = no palette, 1 = has palette.
   && ((data[1] == 0x00) || (data[1] == 0x01))
   /* Byte two is image type:
