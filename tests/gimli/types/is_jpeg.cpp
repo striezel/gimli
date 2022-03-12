@@ -55,9 +55,23 @@ TEST_CASE("file format checks: JPEG")
       REQUIRE_FALSE( is_jpeg(data) );
     }
 
+    SECTION("data from a Bitmap file is not a JPEG")
+    {
+      std::vector<uint8_t> data = { 0x42, 0x4D, 0x92, 0x00, 0x00, 0x00, 0x00,
+          0x00, 0x00, 0x00, 0x7A, 0x00, 0x00, 0x00 };
+      REQUIRE_FALSE( is_jpeg(data) );
+    }
+
     SECTION("data from a PNG file is not a JPEG")
     {
       std::vector<uint8_t> data = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00 };
+      REQUIRE_FALSE( is_jpeg(data) );
+    }
+
+    SECTION("data from Targa image file is not a JPEG")
+    {
+      std::vector<uint8_t> data = { 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x06, 0xB0, 0x04, 0x18, 0x00 };
       REQUIRE_FALSE( is_jpeg(data) );
     }
   }

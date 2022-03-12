@@ -35,7 +35,7 @@
 
 void showVersion()
 {
-  std::cout << "gandalf-the-grey, version 0.1.1, 2022-03-10\n"
+  std::cout << "gandalf-the-grey, version 0.2.0, 2022-03-12\n"
             << "\n"
             << "Library versions:" << std::endl
             << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl

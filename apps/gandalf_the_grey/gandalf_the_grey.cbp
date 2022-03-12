@@ -37,6 +37,8 @@
 			<Add library="jpeg" />
 			<Add library="png" />
 		</Linker>
+		<Unit filename="../../lib/io/BitmapLoader.hpp" />
+		<Unit filename="../../lib/io/BitmapWriter.hpp" />
 		<Unit filename="../../lib/io/JpegLoader.hpp" />
 		<Unit filename="../../lib/io/JpegWriter.hpp" />
 		<Unit filename="../../lib/io/Loader.hpp" />
@@ -53,6 +55,8 @@
 		<Unit filename="../../lib/transforms/Greyscale.hpp" />
 		<Unit filename="../../lib/types/get_type.cpp" />
 		<Unit filename="../../lib/types/get_type.hpp" />
+		<Unit filename="../../lib/types/is_bitmap.cpp" />
+		<Unit filename="../../lib/types/is_bitmap.hpp" />
 		<Unit filename="../../lib/types/is_jpeg.cpp" />
 		<Unit filename="../../lib/types/is_jpeg.hpp" />
 		<Unit filename="../../lib/types/is_png.cpp" />

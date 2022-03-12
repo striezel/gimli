@@ -19,6 +19,7 @@
 */
 
 #include "write_any.hpp"
+#include "BitmapWriter.hpp"
 #include "JpegWriter.hpp"
 #include "PngWriter.hpp"
 #include "TargaWriter.hpp"
@@ -38,6 +39,8 @@ std::optional<std::string> write_any_rgb(const std::string& path, const Image& i
          return PngWriter::write(path, image);
     case ImageType::Targa:
          return TargaWriter::write(path, image);
+    case ImageType::Bitmap:
+         return BitmapWriter::write(path, image);
     case ImageType::Unknown:
     default:
          return "Cannot write image of unknown type.";
@@ -56,6 +59,8 @@ std::optional<std::string> write_any_grey(const std::string& path, const boost::
          return PngWriterGrey::write(path, image);
     case ImageType::Targa:
          return TargaWriterGrey::write(path, image);
+    case ImageType::Bitmap:
+         return BitmapWriterGrey::write(path, image);
     case ImageType::Unknown:
     default:
          return "Cannot write image of unknown type.";

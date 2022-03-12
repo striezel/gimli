@@ -20,6 +20,7 @@
 
 #include "get_type.hpp"
 #include <fstream>
+#include "is_bitmap.hpp"
 #include "is_jpeg.hpp"
 #include "is_png.hpp"
 #include "is_targa.hpp"
@@ -39,6 +40,9 @@ std::ostream& operator<<(std::ostream& os, const ImageType it)
          break;
     case ImageType::Targa:
          os << "Targa image";
+         break;
+    case ImageType::Bitmap:
+         os << "Bitmap";
          break;
     default:
          os << "unknown";
@@ -78,6 +82,8 @@ ImageType get_type(const nonstd::span<uint8_t>& data)
     return ImageType::Png;
   if (is_targa(data))
     return ImageType::Targa;
+  if (is_bitmap(data))
+    return ImageType::Bitmap;
 
   return ImageType::Unknown;
 }

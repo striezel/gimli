@@ -43,6 +43,8 @@
 		<Unit filename="../../lib/hash/average.hpp" />
 		<Unit filename="../../lib/hash/difference.cpp" />
 		<Unit filename="../../lib/hash/difference.hpp" />
+		<Unit filename="../../lib/io/BitmapLoader.hpp" />
+		<Unit filename="../../lib/io/BitmapWriter.hpp" />
 		<Unit filename="../../lib/io/JpegLoader.hpp" />
 		<Unit filename="../../lib/io/JpegWriter.hpp" />
 		<Unit filename="../../lib/io/Loader.hpp" />
@@ -61,6 +63,8 @@
 		<Unit filename="../../lib/transforms/Resize.hpp" />
 		<Unit filename="../../lib/types/get_type.cpp" />
 		<Unit filename="../../lib/types/get_type.hpp" />
+		<Unit filename="../../lib/types/is_bitmap.cpp" />
+		<Unit filename="../../lib/types/is_bitmap.hpp" />
 		<Unit filename="../../lib/types/is_jpeg.cpp" />
 		<Unit filename="../../lib/types/is_jpeg.hpp" />
 		<Unit filename="../../lib/types/is_png.cpp" />
@@ -71,6 +75,7 @@
 		<Unit filename="../../third-party/nonstd/span.hpp" />
 		<Unit filename="hash/average.cpp" />
 		<Unit filename="hash/difference.cpp" />
+		<Unit filename="io/BitmapLoader.cpp" />
 		<Unit filename="io/JpegLoader.cpp" />
 		<Unit filename="io/PngLoader.cpp" />
 		<Unit filename="io/TargaLoader.cpp" />
@@ -81,6 +86,7 @@
 		<Unit filename="transforms/Greyscale.cpp" />
 		<Unit filename="transforms/Resize.cpp" />
 		<Unit filename="types/get_type.cpp" />
+		<Unit filename="types/is_bitmap.cpp" />
 		<Unit filename="types/is_jpeg.cpp" />
 		<Unit filename="types/is_png.cpp" />
 		<Unit filename="types/is_targa.cpp" />

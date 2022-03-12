@@ -31,6 +31,13 @@ TEST_CASE("image type detection")
 
   SECTION("stream operator for ImageType")
   {
+    SECTION("Bitmap")
+    {
+      std::ostringstream stream;
+      stream << ImageType::Bitmap;
+      REQUIRE( stream.str() == "Bitmap" );
+    }
+
     SECTION("Jpeg")
     {
       std::ostringstream stream;
@@ -62,6 +69,13 @@ TEST_CASE("image type detection")
 
   SECTION("get_type with data vector")
   {
+    SECTION("Bitmap")
+    {
+      std::vector<uint8_t> data = { 0x42, 0x4D, 0x92, 0x00, 0x00, 0x00, 0x00,
+          0x00, 0x00, 0x00, 0x7A, 0x00, 0x00, 0x00 };
+      REQUIRE( get_type(data) == ImageType::Bitmap );
+    }
+
     SECTION("JPEG")
     {
       std::vector<uint8_t> data = { 0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46, 0x49, 0x46 };
@@ -114,6 +128,23 @@ TEST_CASE("image type detection")
       REQUIRE_FALSE( img_type.has_value() );
       const auto& error = img_type.error();
       REQUIRE( error.find("short") != std::string::npos );
+    }
+
+    SECTION("Bitmap file")
+    {
+      const auto data = "BM\x92\0\0\0\0\0\0\0\x7A\0\0\0\x6C\0\0\0\x02\0\0\0\x03\0\0\0\x01\0\x18\0\0\0\0\0\x18\0\0\0#.\0\0#.\0\0\0\0\0\0\0\0\0\0BGRs\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x02\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\xFF\0\0\xFF\0\0\0\0\0\xFF\0\0\xFF\0\0\0\0\0\xFF\0\0\xFF\0\0"sv;
+      const auto name = "get_type.bmp";
+      // write file
+      {
+        std::ofstream file(name);
+        file.write(data.data(), data.size());
+        file.close();
+      }
+
+      const auto img_type = get_type(name);
+      REQUIRE( std::remove(name) == 0 );
+      REQUIRE( img_type.has_value() );
+      REQUIRE( img_type.value() == ImageType::Bitmap );
     }
 
     SECTION("JPEG file")

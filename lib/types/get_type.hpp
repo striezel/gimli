@@ -33,6 +33,7 @@ namespace gimli::types
 enum class ImageType
 {
   Unknown,
+  Bitmap,
   Jpeg,
   Png,
   Targa

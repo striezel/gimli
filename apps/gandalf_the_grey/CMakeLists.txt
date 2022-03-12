@@ -5,6 +5,8 @@ cmake_minimum_required (VERSION 3.8)
 project(gandalf-the-grey)
 
 set(gandalf-the-grey_sources
+    ../../lib/io/BitmapLoader.hpp
+    ../../lib/io/BitmapWriter.hpp
     ../../lib/io/JpegLoader.hpp
     ../../lib/io/Loader.hpp
     ../../lib/io/PngLoader.hpp
@@ -16,6 +18,7 @@ set(gandalf-the-grey_sources
     ../../lib/numeric/hamming.hpp
     ../../lib/transforms/Greyscale.cpp
     ../../lib/types/get_type.cpp
+    ../../lib/types/is_bitmap.cpp
     ../../lib/types/is_jpeg.cpp
     ../../lib/types/is_png.cpp
     ../../lib/types/is_targa.cpp

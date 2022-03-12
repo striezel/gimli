@@ -19,51 +19,50 @@
 */
 
 #include "../find_catch.hpp"
-#include "../../../lib/types/is_targa.hpp"
+#include "../../../lib/types/is_bitmap.hpp"
 
-TEST_CASE("file format checks: Targa")
+TEST_CASE("file format checks: Bitmap")
 {
   using namespace gimli::types;
 
-  SECTION("is_targa")
+  SECTION("is_bitmap")
   {
-    SECTION("valid Targa image data")
+    SECTION("valid Bitmap image data")
     {
-      std::vector<uint8_t> data = { 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
-          0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x06, 0xB0, 0x04, 0x18, 0x00 };
-      REQUIRE( is_targa(data) );
+      std::vector<uint8_t> data = { 0x42, 0x4D, 0x92, 0x00, 0x00, 0x00, 0x00,
+          0x00, 0x00, 0x00, 0x7A, 0x00, 0x00, 0x00 };
+      REQUIRE( is_bitmap(data) );
     }
 
     SECTION("data is too short")
     {
-      std::vector<uint8_t> data = { 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
-          0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x06, 0xB0, 0x04, 0x18 };
+      std::vector<uint8_t> data = { 0x42, 0x4D };
       while (!data.empty())
       {
         data.pop_back();
-        REQUIRE_FALSE( is_targa(data) );
+        REQUIRE_FALSE( is_bitmap(data) );
       }
     }
 
-    SECTION("data from a Bitmap file is not a Targa image")
-    {
-      std::vector<uint8_t> data = { 0x42, 0x4D, 0x92, 0x00, 0x00, 0x00, 0x00,
-          0x00, 0x00, 0x00, 0x7A, 0x00, 0x00, 0x00 };
-      REQUIRE_FALSE( is_targa(data) );
-    }
-
-    SECTION("data from a JPEG file is not a Targa image")
+    SECTION("data from a JPEG file is not a Bitmap image")
     {
       std::vector<uint8_t> data = { 0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A,
           0x46, 0x49, 0x46, 0x00, 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 0x01 };
-      REQUIRE_FALSE( is_targa(data) );
+      REQUIRE_FALSE( is_bitmap(data) );
     }
 
-    SECTION("data from a PNG file is not a Targa image")
+    SECTION("data from a PNG file is not a Bitmap image")
     {
       std::vector<uint8_t> data = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A,
           0x0A, 0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00 };
-      REQUIRE_FALSE( is_targa(data) );
+      REQUIRE_FALSE( is_bitmap(data) );
+    }
+
+    SECTION("data from a Targa image file is not a Bitmap image")
+    {
+      std::vector<uint8_t> data = { 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x06, 0xB0, 0x04, 0x18, 0x00 };
+      REQUIRE_FALSE( is_bitmap(data) );
     }
   }
 }

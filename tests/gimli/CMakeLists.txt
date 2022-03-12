@@ -7,6 +7,7 @@ project(gimli_tests)
 set(gimli_tests_sources
     ../../lib/hash/average.cpp
     ../../lib/hash/difference.cpp
+    ../../lib/io/BitmapLoader.hpp
     ../../lib/io/JpegLoader.hpp
     ../../lib/io/PngLoader.hpp
     ../../lib/io/TargaLoader.hpp
@@ -17,11 +18,13 @@ set(gimli_tests_sources
     ../../lib/transforms/Greyscale.cpp
     ../../lib/transforms/Resize.hpp
     ../../lib/types/get_type.cpp
+    ../../lib/types/is_bitmap.cpp
     ../../lib/types/is_jpeg.cpp
     ../../lib/types/is_png.cpp
     ../../lib/types/is_targa.cpp
     hash/average.cpp
     hash/difference.cpp
+    io/BitmapLoader.cpp
     io/JpegLoader.cpp
     io/PngLoader.cpp
     io/TargaLoader.cpp
@@ -31,6 +34,7 @@ set(gimli_tests_sources
     transforms/Greyscale.cpp
     transforms/Resize.cpp
     types/get_type.cpp
+    types/is_bitmap.cpp
     types/is_jpeg.cpp
     types/is_png.cpp
     types/is_targa.cpp

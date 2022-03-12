@@ -19,6 +19,7 @@
 */
 
 #include "load_any.hpp"
+#include "BitmapLoader.hpp"
 #include "JpegLoader.hpp"
 #include "PngLoader.hpp"
 #include "TargaLoader.hpp"
@@ -49,6 +50,8 @@ nonstd::expected<Image, std::string> load_any(const std::string& path, const typ
          return PngLoader::load(path);
     case ImageType::Targa:
          return TargaLoader::load(path);
+    case ImageType::Bitmap:
+         return BitmapLoader::load(path);
     case ImageType::Unknown:
     default:
          return nonstd::make_unexpected("Cannot load image of unknown type.");

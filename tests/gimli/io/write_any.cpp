@@ -33,6 +33,14 @@ TEST_CASE("write_any")
     Image img(point_t(1, 1));
     view(img)(0, 0) = rgb8_pixel_t(255, 0, 0);
 
+    SECTION("Bitmap format")
+    {
+      const auto name = "write_any_rgb.bmp";
+      const auto result = write_any_rgb(name, img, ImageType::Bitmap);
+      REQUIRE( std::remove(name) == 0 );
+      REQUIRE_FALSE( result.has_value() );
+    }
+
     SECTION("JPEG format")
     {
       const auto name = "write_any_rgb.jpeg";
@@ -84,6 +92,14 @@ TEST_CASE("write_any")
   {
     gray8_image_t img(point_t(1, 1));
     view(img)(0, 0) = gray8_pixel_t(128);
+
+    SECTION("Bitmap format")
+    {
+      const auto name = "write_any_grey.bmp";
+      const auto result = write_any_grey(name, img, ImageType::Bitmap);
+      REQUIRE( std::remove(name) == 0 );
+      REQUIRE_FALSE( result.has_value() );
+    }
 
     SECTION("JPEG format")
     {
