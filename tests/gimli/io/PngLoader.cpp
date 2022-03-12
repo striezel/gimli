@@ -52,15 +52,14 @@ TEST_CASE("PngLoader")
       }
 
       const auto result = PngLoader::load(name);
+      REQUIRE( std::remove(name) == 0 );
       REQUIRE( result.has_value() );
       const auto& img = result.value();
       REQUIRE( img.width() == 20 );
       REQUIRE( img.height() == 30 );
-
-      REQUIRE( std::remove(name) == 0 );
     }
 
-    /*SECTION("given file is not a PNG")
+    SECTION("given file is not a PNG")
     {
       using namespace std::string_view_literals;
 
@@ -74,11 +73,10 @@ TEST_CASE("PngLoader")
       }
 
       const auto result = PngLoader::load(name);
+      REQUIRE( std::remove(name) == 0 );
       REQUIRE_FALSE( result.has_value() );
       const auto& error = result.error();
-      REQUIRE( error.find("not a PNG") != std::string::npos );
-
-      REQUIRE( std::remove(name) == 0 );
-    }*/
+      REQUIRE( error.find("invalid") != std::string::npos );
+    }
   }
 }
