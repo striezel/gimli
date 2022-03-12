@@ -101,6 +101,17 @@ TEST_CASE("write_any")
       REQUIRE_FALSE( result.has_value() );
     }
 
+    SECTION("Bitmap format, but with failure")
+    {
+      const auto name = "/foo/bar/write_any_grey_fail.bmp";
+      const auto result = write_any_grey(name, img, ImageType::Bitmap);
+      REQUIRE_FALSE( std::remove(name) == 0 );
+      // Write should fail and have an error message.
+      REQUIRE( result.has_value() );
+      bool contains_fail_or_error = (result.value().find("fail") != std::string::npos) || (result.value().find("error") != std::string::npos);
+      REQUIRE( contains_fail_or_error );
+    }
+
     SECTION("JPEG format")
     {
       const auto name = "write_any_grey.jpeg";
