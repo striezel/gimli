@@ -15,7 +15,6 @@ set(gandalf-the-grey_sources
     ../../lib/io/Writer.hpp
     ../../lib/io/load_any.cpp
     ../../lib/io/write_any.cpp
-    ../../lib/numeric/hamming.hpp
     ../../lib/transforms/Greyscale.cpp
     ../../lib/types/get_type.cpp
     ../../lib/types/is_bitmap.cpp
@@ -72,10 +71,6 @@ if (PNG_FOUND)
 else ()
   message ( FATAL_ERROR "libpng was not found!" )
 endif (PNG_FOUND)
-
-# add test case
-add_test(NAME test_gimli
-         COMMAND $<TARGET_FILE:gandalf-the-grey> --version)
 
 # ##################################### #
 # tests for gandalf-the-grey executable #
