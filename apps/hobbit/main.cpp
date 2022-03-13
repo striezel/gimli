@@ -4,16 +4,16 @@
     Copyright (C) 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
+    it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
+    GNU General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public License
+    You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -------------------------------------------------------------------------------
 */
@@ -30,12 +30,12 @@
     #include <boost/gil/version.hpp>
   #endif
 #endif
-#include "grey.hpp"
 #include "../return_codes.hpp"
+#include "hobbit.hpp"
 
 void showVersion()
 {
-  std::cout << "gandalf-the-grey, version 0.2.0, 2022-03-12\n"
+  std::cout << "hobbit, version 0.1.0-pre, 2022-03-13\n"
             << "\n"
             << "Library versions:" << std::endl
             << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl
@@ -50,24 +50,20 @@ void showVersion()
 
 void showHelp()
 {
-  std::cout << "gandalf-the-grey [OPTIONS] [FILE]\n"
+  std::cout << "hobbit [OPTIONS] [FILE]\n"
             << "\n"
-            << "Produces greyscale versions of images.\n"
-            << "The original images will not be changed, greyscale versions are saved as\n"
-            << "separate files with a file name suffix (usually '_grey').\n"
+            << "Resizes images.\n"
+            << "The original images will not be changed, resized versions are saved as\n"
+            << "separate files with a file name suffix (usually containing the size).\n"
             << "\n"
             << "options:\n"
             << "  -? | --help     - Shows this help message.\n"
             << "  -v | --version  - Shows version information.\n"
-            << "  FILE            - Sets the file name of image to convert to greyscale.\n"
-            << "                    This option can occur multiple times, if multiple files\n"
-            << "                    need to be processed.\n";
+            << "  FILE            - Sets the file name of the image to resize.\n";
 }
 
 int main(int argc, char** argv)
 {
-  namespace fs = std::filesystem;
-
   std::vector<std::string> files;
   if ((argc > 1) && (argv != nullptr))
   {
@@ -105,15 +101,18 @@ int main(int argc, char** argv)
 
   if (files.empty())
   {
-    std::cerr << "Error: No files have been specified for conversion to greyscale!\n"
+    std::cerr << "Error: No files have been specified to resize!\n"
               << "Hint: Image files can be specified as parameter to the program, like so:\n"
-              << "\n\tgandalf-the-grey my_image.png another_image.jpeg\n";
+              << "\n\thobbit my_image.png another_image.jpeg\n";
     return rcInvalidParameter;
   }
 
+  // TODO: Set size from command line parameter.
+  const auto new_dimension = boost::gil::point_t(32, 32);
+
   for (const std::string& file: files)
   {
-    const int rc = gandalf_the_grey(file);
+    const int rc = hobbit(file, new_dimension);
     if (rc != 0)
       return rc;
   }

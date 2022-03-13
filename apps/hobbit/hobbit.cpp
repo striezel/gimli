@@ -4,30 +4,30 @@
     Copyright (C) 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
+    it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
+    GNU General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public License
+    You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -------------------------------------------------------------------------------
 */
 
-#include "grey.hpp"
+#include "hobbit.hpp"
 #include <filesystem>
 #include <iostream>
 #include "../return_codes.hpp"
 #include "../../lib/io/load_any.hpp"
 #include "../../lib/io/write_any.hpp"
-#include "../../lib/transforms/Greyscale.hpp"
+#include "../../lib/transforms/Resize.hpp"
 #include "../../lib/types/get_type.hpp"
 
-int gandalf_the_grey(const std::string& file)
+int hobbit(const std::string& file, const boost::gil::point_t& new_size)
 {
   const auto img_type = gimli::types::get_type(file);
   if (!img_type.has_value())
@@ -39,8 +39,7 @@ int gandalf_the_grey(const std::string& file)
   }
   if (img_type.value() == gimli::types::ImageType::Unknown)
   {
-    std::cerr << "'I have no memory of this place.' - Gandalf\n"
-              << "Error: File " << file << " has an unknown or unsupported image format." << std::endl;
+    std::cerr << "Error: File " << file << " has an unknown or unsupported image format." << std::endl;
     return rcUnsupportedFormat;
   }
 
@@ -52,29 +51,29 @@ int gandalf_the_grey(const std::string& file)
     return rcInputOutputError;
   }
 
-  const auto maybe_grey = gimli::Greyscale::transform(maybe_image.value());
-  if (!maybe_grey.has_value())
+  const auto maybe_resized = gimli::Resize::transform(maybe_image.value(), new_size);
+  if (!maybe_resized.has_value())
   {
-    std::cerr << "Error: File " << file << " could not be transformed to greyscale image.\n"
-              << "Error: " << maybe_grey.error() << "\n";
+    std::cerr << "Error: File " << file << " could not be resized.\n"
+              << "Error: " << maybe_resized.error() << "\n";
     return rcInputOutputError;
   }
 
-  const std::string grey_file = grey_name(file);
-  const auto error_text = gimli::write_any_grey(grey_file, maybe_grey.value(), img_type.value());
+  const std::string resized_file = sized_name(file, new_size);
+  const auto error_text = gimli::write_any_rgb(resized_file, maybe_resized.value(), img_type.value());
   if (error_text.has_value())
   {
-    std::cerr << "Error: Greyscale version of " << file << " could not be written to file "
-              << grey_file << ".\n"
+    std::cerr << "Error: Resized version of " << file << " could not be written to file "
+              << resized_file << ".\n"
               << "Error: " << error_text.value() << "\n";
     return rcInputOutputError;
   }
-  std::cout << file << " -> " << grey_file << "\n";
+  std::cout << file << " -> " << resized_file << "\n";
 
   return 0;
 }
 
-std::string grey_name(const std::string& file)
+std::string sized_name(const std::string& file, const boost::gil::point_t& dims)
 {
   namespace fs = std::filesystem;
 
@@ -82,14 +81,14 @@ std::string grey_name(const std::string& file)
   const auto ext = path.extension();
   const auto stem = path.stem();
 
-  fs::path grey(stem.native() + std::string("_grey") + ext.native());
+  fs::path grey(stem.native() + std::string("_resized") + ext.native());
   path.replace_filename(grey);
   std::error_code error;
   uint_least32_t counter = 0;
   while (fs::exists(path, error) && !error)
   {
     ++counter;
-    grey = stem.native() + std::string("_grey_") + std::to_string(counter) + ext.native();
+    grey = stem.native() + std::string("_resized_") + std::to_string(counter) + ext.native();
     path.replace_filename(grey);
   }
   return path;
