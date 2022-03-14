@@ -4,22 +4,23 @@
     Copyright (C) 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
+    it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
+    GNU General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public License
+    You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -------------------------------------------------------------------------------
 */
 
 #include <filesystem>
 #include <iostream>
+#include <optional>
 #include <string>
 #include <vector>
 #include <jpeglib.h>
@@ -30,12 +31,12 @@
     #include <boost/gil/version.hpp>
   #endif
 #endif
-#include "grey.hpp"
 #include "../return_codes.hpp"
+#include "hobbit.hpp"
 
 void showVersion()
 {
-  std::cout << "gandalf-the-grey, version 0.2.0, 2022-03-12\n"
+  std::cout << "hobbit, version 0.1.0, 2022-03-14\n"
             << "\n"
             << "Library versions:" << std::endl
             << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl
@@ -50,25 +51,25 @@ void showVersion()
 
 void showHelp()
 {
-  std::cout << "gandalf-the-grey [OPTIONS] [FILE]\n"
+  std::cout << "hobbit [OPTIONS] [FILE]\n"
             << "\n"
-            << "Produces greyscale versions of images.\n"
-            << "The original images will not be changed, greyscale versions are saved as\n"
-            << "separate files with a file name suffix (usually '_grey').\n"
+            << "Resizes images.\n"
+            << "The original images will not be changed, resized versions are saved as\n"
+            << "separate files with a file name suffix (usually containing the size).\n"
             << "\n"
             << "options:\n"
-            << "  -? | --help     - Shows this help message.\n"
-            << "  -v | --version  - Shows version information.\n"
-            << "  FILE            - Sets the file name of image to convert to greyscale.\n"
-            << "                    This option can occur multiple times, if multiple files\n"
-            << "                    need to be processed.\n";
+            << "  -? | --help         - Shows this help message.\n"
+            << "  -v | --version      - Shows version information.\n"
+            << "  --size WIDTHxHEIGHT - Sets the new image size.\n"
+            << "  FILE                - Sets the file name of the image to resize.\n"
+            << "                        This option can occur multiple times, if multiple files\n"
+            << "                        need to be processed.\n";
 }
 
 int main(int argc, char** argv)
 {
-  namespace fs = std::filesystem;
-
   std::vector<std::string> files;
+  std::optional<boost::gil::point_t> dimension = std::nullopt;
   if ((argc > 1) && (argv != nullptr))
   {
     for (int i = 1; i < argc; ++i)
@@ -89,6 +90,36 @@ int main(int argc, char** argv)
         showHelp();
         return 0;
       }
+      else if ((param == "--size") || (param == "-s"))
+      {
+        if (dimension.has_value())
+        {
+          std::cerr << "Error: Dimension was already set to "
+                    << dimension.value().x << "x" << dimension.value().y
+                    << "!" << std::endl;
+          return rcInvalidParameter;
+        }
+        // enough parameters?
+        if ((i+1 < argc) && (argv[i+1] != nullptr))
+        {
+          const auto maybe_dim = parse_size(argv[i+1]);
+          if (!maybe_dim.has_value())
+          {
+            std::cerr << "Error while parsing dimension value: "
+                      << maybe_dim.error() << std::endl;
+            return rcInvalidParameter;
+          }
+          dimension = maybe_dim.value();
+          // Skip next parameter, because it's already used as dimension.
+          ++i;
+        }
+        else
+        {
+          std::cerr << "Error: You have to enter a dimension value after \""
+                    << param << "\"." << std::endl;
+          return rcInvalidParameter;
+        }
+      }
       else
       {
         // Parameter might be a file.
@@ -105,15 +136,23 @@ int main(int argc, char** argv)
 
   if (files.empty())
   {
-    std::cerr << "Error: No files have been specified for conversion to greyscale!\n"
+    std::cerr << "Error: No files have been specified to resize!\n"
               << "Hint: Image files can be specified as parameter to the program, like so:\n"
-              << "\n\tgandalf-the-grey my_image.png another_image.jpeg\n";
+              << "\n\thobbit --size 123x456 my_image.png another_image.jpeg\n";
+    return rcInvalidParameter;
+  }
+
+  if (!dimension.has_value())
+  {
+    std::cerr << "Error: No dimension has been specified for resize operation!\n"
+              << "Hint: The new dimension can be specified as parameter to the program, like so:\n"
+              << "\n\thobbit --size 123x456 my_image.png another_image.jpeg\n";
     return rcInvalidParameter;
   }
 
   for (const std::string& file: files)
   {
-    const int rc = gandalf_the_grey(file);
+    const int rc = hobbit(file, dimension.value());
     if (rc != 0)
       return rc;
   }

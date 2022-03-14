@@ -21,7 +21,7 @@
 #include "grey.hpp"
 #include <filesystem>
 #include <iostream>
-#include "return_codes.hpp"
+#include "../return_codes.hpp"
 #include "../../lib/io/load_any.hpp"
 #include "../../lib/io/write_any.hpp"
 #include "../../lib/transforms/Greyscale.hpp"
