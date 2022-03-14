@@ -21,6 +21,10 @@ add_test(NAME hobbit_unknown_file_type
 add_test(NAME hobbit_fail_to_load
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/fail-to-load.sh $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
 
+# test: size not specified
+add_test(NAME hobbit_size_not_specified
+         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/size-not-specified.sh $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
+
 # test: size given twice
 add_test(NAME hobbit_size_parameter_given_twice
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/size-given-twice.sh $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -32,6 +36,14 @@ add_test(NAME hobbit_size_fails_to_parse
 # test: size parameter without numbers
 add_test(NAME hobbit_size_but_no_numbers
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/size-but-no-numbers.sh $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
+
+# test: resize of image fails
+add_test(NAME hobbit_resize_failure
+         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/resize-fail.sh $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
+
+# test: file with name of resized image already exists
+add_test(NAME hobbit_target_file_exists
+         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/target-file-exists.sh $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # test: valid RGB JPEG file
 add_test(NAME hobbit_valid_jpeg_image
