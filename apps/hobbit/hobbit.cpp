@@ -73,6 +73,50 @@ int hobbit(const std::string& file, const boost::gil::point_t& new_size)
   return 0;
 }
 
+nonstd::expected<boost::gil::point_t, std::string> parse_size(const std::string& data)
+{
+  const auto x_pos = data.find('x');
+  if ((x_pos == std::string::npos) || (x_pos < 1) || (x_pos == data.size() - 1))
+  {
+    return nonstd::make_unexpected("'" + data + "' is not a valid dimension. "
+      + std::string(" Dimensions should contains width and height as integers, separated by 'x'.")
+      + " For example, '123x456' would be a proper dimension for width of 123 pixels and height of 456 pixels.");
+  }
+  const auto w_string = data.substr(0, x_pos);
+  const auto h_string = data.substr(x_pos + 1);
+  long long int w = 0;
+  long long int h = 0;
+
+  try
+  {
+    std::size_t pos = 0;
+    w = std::stoll(w_string, &pos);
+    if (pos != w_string.length())
+    {
+      return nonstd::make_unexpected("Dimension's width is not a valid integer.");
+    }
+    h = std::stoll(h_string, &pos);
+    if (pos != h_string.length())
+    {
+      return nonstd::make_unexpected("Dimension's height is not a valid integer.");
+    }
+  }
+  catch (const std::out_of_range& range_ex)
+  {
+    return nonstd::make_unexpected("Dimension value is out of range.");
+  }
+  catch (const std::invalid_argument& arg_ex)
+  {
+    return nonstd::make_unexpected("Dimension value is invalid.");
+  }
+  if ((w <= 0) || (h <= 0))
+  {
+    return nonstd::make_unexpected("Dimension value must not be negative.");
+  }
+
+  return boost::gil::point_t(w, h);
+}
+
 std::string sized_name(const std::string& file, const boost::gil::point_t& dims)
 {
   namespace fs = std::filesystem;
@@ -81,15 +125,16 @@ std::string sized_name(const std::string& file, const boost::gil::point_t& dims)
   const auto ext = path.extension();
   const auto stem = path.stem();
 
-  fs::path grey(stem.native() + std::string("_resized") + ext.native());
-  path.replace_filename(grey);
+  const auto size_string = "_" + std::to_string(dims.x) + "x" + std::to_string(dims.y);
+  fs::path sized(stem.native() + size_string + ext.native());
+  path.replace_filename(sized);
   std::error_code error;
   uint_least32_t counter = 0;
   while (fs::exists(path, error) && !error)
   {
     ++counter;
-    grey = stem.native() + std::string("_resized_") + std::to_string(counter) + ext.native();
-    path.replace_filename(grey);
+    sized = stem.native() + size_string + "_" + std::to_string(counter) + ext.native();
+    path.replace_filename(sized);
   }
   return path;
 }

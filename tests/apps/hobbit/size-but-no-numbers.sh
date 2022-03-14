@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Script to test executable when file with undeterminable type is given.
+# Script to test executable when file is valid.
 #
 #  Copyright (C) 2022  Dirk Stolle
 #
@@ -32,10 +32,10 @@ then
 fi
 
 EXECUTABLE="$1"
-"$EXECUTABLE" --size 12x34 "$2"/file.undetermined
-if [ $? -ne 0 ]
+"$EXECUTABLE" "$2"/rgb.jpeg --size
+if [ $? -ne 1 ]
 then
-  echo "Executable did not exit with code 0."
+  echo "Executable did not exit with code 1."
   exit 1
 fi
 

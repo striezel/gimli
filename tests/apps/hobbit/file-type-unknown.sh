@@ -32,7 +32,7 @@ then
 fi
 
 EXECUTABLE="$1"
-"$EXECUTABLE" "$2"/unknown.blob
+"$EXECUTABLE" --size 12x34 "$2"/unknown.blob
 if [ $? -ne 3 ]
 then
   echo "Executable did not exit with code 3."

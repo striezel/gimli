@@ -32,7 +32,7 @@ then
 fi
 
 EXECUTABLE="$1"
-"$EXECUTABLE" "$2"/foul.jpeg
+"$EXECUTABLE" --size 12x34 "$2"/foul.jpeg
 if [ $? -ne 2 ]
 then
   echo "Executable did not exit with code 2."

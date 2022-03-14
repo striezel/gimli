@@ -23,6 +23,7 @@
 
 #include <string>
 #include <boost/gil/point.hpp>
+#include "../../third-party/nonstd/expected.hpp"
 
 /** \brief Resizes the given image and saves it.
  *
@@ -32,6 +33,14 @@
  *         Returns non-zero exit code, if an error occurred.
  */
 int hobbit(const std::string& file, const boost::gil::point_t& new_size);
+
+/** \brief Parses a string into a point / dimension data.
+ *
+ * \param data   string containing the data in the form "123x456"
+ * \return Returns a point containing the dimension, if parsing succeeds.
+ *         Returns an error message otherwise.
+ */
+nonstd::expected<boost::gil::point_t, std::string> parse_size(const std::string& data);
 
 /** \brief Generates a file name for the resized version of an image.
  *

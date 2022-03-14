@@ -35,7 +35,7 @@
 
 void showVersion()
 {
-  std::cout << "hobbit, version 0.1.0-pre, 2022-03-13\n"
+  std::cout << "hobbit, version 0.1.0, 2022-03-14\n"
             << "\n"
             << "Library versions:" << std::endl
             << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl
@@ -57,14 +57,18 @@ void showHelp()
             << "separate files with a file name suffix (usually containing the size).\n"
             << "\n"
             << "options:\n"
-            << "  -? | --help     - Shows this help message.\n"
-            << "  -v | --version  - Shows version information.\n"
-            << "  FILE            - Sets the file name of the image to resize.\n";
+            << "  -? | --help         - Shows this help message.\n"
+            << "  -v | --version      - Shows version information.\n"
+            << "  --size WIDTHxHEIGHT - Sets the new image size.\n"
+            << "  FILE                - Sets the file name of the image to resize.\n"
+            << "                        This option can occur multiple times, if multiple files\n"
+            << "                        need to be processed.\n";
 }
 
 int main(int argc, char** argv)
 {
   std::vector<std::string> files;
+  std::optional<boost::gil::point_t> dimension = std::nullopt;
   if ((argc > 1) && (argv != nullptr))
   {
     for (int i = 1; i < argc; ++i)
@@ -85,6 +89,36 @@ int main(int argc, char** argv)
         showHelp();
         return 0;
       }
+      else if ((param == "--size") || (param == "-s"))
+      {
+        if (dimension.has_value())
+        {
+          std::cerr << "Error: Dimension was already set to "
+                    << dimension.value().x << "x" << dimension.value().y
+                    << "!" << std::endl;
+          return rcInvalidParameter;
+        }
+        // enough parameters?
+        if ((i+1 < argc) && (argv[i+1] != nullptr))
+        {
+          const auto maybe_dim = parse_size(argv[i+1]);
+          if (!maybe_dim.has_value())
+          {
+            std::cerr << "Error while parsing dimension value: "
+                      << maybe_dim.error() << std::endl;
+            return rcInvalidParameter;
+          }
+          dimension = maybe_dim.value();
+          // Skip next parameter, because it's already used as dimension.
+          ++i;
+        }
+        else
+        {
+          std::cerr << "Error: You have to enter a dimension value after \""
+                    << param << "\"." << std::endl;
+          return rcInvalidParameter;
+        }
+      }
       else
       {
         // Parameter might be a file.
@@ -103,16 +137,21 @@ int main(int argc, char** argv)
   {
     std::cerr << "Error: No files have been specified to resize!\n"
               << "Hint: Image files can be specified as parameter to the program, like so:\n"
-              << "\n\thobbit my_image.png another_image.jpeg\n";
+              << "\n\thobbit --size 123x456 my_image.png another_image.jpeg\n";
     return rcInvalidParameter;
   }
 
-  // TODO: Set size from command line parameter.
-  const auto new_dimension = boost::gil::point_t(32, 32);
+  if (!dimension.has_value())
+  {
+    std::cerr << "Error: No dimension has been specified for resize operation!\n"
+              << "Hint: The new dimension can be specified as parameter to the program, like so:\n"
+              << "\n\thobbit --size 123x456 my_image.png another_image.jpeg\n";
+    return rcInvalidParameter;
+  }
 
   for (const std::string& file: files)
   {
-    const int rc = hobbit(file, new_dimension);
+    const int rc = hobbit(file, dimension.value());
     if (rc != 0)
       return rc;
   }
