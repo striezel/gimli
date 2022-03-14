@@ -111,7 +111,7 @@ nonstd::expected<boost::gil::point_t, std::string> parse_size(const std::string&
   }
   if ((w <= 0) || (h <= 0))
   {
-    return nonstd::make_unexpected("Dimension value must not be negative.");
+    return nonstd::make_unexpected("Dimension value must contain positive integers only.");
   }
 
   return boost::gil::point_t(w, h);
