@@ -20,6 +20,7 @@
 
 #include <filesystem>
 #include <iostream>
+#include <optional>
 #include <string>
 #include <vector>
 #include <jpeglib.h>
