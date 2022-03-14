@@ -1,7 +1,7 @@
 # Gandalf the Grey - produces greyscale versions of images
 
 `gandalf_the_grey` is a command-line program that produces greyscale versions
-of images. Currently JPEG, PNG and Targa image files are supported.
+of images. Currently Bitmap, JPEG, PNG and Targa image files are supported.
 
 ## Usage
 
