@@ -18,35 +18,33 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_NUMERIC_HAMMING_HPP
-#define GIMLI_NUMERIC_HAMMING_HPP
+#ifndef GIMLI_HASH_SIMILARITY_HPP
+#define GIMLI_HASH_SIMILARITY_HPP
 
-#include <cstdint>
-#include <limits>
+#include "../numeric/hamming.hpp"
 
-namespace gimli::numeric
+namespace gimli::hash
 {
 
-/** \brief Calculates the Hamming distance of two integers.
+/** \brief Calculates the similarity of two hashes.
  *
- * \param a   first integer
- * \param b   second integer
- * \return Returns the Hamming distance of a and b.
+ * \param h1   first hash value
+ * \param h2   second hash value
+ * \return Returns the similarity of two hashes as a floating point value in
+ *         the range [0;1]. Zero means no similarity at all, one means 100 %
+ *         similarity.
+ * \remark Obviously, the result is only meaningful, if both hashes have been
+ *         calculated using the same hash algorithm.
  */
 template<typename uint_t>
-unsigned int hamming_distance(const uint_t a, const uint_t b)
+float similarity(const uint_t h1, const uint_t h2)
 {
   static_assert(std::numeric_limits<uint_t>::is_integer && !std::numeric_limits<uint_t>::is_signed);
   constexpr unsigned int digits = std::numeric_limits<uint_t>::digits;
-  unsigned int distance = 0;
-  for (unsigned int i = 0; i < digits; ++i)
-  {
-    const uint_t shifted = static_cast<uint_t>(1u) << i;
-    distance += (shifted & a) != (shifted & b);
-  }
-  return distance;
+
+  return static_cast<float>(digits - numeric::hamming_distance(h1, h2)) / static_cast<float>(digits);
 }
 
 } // namespace
 
-#endif // GIMLI_NUMERIC_HAMMING_HPP
+#endif // GIMLI_HASH_SIMILARITY_HPP

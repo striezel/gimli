@@ -7,6 +7,7 @@ project(gimli_tests)
 set(gimli_tests_sources
     ../../lib/hash/average.cpp
     ../../lib/hash/difference.cpp
+    ../../lib/hash/similarity.hpp
     ../../lib/io/BitmapLoader.hpp
     ../../lib/io/JpegLoader.hpp
     ../../lib/io/PngLoader.hpp
@@ -24,6 +25,7 @@ set(gimli_tests_sources
     ../../lib/types/is_targa.cpp
     hash/average.cpp
     hash/difference.cpp
+    hash/similarity.cpp
     io/BitmapLoader.cpp
     io/JpegLoader.cpp
     io/PngLoader.cpp
