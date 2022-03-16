@@ -37,6 +37,14 @@ namespace gimli::hash
  */
 nonstd::expected<uint64_t, std::string> difference(const Image& img);
 
+/** \brief Calculates the difference hash ("dHash") of an image.
+ *
+ * \param img  the input image
+ * \return Returns the hash of the image in case of success.
+ *         Returns an error message otherwise.
+ */
+nonstd::expected<uint64_t, std::string> difference(const boost::gil::gray8_image_t& img);
+
 } // namespace
 
 #endif // GIMLI_HASH_DIFFERENCE_HPP

@@ -34,8 +34,14 @@ nonstd::expected<uint64_t, std::string> average(const Image& img)
   {
     return nonstd::make_unexpected(maybe_grey.error());
   }
+  return average(maybe_grey.value());
+}
 
-  const auto maybe_small = Resize::transform(maybe_grey.value(), point_t(8, 8));
+nonstd::expected<uint64_t, std::string> average(const boost::gil::gray8_image_t& img)
+{
+  using namespace boost::gil;
+
+  const auto maybe_small = Resize::transform(img, point_t(8, 8));
   if (!maybe_small.has_value())
   {
     return nonstd::make_unexpected(maybe_small.error());

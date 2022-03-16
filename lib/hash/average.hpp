@@ -37,6 +37,14 @@ namespace gimli::hash
  */
 nonstd::expected<uint64_t, std::string> average(const Image& img);
 
+/** \brief Calculates the average hash ("aHash") of an image.
+ *
+ * \param img  the input image
+ * \return Returns the hash of the image in case of success.
+ *         Returns an error message otherwise.
+ */
+nonstd::expected<uint64_t, std::string> average(const boost::gil::gray8_image_t& img);
+
 } // namespace
 
 #endif // GIMLI_HASH_AVERAGE_HPP

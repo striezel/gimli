@@ -21,16 +21,11 @@
 #ifndef GIMLI_IMAGE_HPP
 #define GIMLI_IMAGE_HPP
 
-#include <boost/gil/extension/dynamic_image/any_image.hpp>
+#include <boost/gil/image.hpp>
+#include <boost/gil/typedefs.hpp>
 
 namespace gimli
 {
-
-/* Older approach:
-
-typedef boost::mpl::vector<boost::gil::rgb8_image_t, boost::gil::rgba8_image_t, boost::gil::gray8_image_t> image_types;
-using Image = boost::gil::any_image<image_types>;
-*/
 
 using Image = boost::gil::rgb8_image_t;
 
