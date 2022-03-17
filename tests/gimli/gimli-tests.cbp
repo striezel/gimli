@@ -46,6 +46,8 @@
 		<Unit filename="../../lib/hash/minmax.cpp" />
 		<Unit filename="../../lib/hash/minmax.hpp" />
 		<Unit filename="../../lib/hash/similarity.hpp" />
+		<Unit filename="../../lib/hash/vertical_difference.cpp" />
+		<Unit filename="../../lib/hash/vertical_difference.hpp" />
 		<Unit filename="../../lib/io/BitmapLoader.hpp" />
 		<Unit filename="../../lib/io/BitmapWriter.hpp" />
 		<Unit filename="../../lib/io/JpegLoader.hpp" />
@@ -80,6 +82,7 @@
 		<Unit filename="hash/difference.cpp" />
 		<Unit filename="hash/minmax.cpp" />
 		<Unit filename="hash/similarity.cpp" />
+		<Unit filename="hash/vertical_difference.cpp" />
 		<Unit filename="io/BitmapLoader.cpp" />
 		<Unit filename="io/JpegLoader.cpp" />
 		<Unit filename="io/PngLoader.cpp" />
