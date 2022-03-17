@@ -18,14 +18,14 @@
  -------------------------------------------------------------------------------
 */
 
-#include "average.hpp"
+#include "minmax.hpp"
 #include "../transforms/Greyscale.hpp"
 #include "../transforms/Resize.hpp"
 
 namespace gimli::hash
 {
 
-nonstd::expected<uint64_t, std::string> average(const Image& img)
+nonstd::expected<uint64_t, std::string> minmax(const Image& img)
 {
   using namespace boost::gil;
 
@@ -34,10 +34,10 @@ nonstd::expected<uint64_t, std::string> average(const Image& img)
   {
     return nonstd::make_unexpected(maybe_grey.error());
   }
-  return average(maybe_grey.value());
+  return minmax(maybe_grey.value());
 }
 
-nonstd::expected<uint64_t, std::string> average(const boost::gil::gray8_image_t& img)
+nonstd::expected<uint64_t, std::string> minmax(const boost::gil::gray8_image_t& img)
 {
   using namespace boost::gil;
 
@@ -47,24 +47,14 @@ nonstd::expected<uint64_t, std::string> average(const boost::gil::gray8_image_t&
     return nonstd::make_unexpected(maybe_small.error());
   }
 
-  const auto small_view = const_view(maybe_small.value());
-  uint_fast16_t sum = 0;
-  for (unsigned int y = 0; y < 8; ++y)
-  {
-    for (unsigned int x = 0; x < 8; ++x)
-    {
-      sum += static_cast<uint_fast16_t>(small_view(x, y));
-    }
-  }
-  const uint8_t avg = sum / 64;
-
   uint64_t result = 0;
   unsigned int shift = 0;
+  const auto small_view = const_view(maybe_small.value());
   for (unsigned int y = 0; y < 8; ++y)
   {
     for (unsigned int x = 0; x < 8; ++x)
     {
-      result += static_cast<uint64_t>(small_view(x, y) > avg) << shift;
+      result += static_cast<uint64_t>(small_view(x, y) > 127) << shift;
       ++shift;
     }
   }

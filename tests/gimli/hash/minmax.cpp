@@ -19,14 +19,14 @@
 */
 
 #include "../find_catch.hpp"
-#include "../../../lib/hash/average.hpp"
+#include "../../../lib/hash/minmax.hpp"
 
-TEST_CASE("Hashing: aHash")
+TEST_CASE("Hashing: mHash")
 {
   using namespace gimli::hash;
   using namespace boost::gil;
 
-  SECTION("hash::average")
+  SECTION("hash::minmax")
   {
     SECTION("all zeroes")
     {
@@ -39,9 +39,9 @@ TEST_CASE("Hashing: aHash")
         }
       }
 
-      const auto aHash = average(img);
-      REQUIRE( aHash.has_value() );
-      REQUIRE( aHash.value() == 0 );
+      const auto mHash = minmax(img);
+      REQUIRE( mHash.has_value() );
+      REQUIRE( mHash.value() == 0 );
     }
 
     SECTION("all ones")
@@ -55,9 +55,9 @@ TEST_CASE("Hashing: aHash")
         }
       }
 
-      const auto aHash = average(img);
-      REQUIRE( aHash.has_value() );
-      REQUIRE( aHash.value() == 0x0000000000000000 );
+      const auto mHash = minmax(img);
+      REQUIRE( mHash.has_value() );
+      REQUIRE( mHash.value() == 0xFFFFFFFFFFFFFFFF );
     }
 
     SECTION("mixed")
@@ -74,9 +74,9 @@ TEST_CASE("Hashing: aHash")
         }
       }
 
-      const auto aHash = average(img);
-      REQUIRE( aHash.has_value() );
-      REQUIRE( aHash.value() == 0x00FF00FF00FF00FF );
+      const auto mHash = minmax(img);
+      REQUIRE( mHash.has_value() );
+      REQUIRE( mHash.value() == 0x00FF00FF00FF00FF );
     }
 
     SECTION("ascending")
@@ -92,15 +92,15 @@ TEST_CASE("Hashing: aHash")
         }
       }
 
-      const auto aHash = average(img);
-      REQUIRE( aHash.has_value() );
-      REQUIRE( aHash.value() == 0xFFFFFFFF00000000 );
+      const auto mHash = minmax(img);
+      REQUIRE( mHash.has_value() );
+      REQUIRE( mHash.value() == 0x0000000000000000 );
     }
 
     SECTION("descending")
     {
       rgb8_image_t img(point_t(8, 8));
-      uint8_t current_value = 64;
+      uint8_t current_value = 255;
       for (int i = 0; i < 8; ++i)
       {
         for (int j = 0; j < 8; ++j)
@@ -110,9 +110,9 @@ TEST_CASE("Hashing: aHash")
         }
       }
 
-      const auto aHash = average(img);
-      REQUIRE( aHash.has_value() );
-      REQUIRE( aHash.value() == 0x00000000FFFFFFFF );
+      const auto mHash = minmax(img);
+      REQUIRE( mHash.has_value() );
+      REQUIRE( mHash.value() == 0xFFFFFFFFFFFFFFFF );
     }
   }
 }
