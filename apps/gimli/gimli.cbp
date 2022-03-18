@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="gimli" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/gimli" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/gimli" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Weffc++" />
+			<Add option="-Wall" />
+			<Add option="-std=c++17" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Linker>
+			<Add library="jpeg" />
+			<Add library="png" />
+		</Linker>
+		<Unit filename="../../lib/hash/average.cpp" />
+		<Unit filename="../../lib/hash/average.hpp" />
+		<Unit filename="../../lib/hash/difference.cpp" />
+		<Unit filename="../../lib/hash/difference.hpp" />
+		<Unit filename="../../lib/hash/similarity.hpp" />
+		<Unit filename="../../lib/io/BitmapLoader.hpp" />
+		<Unit filename="../../lib/io/JpegLoader.hpp" />
+		<Unit filename="../../lib/io/Loader.hpp" />
+		<Unit filename="../../lib/io/PngLoader.hpp" />
+		<Unit filename="../../lib/io/TargaLoader.hpp" />
+		<Unit filename="../../lib/io/load_any.cpp" />
+		<Unit filename="../../lib/io/load_any.hpp" />
+		<Unit filename="../../lib/numeric/hamming.hpp" />
+		<Unit filename="../../lib/transforms/Greyscale.cpp" />
+		<Unit filename="../../lib/transforms/Greyscale.hpp" />
+		<Unit filename="../../lib/transforms/Resize.hpp" />
+		<Unit filename="../../lib/types/get_type.cpp" />
+		<Unit filename="../../lib/types/get_type.hpp" />
+		<Unit filename="../../lib/types/is_bitmap.cpp" />
+		<Unit filename="../../lib/types/is_bitmap.hpp" />
+		<Unit filename="../../lib/types/is_jpeg.cpp" />
+		<Unit filename="../../lib/types/is_jpeg.hpp" />
+		<Unit filename="../../lib/types/is_png.cpp" />
+		<Unit filename="../../lib/types/is_png.hpp" />
+		<Unit filename="../../lib/types/is_targa.cpp" />
+		<Unit filename="../../lib/types/is_targa.hpp" />
+		<Unit filename="../../third-party/nonstd/expected.hpp" />
+		<Unit filename="likeness.cpp" />
+		<Unit filename="likeness.hpp" />
+		<Unit filename="main.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

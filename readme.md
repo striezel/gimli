@@ -14,6 +14,7 @@ Furthermore, some example applications are provided that make use of the library
 and its features. Currently, this includes the following applications:
 
 * [`gandalf-the-grey`](./apps/gandalf_the_grey/readme.md) - produces greyscale versions of images
+* [`gimli`](./apps/gimli/readme.md) - finds like images by hashes
 * [`hobbit`](./apps/hobbit/readme.md) - resizes images to smaller (or larger)
   dimensions
 
