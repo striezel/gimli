@@ -7,6 +7,7 @@ set(gimli_sources
     ../../lib/hash/average.cpp
     ../../lib/hash/difference.cpp
     ../../lib/hash/similarity.hpp
+    ../../lib/hash/vertical_difference.cpp
     ../../lib/io/BitmapLoader.hpp
     ../../lib/io/JpegLoader.hpp
     ../../lib/io/Loader.hpp

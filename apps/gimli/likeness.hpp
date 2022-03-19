@@ -39,6 +39,7 @@ struct Hashes
 {
   uint64_t avg_hash = 0; /**< hash value from average hashing ("aHash") */
   uint64_t diff_hash = 0; /**< hash value from difference hashing ("dHash") */
+  uint64_t vertical_diff_hash = 0; /**< hash value from vertical difference hashing ("vdHash") */
 };
 
 /** \brief Calculates both hashes (aHash and dHash) of an image.

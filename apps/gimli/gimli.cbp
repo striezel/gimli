@@ -43,6 +43,8 @@
 		<Unit filename="../../lib/hash/difference.cpp" />
 		<Unit filename="../../lib/hash/difference.hpp" />
 		<Unit filename="../../lib/hash/similarity.hpp" />
+		<Unit filename="../../lib/hash/vertical_difference.cpp" />
+		<Unit filename="../../lib/hash/vertical_difference.hpp" />
 		<Unit filename="../../lib/io/BitmapLoader.hpp" />
 		<Unit filename="../../lib/io/JpegLoader.hpp" />
 		<Unit filename="../../lib/io/Loader.hpp" />

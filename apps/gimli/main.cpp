@@ -35,7 +35,7 @@
 
 void showVersion()
 {
-  std::cout << "gimli, version 0.1.0-pre, 2022-03-17\n"
+  std::cout << "gimli, version 0.1.0, 2022-03-19\n"
             << "\n"
             << "Library versions:" << std::endl
             << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl

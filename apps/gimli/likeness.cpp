@@ -25,6 +25,7 @@
 #include "../../lib/hash/average.hpp"
 #include "../../lib/hash/difference.hpp"
 #include "../../lib/hash/similarity.hpp"
+#include "../../lib/hash/vertical_difference.hpp"
 #include "../../lib/io/load_any.hpp"
 #include "../../lib/transforms/Greyscale.hpp"
 #include "../../lib/types/get_type.hpp"
@@ -56,6 +57,8 @@ int likeness(const std::string& file, const Hashes& ref_hash)
             << to_percentage(gimli::hash::similarity(ref_hash.avg_hash, h.avg_hash))
             << "\n    likeness (dHash): "
             << to_percentage(gimli::hash::similarity(ref_hash.diff_hash, h.diff_hash))
+            << "\n    likeness (vHash): "
+            << to_percentage(gimli::hash::similarity(ref_hash.vertical_diff_hash, h.vertical_diff_hash))
             << "\n";
   return 0;
 }
@@ -108,5 +111,10 @@ nonstd::expected<Hashes, std::string> calculate_hashes(const boost::gil::gray8_i
   {
     return nonstd::make_unexpected(diff.error());
   }
-  return Hashes{ avg.value(), diff.value() };
+  const auto v_diff = gimli::hash::vertical_difference(img);
+  if (!v_diff.has_value())
+  {
+    return nonstd::make_unexpected(diff.error());
+  }
+  return Hashes{ avg.value(), diff.value(), v_diff.value() };
 }
