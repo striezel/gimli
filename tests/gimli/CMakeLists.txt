@@ -9,6 +9,7 @@ set(gimli_tests_sources
     ../../lib/hash/difference.cpp
     ../../lib/hash/minmax.cpp
     ../../lib/hash/similarity.hpp
+    ../../lib/hash/stringify.hpp
     ../../lib/hash/vertical_difference.cpp
     ../../lib/io/BitmapLoader.hpp
     ../../lib/io/JpegLoader.hpp
@@ -29,6 +30,7 @@ set(gimli_tests_sources
     hash/difference.cpp
     hash/minmax.cpp
     hash/similarity.cpp
+    hash/stringify.cpp
     hash/vertical_difference.cpp
     io/BitmapLoader.cpp
     io/JpegLoader.cpp
