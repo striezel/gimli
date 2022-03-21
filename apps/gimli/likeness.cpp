@@ -21,11 +21,10 @@
 #include "likeness.hpp"
 #include <cmath>
 #include <iostream>
+#include <iterator>
 #include "../return_codes.hpp"
-#include "../../lib/hash/average.hpp"
 #include "../../lib/hash/difference.hpp"
 #include "../../lib/hash/similarity.hpp"
-#include "../../lib/hash/vertical_difference.hpp"
 #include "../../lib/io/load_any.hpp"
 #include "../../lib/transforms/Greyscale.hpp"
 #include "../../lib/types/get_type.hpp"
@@ -35,31 +34,21 @@ std::string to_percentage(const float similarity)
   return std::to_string(std::round(similarity * 10000.0) / 100.0) + " %";
 }
 
-int likeness(const std::string& file, const Hashes& ref_hash)
+int calculate_hash(const std::string& file, std::unordered_map<std::string, uint64_t>& hashes)
 {
   const auto img = load_to_grey(file);
   if (!img.has_value())
   {
     return img.error();
   }
-
-  const auto hashes = calculate_hashes(img.value());
-  if (!hashes.has_value())
+  const auto diff_hash = gimli::hash::difference(img.value());
+  if (!diff_hash.has_value())
   {
     std::cerr << "Error: Hash calculation for " << file << " failed!\n"
-              << hashes.error() << "\n";
+              << diff_hash.error() << "\n";
     return rcInputOutputError;
   }
-
-  const auto& h = hashes.value();
-  std::cout << file << "\n"
-            << "    likeness (aHash): "
-            << to_percentage(gimli::hash::similarity(ref_hash.avg_hash, h.avg_hash))
-            << "\n    likeness (dHash): "
-            << to_percentage(gimli::hash::similarity(ref_hash.diff_hash, h.diff_hash))
-            << "\n    likeness (vHash): "
-            << to_percentage(gimli::hash::similarity(ref_hash.vertical_diff_hash, h.vertical_diff_hash))
-            << "\n";
+  hashes[file] = diff_hash.value();
   return 0;
 }
 
@@ -99,22 +88,30 @@ nonstd::expected<boost::gil::gray8_image_t, int> load_to_grey(const std::string&
   return maybe_grey.value();
 }
 
-nonstd::expected<Hashes, std::string> calculate_hashes(const boost::gil::gray8_image_t& img)
+std::vector<likeness_entry> sort_by_similarity(const std::unordered_map<std::string, uint64_t>& hashes)
 {
-  const auto avg = gimli::hash::average(img);
-  if (!avg.has_value())
+  const auto length = hashes.size();
+  if (length <= 1)
   {
-    return nonstd::make_unexpected(avg.error());
+    return { };
   }
-  const auto diff = gimli::hash::difference(img);
-  if (!diff.has_value())
+  std::vector<likeness_entry> result;
+  result.reserve(length * (length - 1) / 2);
+
+  const auto end = hashes.cend();
+  for (auto i = hashes.cbegin(); i != end; ++i)
   {
-    return nonstd::make_unexpected(diff.error());
+    for (auto j = std::next(i); j != end; ++j)
+    {
+      result.emplace_back(std::make_tuple(i->first, j->first,
+                          gimli::hash::similarity(i->second, j->second)));
+    }
   }
-  const auto v_diff = gimli::hash::vertical_difference(img);
-  if (!v_diff.has_value())
+
+  auto compare = [](const likeness_entry& a, const likeness_entry& b)
   {
-    return nonstd::make_unexpected(diff.error());
-  }
-  return Hashes{ avg.value(), diff.value(), v_diff.value() };
+    return std::get<2>(a) > std::get<2>(b);
+  };
+  std::sort(result.begin(), result.end(), compare);
+  return result;
 }

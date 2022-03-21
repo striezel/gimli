@@ -20,6 +20,7 @@
 
 #include <filesystem>
 #include <iostream>
+#include <unordered_map>
 #include <string>
 #include <vector>
 #include <jpeglib.h>
@@ -35,7 +36,7 @@
 
 void showVersion()
 {
-  std::cout << "gimli, version 0.1.0, 2022-03-19\n"
+  std::cout << "gimli, version 0.2.0-pre, 2022-03-22\n"
             << "\n"
             << "Library versions:" << std::endl
             << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl
@@ -110,32 +111,20 @@ int main(int argc, char** argv)
     return rcInvalidParameter;
   }
 
-  Hashes reference_hash;
-  // Load first image as reference image.
+  std::unordered_map<std::string, uint64_t> hash_map;
+  for (const auto& file: files)
   {
-    const auto grey_img = load_to_grey(files[0]);
-    if (!grey_img.has_value())
-    {
-      return grey_img.error();
-    }
-    const auto maybe_hash = calculate_hashes(grey_img.value());
-    if (!maybe_hash.has_value())
-    {
-      std::cerr << "Error: Hash calculation for " << files[0] << " failed!\n"
-                << maybe_hash.error() << "\n";
-      return rcInputOutputError;
-    }
-    reference_hash = maybe_hash.value();
-  }
-
-  std::cout << files[0] << " is set as reference image.\n";
-
-  const std::vector<std::string>::size_type vector_size = files.size();
-  for (std::vector<std::string>::size_type i = 1; i < vector_size; ++i)
-  {
-    const int rc = likeness(files[i], reference_hash);
+    const int rc = calculate_hash(file, hash_map);
     if (rc != 0)
       return rc;
+  }
+
+  const auto sorted = sort_by_similarity(hash_map);
+  std::cout << "Similarity of files:\n";
+  for (const auto& element: sorted)
+  {
+    std::cout << to_percentage(std::get<2>(element)) << " "
+              << std::get<0>(element) << " " << std::get<1>(element) << "\n";
   }
 
   return 0;

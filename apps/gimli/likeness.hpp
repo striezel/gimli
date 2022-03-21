@@ -22,10 +22,14 @@
 #define GIMLI_GIMLI_LIKENESS_HPP
 
 #include <cstdint>
+#include <functional>
 #include <string>
+#include <tuple>
 #include <boost/gil/image.hpp>
 #include <boost/gil/typedefs.hpp>
 #include "../../third-party/nonstd/expected.hpp"
+
+using likeness_entry = std::tuple<std::string, std::string, float>;
 
 /** \brief Loads the given image and converts it to greyscale.
  *
@@ -35,28 +39,29 @@
  */
 nonstd::expected<boost::gil::gray8_image_t, int> load_to_grey(const std::string& file);
 
-struct Hashes
-{
-  uint64_t avg_hash = 0; /**< hash value from average hashing ("aHash") */
-  uint64_t diff_hash = 0; /**< hash value from difference hashing ("dHash") */
-  uint64_t vertical_diff_hash = 0; /**< hash value from vertical difference hashing ("vdHash") */
-};
-
-/** \brief Calculates both hashes (aHash and dHash) of an image.
+/** \brief Calculates the hash of the given image.
  *
- * \param img   the image
- * \return Returns the hash values, if calculation was successful.
- *         Returns an error message, if an error occurred.
- */
-nonstd::expected<Hashes, std::string> calculate_hashes(const boost::gil::gray8_image_t& img);
-
-/** \brief Checks the given image for likeness to given hash (aHash + dHash).
- *
- * \param file   path to the image file
- * \param ref_hash  hash values of the reference file to compare with
+ * \param file    path to the image file
+ * \param hashes  map to which the calculates hash will be added.
  * \return Returns zero, if operation was successful.
  *         Returns non-zero exit code, if an error occurred.
  */
-int likeness(const std::string& file, const Hashes& ref_hash);
+int calculate_hash(const std::string& file, std::unordered_map<std::string, uint64_t>& hashes);
+
+/** \brief Sorts hashed files by similarity.
+ *
+ * \param hashes   the files and their hash values
+ * \return Returns a vector of tuples where the first two elements of a tuple
+ *         are the file names and the third element is the similarity value in
+ *         the range [0;1].
+ */
+std::vector<likeness_entry> sort_by_similarity(const std::unordered_map<std::string, uint64_t>& hashes);
+
+/** \brief Converts a similarity value in the range [0;1] to a percentage.
+ *
+ * \param similarity   similarity value
+ * \return Returns a string containing the percentage.
+ */
+std::string to_percentage(const float similarity);
 
 #endif // GIMLI_GIMLI_LIKENESS_HPP

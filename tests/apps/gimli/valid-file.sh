@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Script to test executable when file is valid.
+# Script to test executable when files are valid.
 #
 #  Copyright (C) 2022  Dirk Stolle
 #
@@ -32,7 +32,7 @@ then
 fi
 
 EXECUTABLE="$1"
-"$EXECUTABLE" "$2"/rgb.jpeg "$2"/rgb.jpeg
+"$EXECUTABLE" "$2"/rgb.jpeg "$2"/rgb2.jpeg
 if [ $? -ne 0 ]
 then
   echo "Executable did not exit with code 0."
