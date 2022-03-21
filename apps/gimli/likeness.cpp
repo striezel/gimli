@@ -108,10 +108,9 @@ std::vector<likeness_entry> sort_by_similarity(const std::unordered_map<std::str
     }
   }
 
-  auto compare = [](const likeness_entry& a, const likeness_entry& b)
+  std::sort(result.begin(), result.end(), [](const likeness_entry& a, const likeness_entry& b)
   {
     return std::get<2>(a) > std::get<2>(b);
-  };
-  std::sort(result.begin(), result.end(), compare);
+  });
   return result;
 }

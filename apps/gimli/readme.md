@@ -18,6 +18,15 @@ options:
                     needs at least two images for a comparison.
 ```
 
+A possible output for three hypothetical image files `/home/user/foo.jpg`,
+`/home/user/image.png` and `/home/user/picture.jpg` could be:
+
+```
+65.630000 % /home/user/image.png /home/user/foo.jpg
+42.190000 % /home/user/image.png /home/user/picture.jpg
+39.060000 % /home/user/picture.jpg /home/user/foo.jpg
+```
+
 ## History of changes
 
 A changelog is provided as [separate file](./changelog.md).
