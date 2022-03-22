@@ -28,6 +28,7 @@
 #include <boost/gil/image.hpp>
 #include <boost/gil/typedefs.hpp>
 #include "../../third-party/nonstd/expected.hpp"
+#include "../../lib/hash/factory.hpp"
 
 using likeness_entry = std::tuple<std::string, std::string, float>;
 
@@ -46,7 +47,7 @@ nonstd::expected<boost::gil::gray8_image_t, int> load_to_grey(const std::string&
  * \return Returns zero, if operation was successful.
  *         Returns non-zero exit code, if an error occurred.
  */
-int calculate_hash(const std::string& file, std::unordered_map<std::string, uint64_t>& hashes);
+int calculate_hash(const std::string& file, std::unordered_map<std::string, uint64_t>& hashes, const gimli::hash::algorithm algo);
 
 /** \brief Sorts hashed files by similarity.
  *

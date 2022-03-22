@@ -32,43 +32,35 @@ then
 fi
 
 EXECUTABLE="$1"
-# hash with default hashing algorithm
-"$EXECUTABLE" "$2"/rgb.jpeg "$2"/rgb2.jpeg
-if [ $? -ne 0 ]
-then
-  echo "Executable did not exit with code 0."
-  exit 1
-fi
-
 # hash with average hashing algorithm
-"$EXECUTABLE" --hash=avg "$2"/rgb.jpeg "$2"/rgb2.jpeg
-if [ $? -ne 0 ]
+"$EXECUTABLE" --hash=avg --hash=avg "$2"/rgb.jpeg "$2"/rgb2.jpeg
+if [ $? -ne 1 ]
 then
-  echo "Executable did not exit with code 0."
+  echo "Executable did not exit with code 1."
   exit 1
 fi
 
 # hash with difference hashing algorithm
-"$EXECUTABLE" --hash=diff "$2"/rgb.jpeg "$2"/rgb2.jpeg
-if [ $? -ne 0 ]
+"$EXECUTABLE" --hash=diff --hash=diff "$2"/rgb.jpeg "$2"/rgb2.jpeg
+if [ $? -ne 1 ]
 then
-  echo "Executable did not exit with code 0."
+  echo "Executable did not exit with code 1."
   exit 1
 fi
 
 # hash with minmax hashing algorithm
-"$EXECUTABLE" --hash=minmax "$2"/rgb.jpeg "$2"/rgb2.jpeg
-if [ $? -ne 0 ]
+"$EXECUTABLE" --hash=minmax --hash=minmax "$2"/rgb.jpeg "$2"/rgb2.jpeg
+if [ $? -ne 1 ]
 then
-  echo "Executable did not exit with code 0."
+  echo "Executable did not exit with code 1."
   exit 1
 fi
 
 # hash with vertical difference hashing algorithm
-"$EXECUTABLE" --hash=vdiff "$2"/rgb.jpeg "$2"/rgb2.jpeg
-if [ $? -ne 0 ]
+"$EXECUTABLE" --hash=vdiff --hash=vdiff "$2"/rgb.jpeg "$2"/rgb2.jpeg
+if [ $? -ne 1 ]
 then
-  echo "Executable did not exit with code 0."
+  echo "Executable did not exit with code 1."
   exit 1
 fi
 

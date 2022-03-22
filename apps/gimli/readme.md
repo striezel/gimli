@@ -11,11 +11,19 @@ gimli [OPTIONS] [FILE]
 Tests how much images look like each other.
 
 options:
-  -? | --help     - Shows this help message.
-  -v | --version  - Shows version information.
-  FILE            - Sets the file name of an image to compare.
-                    This option has to occur at least two times, because one
-                    needs at least two images for a comparison.
+  -? | --help      - Shows this help message.
+  -v | --version   - Shows version information.
+  --hash=ALGORITHM - Sets the image hashing algorithm to ALGORITHM.
+                     Allowed values for the algorithm are:
+                         avg: Uses average hashing.
+                         diff: Uses horizontal difference hashing.
+                         minmax: Uses minimum-maximum hashing.
+                         vdiff: Uses vertical difference hashing.
+                     If no algorithm is set explicitly, then the program
+                     behaves as if --hash=diff is specified.
+  FILE             - Sets the file name of an image to compare.
+                     This option has to occur at least two times, because one
+                     needs at least two images for a comparison.
 ```
 
 A possible output for three hypothetical image files `/home/user/foo.jpg`,

@@ -20,6 +20,7 @@
 
 #include <filesystem>
 #include <iostream>
+#include <optional>
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -36,7 +37,7 @@
 
 void showVersion()
 {
-  std::cout << "gimli, version 0.2.0-pre, 2022-03-22\n"
+  std::cout << "gimli, version 0.2.0, 2022-03-22\n"
             << "\n"
             << "Library versions:" << std::endl
             << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl
@@ -56,17 +57,26 @@ void showHelp()
             << "Tests how much images look like each other.\n"
             << "\n"
             << "options:\n"
-            << "  -? | --help     - Shows this help message.\n"
-            << "  -v | --version  - Shows version information.\n"
-            << "  FILE            - Sets the file name of an image to compare.\n"
-            << "                    This option has to occur at least two times, because one\n"
-            << "                    needs at least two images for a comparison.\n";
+            << "  -? | --help      - Shows this help message.\n"
+            << "  -v | --version   - Shows version information.\n"
+            << "  --hash=ALGORITHM - Sets the image hashing algorithm to ALGORITHM.\n"
+            << "                     Allowed values for the algorithm are:\n"
+            << "                         avg: Uses average hashing.\n"
+            << "                         diff: Uses horizontal difference hashing.\n"
+            << "                         minmax: Uses minimum-maximum hashing.\n"
+            << "                         vdiff: Uses vertical difference hashing.\n"
+            << "                     If no algorithm is set explicitly, then the program\n"
+            << "                     behaves as if --hash=diff is specified.\n"
+            << "  FILE             - Sets the file name of an image to compare.\n"
+            << "                     This option has to occur at least two times, because one\n"
+            << "                     needs at least two images for a comparison.\n";
 }
 
 int main(int argc, char** argv)
 {
   namespace fs = std::filesystem;
 
+  std::optional<gimli::hash::algorithm> algorithm {std::nullopt};
   std::vector<std::string> files;
   if ((argc > 1) && (argv != nullptr))
   {
@@ -87,6 +97,42 @@ int main(int argc, char** argv)
       {
         showHelp();
         return 0;
+      }
+      else if ((param == "--hash=avg") || (param == "--average"))
+      {
+        if (algorithm.has_value())
+        {
+          std::cerr << "Error: Hashing algorithm was already set.\n";
+          return rcInvalidParameter;
+        }
+        algorithm = gimli::hash::algorithm::average;
+      }
+      else if ((param == "--hash=diff") || (param == "--difference") || (param == "--diff"))
+      {
+        if (algorithm.has_value())
+        {
+          std::cerr << "Error: Hashing algorithm was already set.\n";
+          return rcInvalidParameter;
+        }
+        algorithm = gimli::hash::algorithm::difference;
+      }
+      else if ((param == "--hash=minmax") || (param == "--minmax"))
+      {
+        if (algorithm.has_value())
+        {
+          std::cerr << "Error: Hashing algorithm was already set.\n";
+          return rcInvalidParameter;
+        }
+        algorithm = gimli::hash::algorithm::minmax;
+      }
+      else if ((param == "--hash=vdiff") || (param == "--vertical-difference") || (param == "--vdiff"))
+      {
+        if (algorithm.has_value())
+        {
+          std::cerr << "Error: Hashing algorithm was already set.\n";
+          return rcInvalidParameter;
+        }
+        algorithm = gimli::hash::algorithm::vertical_difference;
       }
       else
       {
@@ -111,10 +157,15 @@ int main(int argc, char** argv)
     return rcInvalidParameter;
   }
 
+  if (!algorithm.has_value())
+  {
+    algorithm = gimli::hash::algorithm::difference;
+  }
+
   std::unordered_map<std::string, uint64_t> hash_map;
   for (const auto& file: files)
   {
-    const int rc = calculate_hash(file, hash_map);
+    const int rc = calculate_hash(file, hash_map, algorithm.value());
     if (rc != 0)
       return rc;
   }

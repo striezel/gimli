@@ -6,6 +6,8 @@ project(gimli)
 set(gimli_sources
     ../../lib/hash/average.cpp
     ../../lib/hash/difference.cpp
+    ../../lib/hash/factory.hpp
+    ../../lib/hash/minmax.cpp
     ../../lib/hash/similarity.hpp
     ../../lib/hash/vertical_difference.cpp
     ../../lib/io/BitmapLoader.hpp

@@ -23,7 +23,7 @@
 #include <iostream>
 #include <iterator>
 #include "../return_codes.hpp"
-#include "../../lib/hash/difference.hpp"
+#include "../../lib/hash/factory.hpp"
 #include "../../lib/hash/similarity.hpp"
 #include "../../lib/io/load_any.hpp"
 #include "../../lib/transforms/Greyscale.hpp"
@@ -34,21 +34,21 @@ std::string to_percentage(const float similarity)
   return std::to_string(std::round(similarity * 10000.0) / 100.0) + " %";
 }
 
-int calculate_hash(const std::string& file, std::unordered_map<std::string, uint64_t>& hashes)
+int calculate_hash(const std::string& file, std::unordered_map<std::string, uint64_t>& hashes, const gimli::hash::algorithm algo)
 {
   const auto img = load_to_grey(file);
   if (!img.has_value())
   {
     return img.error();
   }
-  const auto diff_hash = gimli::hash::difference(img.value());
-  if (!diff_hash.has_value())
+  const auto hash = gimli::hash::factory::calculate(algo, img.value());
+  if (!hash.has_value())
   {
     std::cerr << "Error: Hash calculation for " << file << " failed!\n"
-              << diff_hash.error() << "\n";
+              << hash.error() << "\n";
     return rcInputOutputError;
   }
-  hashes[file] = diff_hash.value();
+  hashes[file] = hash.value();
   return 0;
 }
 

@@ -21,6 +21,10 @@ add_test(NAME gimli_unknown_file_type
 add_test(NAME gimli_fail_to_load
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/fail-to-load.sh $<TARGET_FILE:gimli> "${CMAKE_CURRENT_SOURCE_DIR}")
 
+# test: duplicate parameter for hash algorithm
+add_test(NAME gimli_duplicate_hash_parameter
+         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/duplicate-hash-algorithm.sh $<TARGET_FILE:gimli> "${CMAKE_CURRENT_SOURCE_DIR}")
+
 # test: valid RGB JPEG file
 add_test(NAME gimli_valid_jpeg_images
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/valid-file.sh $<TARGET_FILE:gimli> "${CMAKE_CURRENT_SOURCE_DIR}")

@@ -7,6 +7,7 @@ project(gimli_tests)
 set(gimli_tests_sources
     ../../lib/hash/average.cpp
     ../../lib/hash/difference.cpp
+    ../../lib/hash/factory.hpp
     ../../lib/hash/minmax.cpp
     ../../lib/hash/similarity.hpp
     ../../lib/hash/stringify.hpp
@@ -28,6 +29,7 @@ set(gimli_tests_sources
     ../../lib/types/is_targa.cpp
     hash/average.cpp
     hash/difference.cpp
+    hash/factory.cpp
     hash/minmax.cpp
     hash/similarity.cpp
     hash/stringify.cpp
