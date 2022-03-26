@@ -65,6 +65,16 @@ TEST_CASE("write_any")
       REQUIRE_FALSE( result.has_value() );
     }
 
+    /* TODO: Implement WebP writer.
+    SECTION("WebP format")
+    {
+      const auto name = "write_any_rgb.webp";
+      const auto result = write_any_rgb(name, img, ImageType::WebP);
+      REQUIRE( std::remove(name) == 0 );
+      REQUIRE_FALSE( result.has_value() );
+    }
+    */
+
     SECTION("unknown format")
     {
       const auto name = "write_any_rgb.unk";
@@ -146,6 +156,16 @@ TEST_CASE("write_any")
       bool contains_fail_or_error = (result.value().find("fail") != std::string::npos) || (result.value().find("error") != std::string::npos);
       REQUIRE( contains_fail_or_error );
     }
+
+    /* TODO: Implement WebP writer.
+    SECTION("WebP format")
+    {
+      const auto name = "write_any_grey.webp";
+      const auto result = write_any_grey(name, img, ImageType::WebP);
+      REQUIRE( std::remove(name) == 0 );
+      REQUIRE_FALSE( result.has_value() );
+    }
+    */
 
     SECTION("unknown format")
     {

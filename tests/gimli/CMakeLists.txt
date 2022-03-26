@@ -27,6 +27,7 @@ set(gimli_tests_sources
     ../../lib/types/is_jpeg.cpp
     ../../lib/types/is_png.cpp
     ../../lib/types/is_targa.cpp
+    ../../lib/types/is_webp.cpp
     hash/average.cpp
     hash/difference.cpp
     hash/factory.cpp
@@ -48,6 +49,7 @@ set(gimli_tests_sources
     types/is_jpeg.cpp
     types/is_png.cpp
     types/is_targa.cpp
+    types/is_webp.cpp
     main.cpp)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")

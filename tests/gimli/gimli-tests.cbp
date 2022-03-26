@@ -78,6 +78,8 @@
 		<Unit filename="../../lib/types/is_png.hpp" />
 		<Unit filename="../../lib/types/is_targa.cpp" />
 		<Unit filename="../../lib/types/is_targa.hpp" />
+		<Unit filename="../../lib/types/is_webp.cpp" />
+		<Unit filename="../../lib/types/is_webp.hpp" />
 		<Unit filename="../../third-party/nonstd/expected.hpp" />
 		<Unit filename="../../third-party/nonstd/span.hpp" />
 		<Unit filename="hash/average.cpp" />
@@ -102,6 +104,7 @@
 		<Unit filename="types/is_jpeg.cpp" />
 		<Unit filename="types/is_png.cpp" />
 		<Unit filename="types/is_targa.cpp" />
+		<Unit filename="types/is_webp.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

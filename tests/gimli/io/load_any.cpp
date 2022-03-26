@@ -112,6 +112,27 @@ TEST_CASE("load_any")
       REQUIRE( img.width() == 2 );
       REQUIRE( img.height() == 3 );
     }
+
+    /* TODO: Implement WebP loading.
+    SECTION("WebP format")
+    {
+      const auto data = "RIFF\x36\0\0\0WEBPVP8L*\0\0\0/\x01\x80\0\0\x17 \x10H\xDA\xDFy\x0E\x02\x01\x8A\xE2\xFF\x65\x08\x04(\x0A\xFF/\x9B\xFF\x30\xD6\xFB\x03\x85m\xDB\xA0\xB0\x34\x8C\xE8\x7F\xE0\x0B"sv;
+      // write WebP file
+      const auto name = "load_any_one.webp";
+      {
+        std::ofstream file(name);
+        file.write(data.data(), data.size());
+        file.close();
+      }
+
+      const auto result = load_any(name);
+      REQUIRE( std::remove(name) == 0 );
+      REQUIRE( result.has_value() );
+      const auto& img = result.value();
+      REQUIRE( img.width() == 2 );
+      REQUIRE( img.height() == 3 );
+    }
+    */
   }
 
   SECTION("load_any (version with path and type)")
