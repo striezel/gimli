@@ -17,6 +17,7 @@ set(hobbit_tests_sources
     ../../../../lib/types/is_jpeg.cpp
     ../../../../lib/types/is_png.cpp
     ../../../../lib/types/is_targa.cpp
+    ../../../../lib/types/is_webp.cpp
     parse_size.cpp
     main.cpp)
 

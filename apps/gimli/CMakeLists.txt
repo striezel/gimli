@@ -15,6 +15,7 @@ set(gimli_sources
     ../../lib/io/Loader.hpp
     ../../lib/io/PngLoader.hpp
     ../../lib/io/TargaLoader.hpp
+    ../../lib/io/WebpLoader.hpp
     ../../lib/io/load_any.cpp
     ../../lib/numeric/hamming.hpp
     ../../lib/transforms/Greyscale.cpp
@@ -23,6 +24,7 @@ set(gimli_sources
     ../../lib/types/is_jpeg.cpp
     ../../lib/types/is_png.cpp
     ../../lib/types/is_targa.cpp
+    ../../lib/types/is_webp.cpp
     likeness.cpp
     main.cpp)
 

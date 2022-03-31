@@ -36,7 +36,8 @@ enum class ImageType
   Bitmap,
   Jpeg,
   Png,
-  Targa
+  Targa,
+  WebP
 };
 
 std::ostream& operator<<(std::ostream& os, const ImageType it);

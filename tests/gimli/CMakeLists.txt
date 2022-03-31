@@ -16,6 +16,7 @@ set(gimli_tests_sources
     ../../lib/io/JpegLoader.hpp
     ../../lib/io/PngLoader.hpp
     ../../lib/io/TargaLoader.hpp
+    ../../lib/io/WebpLoader.hpp
     ../../lib/io/Writer.hpp
     ../../lib/io/load_any.cpp
     ../../lib/io/write_any.cpp
@@ -39,6 +40,7 @@ set(gimli_tests_sources
     io/JpegLoader.cpp
     io/PngLoader.cpp
     io/TargaLoader.cpp
+    io/WebpLoader.cpp
     io/load_any.cpp
     io/write_any.cpp
     numeric/hamming.cpp

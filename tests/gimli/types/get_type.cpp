@@ -59,6 +59,13 @@ TEST_CASE("image type detection")
       REQUIRE( stream.str() == "Targa image" );
     }
 
+    SECTION("WebP")
+    {
+      std::ostringstream stream;
+      stream << ImageType::WebP;
+      REQUIRE( stream.str() == "WebP" );
+    }
+
     SECTION("Unknown")
     {
       std::ostringstream stream;
@@ -93,6 +100,13 @@ TEST_CASE("image type detection")
       std::vector<uint8_t> data = { 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
           0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x06, 0xB0, 0x04, 0x18, 0x00 };
       REQUIRE( get_type(data) == ImageType::Targa );
+    }
+
+    SECTION("WebP image")
+    {
+      std::vector<uint8_t> data = { 0x52, 0x49, 0x46, 0x46, 0x36, 0x00, 0x00,
+                                    0x00, 0x57, 0x45, 0x42, 0x50 };
+      REQUIRE( get_type(data) == ImageType::WebP );
     }
 
     SECTION("unknown format")
@@ -196,6 +210,23 @@ TEST_CASE("image type detection")
       REQUIRE( std::remove(name) == 0 );
       REQUIRE( img_type.has_value() );
       REQUIRE( img_type.value() == ImageType::Targa );
+    }
+
+    SECTION("WebP image file")
+    {
+      const auto data = "RIFF\x36\0\0\0WEBPVP8L*\0\0\0/\x01\x80\0\0\x17 \x10H\xDA\xDFy\x0E\x02\x01\x8A\xE2\xFF\x65\x08\x04(\x0A\xFF/\x9B\xFF\x30\xD6\xFB\x03\x85m\xDB\xA0\xB0\x34\x8C\xE8\x7F\xE0\x0B"sv;
+      const auto name = "get_type.webp";
+      // write file
+      {
+        std::ofstream file(name);
+        file.write(data.data(), data.size());
+        file.close();
+      }
+
+      const auto img_type = get_type(name);
+      REQUIRE( std::remove(name) == 0 );
+      REQUIRE( img_type.has_value() );
+      REQUIRE( img_type.value() == ImageType::WebP );
     }
 
     SECTION("unknown format")

@@ -53,6 +53,7 @@
 		<Unit filename="../../lib/io/Loader.hpp" />
 		<Unit filename="../../lib/io/PngLoader.hpp" />
 		<Unit filename="../../lib/io/TargaLoader.hpp" />
+		<Unit filename="../../lib/io/WebpLoader.hpp" />
 		<Unit filename="../../lib/io/load_any.cpp" />
 		<Unit filename="../../lib/io/load_any.hpp" />
 		<Unit filename="../../lib/numeric/hamming.hpp" />
@@ -69,6 +70,8 @@
 		<Unit filename="../../lib/types/is_png.hpp" />
 		<Unit filename="../../lib/types/is_targa.cpp" />
 		<Unit filename="../../lib/types/is_targa.hpp" />
+		<Unit filename="../../lib/types/is_webp.cpp" />
+		<Unit filename="../../lib/types/is_webp.hpp" />
 		<Unit filename="../../third-party/nonstd/expected.hpp" />
 		<Unit filename="likeness.cpp" />
 		<Unit filename="likeness.hpp" />

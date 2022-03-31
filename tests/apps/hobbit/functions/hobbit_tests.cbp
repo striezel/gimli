@@ -63,6 +63,8 @@
 		<Unit filename="../../../../lib/types/is_png.hpp" />
 		<Unit filename="../../../../lib/types/is_targa.cpp" />
 		<Unit filename="../../../../lib/types/is_targa.hpp" />
+		<Unit filename="../../../../lib/types/is_webp.cpp" />
+		<Unit filename="../../../../lib/types/is_webp.hpp" />
 		<Unit filename="../../../../third-party/nonstd/expected.hpp" />
 		<Unit filename="../../../gimli/find_catch.hpp" />
 		<Unit filename="main.cpp" />

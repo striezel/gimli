@@ -46,6 +46,7 @@
 		<Unit filename="../../lib/io/PngWriter.hpp" />
 		<Unit filename="../../lib/io/TargaLoader.hpp" />
 		<Unit filename="../../lib/io/TargaWriter.hpp" />
+		<Unit filename="../../lib/io/WebpLoader.hpp" />
 		<Unit filename="../../lib/io/Writer.hpp" />
 		<Unit filename="../../lib/io/load_any.cpp" />
 		<Unit filename="../../lib/io/load_any.hpp" />
@@ -63,6 +64,8 @@
 		<Unit filename="../../lib/types/is_png.hpp" />
 		<Unit filename="../../lib/types/is_targa.cpp" />
 		<Unit filename="../../lib/types/is_targa.hpp" />
+		<Unit filename="../../lib/types/is_webp.cpp" />
+		<Unit filename="../../lib/types/is_webp.hpp" />
 		<Unit filename="grey.cpp" />
 		<Unit filename="grey.hpp" />
 		<Unit filename="main.cpp" />

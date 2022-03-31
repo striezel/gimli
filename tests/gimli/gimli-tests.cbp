@@ -59,6 +59,7 @@
 		<Unit filename="../../lib/io/PngWriter.hpp" />
 		<Unit filename="../../lib/io/TargaLoader.hpp" />
 		<Unit filename="../../lib/io/TargaWriter.hpp" />
+		<Unit filename="../../lib/io/WebpLoader.hpp" />
 		<Unit filename="../../lib/io/Writer.hpp" />
 		<Unit filename="../../lib/io/load_any.cpp" />
 		<Unit filename="../../lib/io/load_any.hpp" />
@@ -93,6 +94,7 @@
 		<Unit filename="io/JpegLoader.cpp" />
 		<Unit filename="io/PngLoader.cpp" />
 		<Unit filename="io/TargaLoader.cpp" />
+		<Unit filename="io/WebpLoader.cpp" />
 		<Unit filename="io/load_any.cpp" />
 		<Unit filename="io/write_any.cpp" />
 		<Unit filename="main.cpp" />

@@ -24,6 +24,7 @@
 #include "is_jpeg.hpp"
 #include "is_png.hpp"
 #include "is_targa.hpp"
+#include "is_webp.hpp"
 
 namespace gimli::types
 {
@@ -37,6 +38,9 @@ std::ostream& operator<<(std::ostream& os, const ImageType it)
          break;
     case ImageType::Png:
          os << "PNG";
+         break;
+    case ImageType::WebP:
+         os << "WebP";
          break;
     case ImageType::Targa:
          os << "Targa image";
@@ -80,6 +84,8 @@ ImageType get_type(const nonstd::span<uint8_t>& data)
     return ImageType::Jpeg;
   if (is_png(data))
     return ImageType::Png;
+  if (is_webp(data))
+    return ImageType::WebP;
   if (is_targa(data))
     return ImageType::Targa;
   if (is_bitmap(data))

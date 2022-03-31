@@ -12,6 +12,7 @@ set(hobbit_sources
     ../../lib/io/PngLoader.hpp
     ../../lib/io/TargaLoader.hpp
     ../../lib/io/TargaWriter.hpp
+    ../../lib/io/WebpLoader.hpp
     ../../lib/io/Writer.hpp
     ../../lib/io/load_any.cpp
     ../../lib/io/write_any.cpp
@@ -21,6 +22,7 @@ set(hobbit_sources
     ../../lib/types/is_jpeg.cpp
     ../../lib/types/is_png.cpp
     ../../lib/types/is_targa.cpp
+    ../../lib/types/is_webp.cpp
     hobbit.cpp
     main.cpp)
 

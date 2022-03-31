@@ -23,6 +23,7 @@
 #include "JpegLoader.hpp"
 #include "PngLoader.hpp"
 #include "TargaLoader.hpp"
+#include "WebpLoader.hpp"
 #include "../types/get_type.hpp"
 
 namespace gimli
@@ -48,6 +49,8 @@ nonstd::expected<Image, std::string> load_any(const std::string& path, const typ
          return JpegLoader::load(path);
     case ImageType::Png:
          return PngLoader::load(path);
+    case ImageType::WebP:
+         return WebpLoader::load(path);
     case ImageType::Targa:
          return TargaLoader::load(path);
     case ImageType::Bitmap:

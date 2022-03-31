@@ -41,6 +41,7 @@ std::optional<std::string> write_any_rgb(const std::string& path, const Image& i
          return TargaWriter::write(path, image);
     case ImageType::Bitmap:
          return BitmapWriter::write(path, image);
+    case ImageType::WebP:
     case ImageType::Unknown:
     default:
          return "Cannot write image of unknown type.";
@@ -61,6 +62,7 @@ std::optional<std::string> write_any_grey(const std::string& path, const boost::
          return TargaWriterGrey::write(path, image);
     case ImageType::Bitmap:
          return BitmapWriterGrey::write(path, image);
+    case ImageType::WebP:
     case ImageType::Unknown:
     default:
          return "Cannot write image of unknown type.";
