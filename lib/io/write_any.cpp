@@ -23,6 +23,7 @@
 #include "JpegWriter.hpp"
 #include "PngWriter.hpp"
 #include "TargaWriter.hpp"
+#include "WebpWriter.hpp"
 
 namespace gimli
 {
@@ -42,6 +43,7 @@ std::optional<std::string> write_any_rgb(const std::string& path, const Image& i
     case ImageType::Bitmap:
          return BitmapWriter::write(path, image);
     case ImageType::WebP:
+         return WebpWriter::write(path, image);
     case ImageType::Unknown:
     default:
          return "Cannot write image of unknown type.";
@@ -63,6 +65,7 @@ std::optional<std::string> write_any_grey(const std::string& path, const boost::
     case ImageType::Bitmap:
          return BitmapWriterGrey::write(path, image);
     case ImageType::WebP:
+         return WebpWriterGrey::write(path, image);
     case ImageType::Unknown:
     default:
          return "Cannot write image of unknown type.";

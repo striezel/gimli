@@ -47,6 +47,7 @@
 		<Unit filename="../../lib/io/TargaLoader.hpp" />
 		<Unit filename="../../lib/io/TargaWriter.hpp" />
 		<Unit filename="../../lib/io/WebpLoader.hpp" />
+		<Unit filename="../../lib/io/WebpWriter.hpp" />
 		<Unit filename="../../lib/io/Writer.hpp" />
 		<Unit filename="../../lib/io/load_any.cpp" />
 		<Unit filename="../../lib/io/load_any.hpp" />

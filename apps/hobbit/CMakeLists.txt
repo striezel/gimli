@@ -13,6 +13,7 @@ set(hobbit_sources
     ../../lib/io/TargaLoader.hpp
     ../../lib/io/TargaWriter.hpp
     ../../lib/io/WebpLoader.hpp
+    ../../lib/io/WebpWriter.hpp
     ../../lib/io/Writer.hpp
     ../../lib/io/load_any.cpp
     ../../lib/io/write_any.cpp
