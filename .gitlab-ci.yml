@@ -1,10 +1,26 @@
+docker_image_coverage:
+  image: docker:20
+  stage: build
+  services:
+    - docker:20-dind
+  script:
+    - cd ci/
+    - docker build -t $CI_REGISTRY/striezel/gimli/coverage:deb11 . -f Dockerfile_coverage
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY/striezel/gimli/coverage:deb11
+    - docker logout $CI_REGISTRY
+  # Only build new image when the Dockerfile or the GitLab CI configuration
+  # changes.
+  only:
+    changes:
+      - ci/Dockerfile_coverage
+      - .gitlab-ci.yml
+
 coverage:
-  image: debian:11-slim
+  image: registry.gitlab.com/striezel/gimli/coverage:deb11
   stage: test
   before_script:
     - apt-get update && apt-get -y upgrade
-    - apt-get install -y catch cmake g++-10 lcov libjpeg-dev libpng-dev pkg-config
-    - apt-get install -y --no-install-recommends --no-install-suggests libboost-dev
   script:
     # build
     - export CXX=g++-10
@@ -26,12 +42,29 @@ coverage:
     paths:
       - public
 
+docker_image_fedora:
+  image: docker:20
+  stage: build
+  services:
+    - docker:20-dind
+  script:
+    - cd ci/
+    - docker build -t $CI_REGISTRY/striezel/gimli/fedora:fc35 . -f Dockerfile_fedora
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY/striezel/gimli/fedora:fc35
+    - docker logout $CI_REGISTRY
+  # Only build new image when the Dockerfile or the GitLab CI configuration
+  # changes.
+  only:
+    changes:
+      - ci/Dockerfile_fedora
+      - .gitlab-ci.yml
+
 fedora:
-  image: fedora:35
+  image: registry.gitlab.com/striezel/gimli/fedora:fc35
   stage: test
   before_script:
     - yum update -y
-    - yum install -y boost-devel catch-devel cmake gcc-c++ git libjpeg-devel libpng-devel pkgconfig
   script:
     # build
     - export CXX=g++
@@ -42,13 +75,30 @@ fedora:
     - make -j4
     # tests
     - ctest -V
+
+docker_image_boost_1_75:
+  image: docker:20
+  stage: build
+  services:
+    - docker:20-dind
+  script:
+    - cd ci/
+    - docker build -t $CI_REGISTRY/striezel/gimli/boost_1_75:latest . -f Dockerfile_boost_1_75
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY/striezel/gimli/boost_1_75:latest
+    - docker logout $CI_REGISTRY
+  # Only build new image when the Dockerfile or the GitLab CI configuration
+  # changes.
+  only:
+    changes:
+      - ci/Dockerfile_boost_1_75
+      - .gitlab-ci.yml
 
 boost_1_75:
-  image: alpine:3.14
+  image: registry.gitlab.com/striezel/gimli/boost_1_75:latest
   stage: test
   before_script:
     - apk update
-    - apk add boost1.75-dev catch2 cmake g++ jpeg-dev libpng-dev make pkgconf
   script:
     # build
     - export CXX=g++
@@ -60,12 +110,29 @@ boost_1_75:
     # tests
     - ctest -V
 
+docker_image_boost_1_72:
+  image: docker:20
+  stage: build
+  services:
+    - docker:20-dind
+  script:
+    - cd ci/
+    - docker build -t $CI_REGISTRY/striezel/gimli/boost_1_72:latest . -f Dockerfile_boost_1_72
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY/striezel/gimli/boost_1_72:latest
+    - docker logout $CI_REGISTRY
+  # Only build new image when the Dockerfile or the GitLab CI configuration
+  # changes.
+  only:
+    changes:
+      - ci/Dockerfile_boost_1_72
+      - .gitlab-ci.yml
+
 boost_1_72:
-  image: alpine:3.12
+  image: registry.gitlab.com/striezel/gimli/boost_1_72:latest
   stage: test
   before_script:
     - apk update
-    - apk add boost-dev catch2 cmake g++ jpeg-dev libpng-dev make pkgconf
   script:
     # build
     - export CXX=g++
