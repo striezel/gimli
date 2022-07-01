@@ -122,19 +122,19 @@ std::string sized_name(const std::string& file, const boost::gil::point_t& dims)
   namespace fs = std::filesystem;
 
   fs::path path(file);
-  const auto ext = path.extension();
-  const auto stem = path.stem();
+  const auto ext = path.extension().string();
+  const auto stem = path.stem().string();
 
   const auto size_string = "_" + std::to_string(dims.x) + "x" + std::to_string(dims.y);
-  fs::path sized(stem.native() + size_string + ext.native());
+  fs::path sized(stem + size_string + ext);
   path.replace_filename(sized);
   std::error_code error;
   uint_least32_t counter = 0;
   while (fs::exists(path, error) && !error)
   {
     ++counter;
-    sized = stem.native() + size_string + "_" + std::to_string(counter) + ext.native();
+    sized = stem + size_string + "_" + std::to_string(counter) + ext;
     path.replace_filename(sized);
   }
-  return path;
+  return path.string();
 }

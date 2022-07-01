@@ -79,18 +79,18 @@ std::string grey_name(const std::string& file)
   namespace fs = std::filesystem;
 
   fs::path path(file);
-  const auto ext = path.extension();
-  const auto stem = path.stem();
+  const auto ext = path.extension().string();
+  const auto stem = path.stem().string();
 
-  fs::path grey(stem.native() + std::string("_grey") + ext.native());
+  fs::path grey(stem + std::string("_grey") + ext);
   path.replace_filename(grey);
   std::error_code error;
   uint_least32_t counter = 0;
   while (fs::exists(path, error) && !error)
   {
     ++counter;
-    grey = stem.native() + std::string("_grey_") + std::to_string(counter) + ext.native();
+    grey = stem + std::string("_grey_") + std::to_string(counter) + ext;
     path.replace_filename(grey);
   }
-  return path;
+  return path.string();
 }
