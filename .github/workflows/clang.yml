@@ -28,7 +28,7 @@ jobs:
           mkdir build
           cd build
           cmake ../
-          make -j4
+          cmake --build . -j2
       - name: Tests
         run: |
           cd "$GITHUB_WORKSPACE"/build

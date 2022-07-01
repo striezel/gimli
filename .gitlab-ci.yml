@@ -28,7 +28,7 @@ coverage:
     - mkdir build-coverage
     - cd build-coverage
     - cmake -DCODE_COVERAGE=ON ../
-    - make -j4
+    - cmake --build . -j4
     # tests
     - ctest -V
     # collect code coverage data
@@ -72,7 +72,7 @@ fedora:
     - mkdir build
     - cd build
     - cmake ../
-    - make -j4
+    - cmake --build . -j4
     # tests
     - ctest -V
 
@@ -106,7 +106,7 @@ boost_1_75:
     - mkdir build
     - cd build
     - cmake ../
-    - make -j4
+    - cmake --build . -j4
     # tests
     - ctest -V
 
@@ -140,7 +140,7 @@ boost_1_72:
     - mkdir build
     - cd build
     - cmake ../
-    - make -j4
+    - cmake --build . -j4
     # tests
     - ctest -V
 
