@@ -46,7 +46,7 @@ TEST_CASE("JpegLoader")
       // write JPEG file
       const auto name = "rgb.jpeg";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -67,7 +67,7 @@ TEST_CASE("JpegLoader")
       const auto name = "not-a.jpeg";
       // write "JPEG" file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }

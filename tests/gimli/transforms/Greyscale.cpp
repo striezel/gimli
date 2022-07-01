@@ -40,7 +40,7 @@ TEST_CASE("Greyscale")
       // write PNG file
       const auto name = "red-blue-for-greyscale.png";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }

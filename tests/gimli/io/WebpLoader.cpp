@@ -46,7 +46,7 @@ TEST_CASE("WebpLoader")
       // write WebP file
       const auto name = "rgb.webp";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -67,7 +67,7 @@ TEST_CASE("WebpLoader")
       const auto name = "not-a.webp";
       // write "WebP" file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }

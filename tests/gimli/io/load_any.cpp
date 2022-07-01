@@ -43,7 +43,7 @@ TEST_CASE("load_any")
       // write Bitmap file
       const auto name = "load_any_one.bmp";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -62,7 +62,7 @@ TEST_CASE("load_any")
       // write JPEG file
       const auto name = "load_any_one.jpeg";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -81,7 +81,7 @@ TEST_CASE("load_any")
       // write PNG file
       const auto name = "load_any_one.png";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -100,7 +100,7 @@ TEST_CASE("load_any")
       // write Targa file
       const auto name = "load_any_one.tga";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -120,7 +120,7 @@ TEST_CASE("load_any")
       // write WebP file
       const auto name = "load_any_one.webp";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -143,7 +143,7 @@ TEST_CASE("load_any")
       // write Targa file
       const auto name = "load_any_two_unknown.tga";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }

@@ -46,7 +46,7 @@ TEST_CASE("BitmapLoader")
       // write Bitmap file
       const auto name = "rgb.bmp";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -75,7 +75,7 @@ TEST_CASE("BitmapLoader")
       const auto name = "not-a.bmp";
       // write "Bitmap" file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }

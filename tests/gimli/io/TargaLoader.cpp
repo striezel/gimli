@@ -46,7 +46,7 @@ TEST_CASE("TargaLoader")
       // write Targa file
       const auto name = "rgb.tga";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -67,7 +67,7 @@ TEST_CASE("TargaLoader")
       const auto name = "not-a.tga";
       // write "Targa" file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }

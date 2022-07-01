@@ -132,7 +132,7 @@ TEST_CASE("image type detection")
       const auto name = "not-a-valid.jpeg";
       // write "image" file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -150,7 +150,7 @@ TEST_CASE("image type detection")
       const auto name = "get_type.bmp";
       // write file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -167,7 +167,7 @@ TEST_CASE("image type detection")
       const auto name = "get_type.jpeg";
       // write file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -184,7 +184,7 @@ TEST_CASE("image type detection")
       const auto name = "get_type.png";
       // write file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -201,7 +201,7 @@ TEST_CASE("image type detection")
       const auto name = "get_type.tga";
       // write file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -218,7 +218,7 @@ TEST_CASE("image type detection")
       const auto name = "get_type.webp";
       // write file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -235,7 +235,7 @@ TEST_CASE("image type detection")
       const auto name = "get_type.unk";
       // write file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }

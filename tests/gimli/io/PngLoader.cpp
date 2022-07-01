@@ -46,7 +46,7 @@ TEST_CASE("PngLoader")
       // write PNG file
       const auto name = "red-blue.png";
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
@@ -67,7 +67,7 @@ TEST_CASE("PngLoader")
       const auto name = "not-a.png";
       // write PNG file
       {
-        std::ofstream file(name);
+        std::ofstream file(name, std::ios::out | std::ios::binary);
         file.write(data.data(), data.size());
         file.close();
       }
