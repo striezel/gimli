@@ -29,17 +29,19 @@ set(gimli_sources
     main.cpp)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    add_definitions (-Wall -fexceptions)
+    add_definitions (-Wall -pedantic -pedantic-errors -fexceptions)
+
+    if (CODE_COVERAGE)
+        add_definitions (-O0)
+    else()
+        add_definitions (-O2)
+    endif()
+
+    set( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s" )
 endif ()
-if (CODE_COVERAGE)
-    add_definitions (-O0)
-else()
-    add_definitions (-O2)
-endif()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s" )
 add_executable(gimli ${gimli_sources})
 
 # GNU GCC before 9.1.0 needs to link to libstdc++fs explicitly.
