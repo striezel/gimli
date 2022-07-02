@@ -92,8 +92,10 @@ add_test(NAME gimli_help_question_mark
          COMMAND $<TARGET_FILE:gimli> -?)
 
 # Windows-style help parameter "/?"
-add_test(NAME gimli_help_question_mark_windows
-         COMMAND $<TARGET_FILE:gimli> /?)
+if (NOT DEFINED ENV{GITHUB_ACTIONS} OR NOT MINGW)
+    add_test(NAME gimli_help_question_mark_windows
+             COMMAND $<TARGET_FILE:gimli> /?)
+endif ()
 
 # parameter to show version number
 add_test(NAME gimli_version

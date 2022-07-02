@@ -91,8 +91,10 @@ add_test(NAME gandalf-the-grey_help_question_mark
          COMMAND $<TARGET_FILE:gandalf-the-grey> -?)
 
 # Windows-style help parameter "/?"
-add_test(NAME gandalf-the-grey_help_question_mark_windows
-         COMMAND $<TARGET_FILE:gandalf-the-grey> /?)
+if (NOT DEFINED ENV{GITHUB_ACTIONS} OR NOT MINGW)
+    add_test(NAME gandalf-the-grey_help_question_mark_windows
+             COMMAND $<TARGET_FILE:gandalf-the-grey> /?)
+endif ()
 
 # parameter to show version number
 add_test(NAME gandalf-the-grey_version

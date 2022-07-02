@@ -2,6 +2,7 @@
 
 [![GitHub CI Clang status](https://github.com/striezel/gimli/workflows/Clang/badge.svg)](https://github.com/striezel/gimli/actions)
 [![GitHub CI GCC status](https://github.com/striezel/gimli/workflows/GCC/badge.svg)](https://github.com/striezel/gimli/actions)
+[![GitHub CI MSYS2 status](https://github.com/striezel/gimli/workflows/MSYS2/badge.svg)](https://github.com/striezel/gimli/actions)
 [![GitLab pipeline status](https://gitlab.com/striezel/gimli/badges/main/pipeline.svg)](https://gitlab.com/striezel/gimli/)
 
 gimli is a library that can load common image formats (such as JPEG or PNG)
@@ -65,6 +66,11 @@ Starting in the root directory of the source, you can do the following steps:
 If you want to run the test suite, too, then there is one more step:
 
     ctest -V
+
+## Building from source on Windows
+
+For information how to build gimli on Windows, see the
+[build instructions for MSYS2](./documentation/msys2-build.md).
 
 ## Copyright and Licensing
 
