@@ -19,6 +19,9 @@ and its features. Currently, this includes the following applications:
 * [`hobbit`](./apps/hobbit/readme.md) - resizes images to smaller (or larger)
   dimensions
 
+_Note that those example applications are licensed under GNU GPL v3, whereas the
+library code itself is licensend under the weaker copyleft license GNU LGPL v3._
+
 ## Building from source
 
 ### Prerequisites
