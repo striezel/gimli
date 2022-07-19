@@ -1,4 +1,3 @@
-# We might support earlier versions, too, but try to use a more recent one.
 cmake_minimum_required (VERSION 3.8)
 
 # test binary for function tests
@@ -69,6 +68,12 @@ if (PNG_FOUND)
 else ()
   message ( FATAL_ERROR "libpng was not found!" )
 endif (PNG_FOUND)
+
+# Link static library of Catch2 v3, if necessary.
+if (HAS_CATCH_V3)
+    find_package(Catch2 3 REQUIRED)
+    target_link_libraries(hobbit_tests Catch2::Catch2WithMain)
+endif ()
 
 # add run of executable as test
 add_test(NAME hobbit_function_tests
