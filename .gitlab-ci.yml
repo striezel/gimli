@@ -49,9 +49,9 @@ docker_image_fedora:
     - docker:20-dind
   script:
     - cd ci/
-    - docker build -t $CI_REGISTRY/striezel/gimli/fedora:fc35 . -f Dockerfile_fedora
+    - docker build -t $CI_REGISTRY/striezel/gimli/fedora:fc36 . -f Dockerfile_fedora
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker push $CI_REGISTRY/striezel/gimli/fedora:fc35
+    - docker push $CI_REGISTRY/striezel/gimli/fedora:fc36
     - docker logout $CI_REGISTRY
   # Only build new image when the Dockerfile or the GitLab CI configuration
   # changes.
@@ -61,7 +61,7 @@ docker_image_fedora:
       - .gitlab-ci.yml
 
 fedora:
-  image: registry.gitlab.com/striezel/gimli/fedora:fc35
+  image: registry.gitlab.com/striezel/gimli/fedora:fc36
   stage: test
   before_script:
     - yum update -y
