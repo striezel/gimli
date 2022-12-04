@@ -28,7 +28,7 @@ set(hobbit_sources
     main.cpp)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    add_definitions (-Wall -pedantic -pedantic-errors -fexceptions)
+    add_definitions (-Wall -Wextra -Wpedantic -pedantic-errors -Wshadow -fexceptions)
 
     if (CODE_COVERAGE)
         add_definitions (-O0)
@@ -54,8 +54,8 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSIO
     # If we are on Clang 7.x, then the filesystem library from GCC is better.
     target_link_libraries(hobbit stdc++fs)
   else ()
-   # Use Clang's C++ filesystem library, it is recent enough.
-   target_link_libraries(hobbit c++fs)
+    # Use Clang's C++ filesystem library, it is recent enough.
+    target_link_libraries(hobbit c++fs)
   endif ()
 endif ()
 
