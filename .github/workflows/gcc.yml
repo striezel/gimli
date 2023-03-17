@@ -3,11 +3,11 @@ name: GCC
 on: push
 
 jobs:
-  ubuntu_20_04_gcc:
-    runs-on: ubuntu-20.04
+  ubuntu_gcc:
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        version: [8, 9, 10, 11]
+        version: [9, 10, 11, 12]
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
       - uses: actions/checkout@v3
@@ -39,7 +39,7 @@ jobs:
           cmake -DENABLE_LTO=ON -DENABLE_STATIC_LINKING=ON ../
           cmake --build . -j2
         # Only run static build on latest version in the matrix.
-        if: matrix.version == 11
+        if: matrix.version == 12
       - name: Collect build artifacts and documentation
         run: |
           cd "$GITHUB_WORKSPACE"
@@ -53,7 +53,7 @@ jobs:
           cp build-static/apps/hobbit/hobbit artifacts/hobbit/
           cp apps/hobbit/*.md artifacts/hobbit/
         # Only run static build on latest version in the matrix.
-        if: matrix.version == 11
+        if: matrix.version == 12
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -61,4 +61,4 @@ jobs:
           path: |
             artifacts/*
         # Only run static build on latest version in the matrix.
-        if: matrix.version == 11
+        if: matrix.version == 12

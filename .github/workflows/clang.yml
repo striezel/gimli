@@ -3,11 +3,11 @@ name: Clang
 on: push
 
 jobs:
-  ubuntu_20_04_clang:
-    runs-on: ubuntu-20.04
+  ubuntu_clang:
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        version: [8, 9, 10, 11]
+        version: [11, 12, 13, 14]
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
       - uses: actions/checkout@v3
@@ -19,7 +19,6 @@ jobs:
       - name: Install Clang's standard C++ library
         run: |
           sudo apt-get install -y libc++-${{ matrix.version }}-dev
-        if: matrix.version != 11
       - name: Build with Clang ${{ matrix.version }}
         run: |
           export CXX=clang++-${{ matrix.version }}
@@ -43,7 +42,7 @@ jobs:
           cmake -DENABLE_LTO=ON -DENABLE_STATIC_LINKING=ON ../
           cmake --build . -j2
         # Only run static build on latest version in the matrix.
-        if: matrix.version == 11
+        if: matrix.version == 14
       - name: Collect build artifacts and documentation files
         run: |
           cd "$GITHUB_WORKSPACE"
@@ -57,7 +56,7 @@ jobs:
           cp build-static/apps/hobbit/hobbit artifacts/hobbit/
           cp apps/hobbit/*.md artifacts/hobbit/
         # Only run static build on latest version in the matrix.
-        if: matrix.version == 11
+        if: matrix.version == 14
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -65,4 +64,4 @@ jobs:
           path: |
             artifacts/*
         # Only run static build on latest version in the matrix.
-        if: matrix.version == 11
+        if: matrix.version == 14
