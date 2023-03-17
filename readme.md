@@ -14,7 +14,10 @@ very few features._
 Furthermore, some example applications are provided that make use of the library
 and its features. Currently, this includes the following applications:
 
-* [`gandalf-the-grey`](./apps/gandalf_the_grey/readme.md) - produces greyscale versions of images
+* [`gandalf-the-grey`](./apps/gandalf_the_grey/readme.md) - produces greyscale
+  versions of images
+* [`gandalf-the-white`](./apps/gandalf_the_white/readme.md) - produces
+  white-balanced versions of images
 * [`gimli`](./apps/gimli/readme.md) - finds like images by hashes
 * [`hobbit`](./apps/hobbit/readme.md) - resizes images to smaller (or larger)
   dimensions
@@ -77,7 +80,7 @@ For information how to build gimli on Windows, see the
 
 ## Copyright and Licensing
 
-Copyright 2022  Dirk Stolle
+Copyright 2022, 2023  Dirk Stolle
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by

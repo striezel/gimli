@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="gandalf_the_white" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/gandalf_the_white" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/gandalf_the_white" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wshadow" />
+			<Add option="-pedantic-errors" />
+			<Add option="-pedantic" />
+			<Add option="-Wextra" />
+			<Add option="-Wall" />
+			<Add option="-std=c++17" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Linker>
+			<Add library="jpeg" />
+			<Add library="png" />
+		</Linker>
+		<Unit filename="../../lib/io/BitmapLoader.hpp" />
+		<Unit filename="../../lib/io/BitmapWriter.hpp" />
+		<Unit filename="../../lib/io/JpegLoader.hpp" />
+		<Unit filename="../../lib/io/JpegWriter.hpp" />
+		<Unit filename="../../lib/io/Loader.hpp" />
+		<Unit filename="../../lib/io/PngLoader.hpp" />
+		<Unit filename="../../lib/io/PngWriter.hpp" />
+		<Unit filename="../../lib/io/TargaLoader.hpp" />
+		<Unit filename="../../lib/io/TargaWriter.hpp" />
+		<Unit filename="../../lib/io/WebpLoader.hpp" />
+		<Unit filename="../../lib/io/WebpWriter.hpp" />
+		<Unit filename="../../lib/io/Writer.hpp" />
+		<Unit filename="../../lib/io/load_any.cpp" />
+		<Unit filename="../../lib/io/load_any.hpp" />
+		<Unit filename="../../lib/io/write_any.cpp" />
+		<Unit filename="../../lib/io/write_any.hpp" />
+		<Unit filename="../../lib/types/get_type.cpp" />
+		<Unit filename="../../lib/types/get_type.hpp" />
+		<Unit filename="../../lib/types/is_bitmap.cpp" />
+		<Unit filename="../../lib/types/is_bitmap.hpp" />
+		<Unit filename="../../lib/types/is_jpeg.cpp" />
+		<Unit filename="../../lib/types/is_jpeg.hpp" />
+		<Unit filename="../../lib/types/is_png.cpp" />
+		<Unit filename="../../lib/types/is_png.hpp" />
+		<Unit filename="../../lib/types/is_targa.cpp" />
+		<Unit filename="../../lib/types/is_targa.hpp" />
+		<Unit filename="../../lib/types/is_webp.cpp" />
+		<Unit filename="../../lib/types/is_webp.hpp" />
+		<Unit filename="../../third-party/nonstd/expected.hpp" />
+		<Unit filename="../return_codes.hpp" />
+		<Unit filename="main.cpp" />
+		<Unit filename="white.cpp" />
+		<Unit filename="white.hpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
