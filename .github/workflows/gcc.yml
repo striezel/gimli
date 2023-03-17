@@ -46,6 +46,9 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE"/artifacts/gandalf_the_grey
           cp build-static/apps/gandalf_the_grey/gandalf-the-grey artifacts/gandalf_the_grey/
           cp apps/gandalf_the_grey/*.md artifacts/gandalf_the_grey/
+          mkdir -p "$GITHUB_WORKSPACE"/artifacts/gandalf_the_white
+          cp build-static/apps/gandalf_the_white/gandalf-the-white artifacts/gandalf_the_white/
+          cp apps/gandalf_the_white/*.md artifacts/gandalf_the_white/
           mkdir -p "$GITHUB_WORKSPACE"/artifacts/gimli
           cp build-static/apps/gimli/gimli artifacts/gimli/
           cp apps/gimli/*.md artifacts/gimli/
