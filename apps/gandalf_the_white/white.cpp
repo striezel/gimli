@@ -74,7 +74,7 @@ int gandalf_the_white(const std::string& file)
   return 0;
 }
 
-nonstd::expected<boost::gil::rgb8_image_t, std::string> white_balance(const boost::gil::rgb8_image_t& source)
+boost::gil::rgb8_pixel_t get_maximum_channels(const boost::gil::rgb8_image_t& source)
 {
   using namespace boost::gil;
 
@@ -110,11 +110,25 @@ nonstd::expected<boost::gil::rgb8_image_t, std::string> white_balance(const boos
   if (b_max == 0)
     b_max = 255;
 
+  return rgb8_pixel_t{r_max, g_max, b_max};
+}
+
+nonstd::expected<boost::gil::rgb8_image_t, std::string> white_balance(const boost::gil::rgb8_image_t& source)
+{
+  using namespace boost::gil;
+
+  const auto max_channels = get_maximum_channels(source);
+  const uint8_t r_max = get_color(max_channels, red_t());
+  const uint8_t g_max = get_color(max_channels, green_t());
+  const uint8_t b_max = get_color(max_channels, blue_t());
+
   try
   {
     rgb8_image_t img(source.dimensions());
 
-    it = source_view.begin();
+    const auto source_view = const_view(source);
+    auto it = source_view.begin();
+    const auto end = source_view.end();
     auto img_view = view(img);
     auto dest_it = img_view.begin();
     while (it != end)
