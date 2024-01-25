@@ -47,6 +47,10 @@ or
 
     yum install boost-devel catch-devel cmake gcc-c++ git libjpeg-devel libpng-devel pkgconfig
 
+or
+
+    apk add boost-dev catch2 cmake g++ git jpeg-dev libpng-dev make pkgconf
+
 into a root terminal.
 
 ### Getting the source code
