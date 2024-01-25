@@ -63,6 +63,7 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE"/artifacts/hobbit
           cp build-static/apps/hobbit/hobbit.exe artifacts/hobbit/
           cp apps/hobbit/*.md artifacts/hobbit/
+          cp LICENSE artifacts/
       - name: Archive build artifacts
         uses: actions/upload-artifact@v4
         with:

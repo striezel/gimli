@@ -55,6 +55,7 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE"/artifacts/hobbit
           cp build-static/apps/hobbit/hobbit artifacts/hobbit/
           cp apps/hobbit/*.md artifacts/hobbit/
+          cp LICENSE artifacts/
         # Only run static build on latest version in the matrix.
         if: matrix.version == 12
       - name: Archive build artifacts
