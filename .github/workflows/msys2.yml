@@ -64,7 +64,7 @@ jobs:
           cp build-static/apps/hobbit/hobbit.exe artifacts/hobbit/
           cp apps/hobbit/*.md artifacts/hobbit/
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-msys2-static-linking
           path: |

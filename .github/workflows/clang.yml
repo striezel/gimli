@@ -61,7 +61,7 @@ jobs:
         # Only run static build on latest version in the matrix.
         if: matrix.version == 14
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-clang-static-linking
           path: |
