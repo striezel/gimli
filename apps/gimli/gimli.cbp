@@ -78,6 +78,8 @@
 		<Unit filename="../../lib/types/is_webp.hpp" />
 		<Unit filename="../../third-party/nonstd/expected.hpp" />
 		<Unit filename="../return_codes.hpp" />
+		<Unit filename="../versions.cpp" />
+		<Unit filename="../versions.hpp" />
 		<Unit filename="likeness.cpp" />
 		<Unit filename="likeness.hpp" />
 		<Unit filename="main.cpp" />

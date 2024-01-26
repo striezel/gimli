@@ -72,6 +72,8 @@
 		<Unit filename="../../lib/types/is_webp.cpp" />
 		<Unit filename="../../lib/types/is_webp.hpp" />
 		<Unit filename="../return_codes.hpp" />
+		<Unit filename="../versions.cpp" />
+		<Unit filename="../versions.hpp" />
 		<Unit filename="grey.cpp" />
 		<Unit filename="grey.hpp" />
 		<Unit filename="main.cpp" />

@@ -71,6 +71,8 @@
 		<Unit filename="../../lib/types/is_webp.cpp" />
 		<Unit filename="../../lib/types/is_webp.hpp" />
 		<Unit filename="../return_codes.hpp" />
+		<Unit filename="../versions.cpp" />
+		<Unit filename="../versions.hpp" />
 		<Unit filename="hobbit.cpp" />
 		<Unit filename="hobbit.hpp" />
 		<Unit filename="main.cpp" />

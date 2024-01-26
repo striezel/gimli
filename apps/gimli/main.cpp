@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,30 +24,15 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
-#include <jpeglib.h>
-#include <png.h>
-#include <boost/version.hpp>
-#if defined(__has_include)
-  #if __has_include(<boost/gil/version.hpp>)
-    #include <boost/gil/version.hpp>
-  #endif
-#endif
 #include "likeness.hpp"
 #include "../return_codes.hpp"
+#include "../versions.hpp"
 
 void showVersion()
 {
   std::cout << "gimli, version 0.2.0, 2022-03-22\n"
-            << "\n"
-            << "Library versions:" << std::endl
-            << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl
-            #if defined(__has_include)
-              #if __has_include(<boost/gil/version.hpp>)
-            << "  * Boost GIL: API version " << BOOST_GIL_VERSION << ", library version " << BOOST_GIL_LIB_VERSION << std::endl
-              #endif
-            #endif
-            << "  * libjpeg " << JPEG_LIB_VERSION << " (compile time version)" << std::endl
-            << "  * libpng " << png_get_header_ver(nullptr) << std::endl;
+            << "\n";
+  library_versions();
 }
 
 void showHelp()

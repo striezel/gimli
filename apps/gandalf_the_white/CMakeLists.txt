@@ -22,6 +22,7 @@ set(gandalf-the-white_sources
     ../../lib/types/is_png.cpp
     ../../lib/types/is_targa.cpp
     ../../lib/types/is_webp.cpp
+    ../versions.cpp
     white.cpp
     main.cpp)
 

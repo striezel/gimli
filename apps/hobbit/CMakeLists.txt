@@ -1,4 +1,3 @@
-# We might support earlier versions, too, but try to use a more recent one.
 cmake_minimum_required (VERSION 3.8)
 
 # test binary for components and functions
@@ -24,6 +23,7 @@ set(hobbit_sources
     ../../lib/types/is_png.cpp
     ../../lib/types/is_targa.cpp
     ../../lib/types/is_webp.cpp
+    ../versions.cpp
     hobbit.cpp
     main.cpp)
 
