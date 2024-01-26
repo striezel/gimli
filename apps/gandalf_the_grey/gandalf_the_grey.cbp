@@ -71,10 +71,10 @@
 		<Unit filename="../../lib/types/is_targa.hpp" />
 		<Unit filename="../../lib/types/is_webp.cpp" />
 		<Unit filename="../../lib/types/is_webp.hpp" />
+		<Unit filename="../return_codes.hpp" />
 		<Unit filename="grey.cpp" />
 		<Unit filename="grey.hpp" />
 		<Unit filename="main.cpp" />
-		<Unit filename="return_codes.hpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
