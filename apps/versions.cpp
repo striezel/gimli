@@ -31,13 +31,13 @@
 
 void library_versions()
 {
-  std::cout << "Library versions:" << std::endl
-            << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl
+  std::cout << "Library versions:\n"
+            << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << '\n'
             #if defined(__has_include)
               #if __has_include(<boost/gil/version.hpp>)
-            << "  * Boost GIL: API version " << BOOST_GIL_VERSION << ", library version " << BOOST_GIL_LIB_VERSION << std::endl
+            << "  * Boost GIL: API version " << BOOST_GIL_VERSION << ", library version " << BOOST_GIL_LIB_VERSION << '\n'
               #endif
             #endif
-            << "  * libjpeg " << JPEG_LIB_VERSION << " (compile time version)" << std::endl
+            << "  * libjpeg " << JPEG_LIB_VERSION << " (compile time version)\n"
             << "  * libpng " << png_get_header_ver(nullptr) << std::endl;
 }
