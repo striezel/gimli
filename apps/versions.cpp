@@ -29,5 +29,9 @@ void library_versions()
   std::cout << "Library versions:\n"
             << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << '\n'
             << "  * libjpeg " << JPEG_LIB_VERSION << " (compile time version)\n"
+            #ifdef LIBJPEG_TURBO_VERSION_NUMBER
+            << "    provided by libjpeg-turbo " << (LIBJPEG_TURBO_VERSION_NUMBER / 1000000)
+            << '.' << ((LIBJPEG_TURBO_VERSION_NUMBER / 1000) % 1000) << '.' << (LIBJPEG_TURBO_VERSION_NUMBER % 1000) << '\n'
+            #endif // LIBJPEG_TURBO_VERSION_NUMBER
             << "  * libpng " << png_get_header_ver(nullptr) << std::endl;
 }
