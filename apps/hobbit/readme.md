@@ -15,7 +15,8 @@ separate files with a file name suffix (usually containing the size).
 options:
   -? | --help         - Shows this help message.
   -v | --version      - Shows version information.
-  --size WIDTHxHEIGHT - Sets the new image size.
+  --size WIDTHxHEIGHT - Sets the new image size in pixels (WIDTH pixels wide
+                        and HEIGHT pixels high).
   FILE                - Sets the file name of the image to resize.
                         This option can occur multiple times, if multiple files
                         need to be processed.
@@ -27,7 +28,7 @@ A changelog is provided as [separate file](./changelog.md).
 
 ## Copyright and Licensing
 
-Copyright 2022  Dirk Stolle
+Copyright 2022, 2024  Dirk Stolle
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

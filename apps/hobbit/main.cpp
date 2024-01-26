@@ -36,7 +36,7 @@
 
 void showVersion()
 {
-  std::cout << "hobbit, version 0.1.0, 2022-03-14\n"
+  std::cout << "hobbit, version 0.1.1, 2024-01-26\n"
             << "\n"
             << "Library versions:" << std::endl
             << "  * Boost " << (BOOST_VERSION / 100000) << "." << ((BOOST_VERSION / 100) % 1000) << "." << (BOOST_VERSION % 100) << std::endl
@@ -60,7 +60,8 @@ void showHelp()
             << "options:\n"
             << "  -? | --help         - Shows this help message.\n"
             << "  -v | --version      - Shows version information.\n"
-            << "  --size WIDTHxHEIGHT - Sets the new image size.\n"
+            << "  --size WIDTHxHEIGHT - Sets the new image size in pixels (WIDTH pixels wide\n"
+            << "                        and HEIGHT pixels high).\n"
             << "  FILE                - Sets the file name of the image to resize.\n"
             << "                        This option can occur multiple times, if multiple files\n"
             << "                        need to be processed.\n";

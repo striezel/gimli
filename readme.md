@@ -84,7 +84,7 @@ For information how to build gimli on Windows, see the
 
 ## Copyright and Licensing
 
-Copyright 2022, 2023  Dirk Stolle
+Copyright 2022, 2023, 2024  Dirk Stolle
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
