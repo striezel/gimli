@@ -54,19 +54,27 @@ jobs:
         run: |
           export MSYSTEM=MINGW64
           cd "$GITHUB_WORKSPACE"
+          # gandalf_the_grey
           mkdir -p "$GITHUB_WORKSPACE"/artifacts/gandalf_the_grey
           cp build-static/apps/gandalf_the_grey/gandalf-the-grey.exe artifacts/gandalf_the_grey/
           cp apps/gandalf_the_grey/*.md artifacts/gandalf_the_grey/
+          # gandalf_the_white
+          mkdir -p "$GITHUB_WORKSPACE"/artifacts/gandalf_the_white
+          cp build-static/apps/gandalf_the_white/gandalf-the-white.exe artifacts/gandalf_the_white/
+          cp apps/gandalf_the_white/*.md artifacts/gandalf_the_white/
+          # gimli
           mkdir -p "$GITHUB_WORKSPACE"/artifacts/gimli
           cp build-static/apps/gimli/gimli.exe artifacts/gimli/
           cp apps/gimli/*.md artifacts/gimli/
+          # hobbit
           mkdir -p "$GITHUB_WORKSPACE"/artifacts/hobbit
           cp build-static/apps/hobbit/hobbit.exe artifacts/hobbit/
           cp apps/hobbit/*.md artifacts/hobbit/
+          # license
           cp LICENSE artifacts/
       - name: Archive build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-msys2-static-linking
+          name: gimli_vX.Y.Z_win64
           path: |
             artifacts/*
