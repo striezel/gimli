@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@
  -------------------------------------------------------------------------------
 */
 
-#ifndef GIMLI_GANDALF_GREY_HPP
-#define GIMLI_GANDALF_GREY_HPP
+#ifndef GIMLI_HOBBIT_HPP
+#define GIMLI_HOBBIT_HPP
 
 #include <string>
 #include <boost/gil/point.hpp>
@@ -50,4 +50,4 @@ nonstd::expected<boost::gil::point_t, std::string> parse_size(const std::string&
  */
 std::string sized_name(const std::string& file, const boost::gil::point_t& dims);
 
-#endif // GIMLI_GANDALF_GREY_HPP
+#endif // GIMLI_HOBBIT_HPP
