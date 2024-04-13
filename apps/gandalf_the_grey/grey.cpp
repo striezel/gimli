@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,27 +27,27 @@
 #include "../../lib/transforms/Greyscale.hpp"
 #include "../../lib/types/get_type.hpp"
 
-int gandalf_the_grey(const std::string& file)
+int gandalf_the_grey(const std::filesystem::path& file)
 {
   const auto img_type = gimli::types::get_type(file);
   if (!img_type.has_value())
   {
     std::cout << "Warning: Could not determine image type of " << file
               << "!\nError message: " << img_type.error() << "\n"
-              << "File will be skipped." << std::endl;
+              << "File will be skipped.\n";
     return 0;
   }
   if (img_type.value() == gimli::types::ImageType::Unknown)
   {
     std::cerr << "'I have no memory of this place.' - Gandalf\n"
-              << "Error: File " << file << " has an unknown or unsupported image format." << std::endl;
+              << "Error: File " << file << " has an unknown or unsupported image format.\n";
     return rcUnsupportedFormat;
   }
 
   const auto maybe_image = gimli::load_any(file, img_type.value());
   if (!maybe_image.has_value())
   {
-    std::cerr << "Error: File " << file << " could not be loaded.\n"
+    std::cerr << "Error: File " << file.string() << " could not be loaded.\n"
               << "Error: " << maybe_image.error() << "\n";
     return rcInputOutputError;
   }
@@ -60,11 +60,11 @@ int gandalf_the_grey(const std::string& file)
     return rcInputOutputError;
   }
 
-  const std::string grey_file = grey_name(file);
+  const std::filesystem::path grey_file = grey_name(file);
   const auto error_text = gimli::write_any_grey(grey_file, maybe_grey.value(), img_type.value());
   if (error_text.has_value())
   {
-    std::cerr << "Error: Greyscale version of " << file << " could not be written to file "
+    std::cerr << "Error: Greyscale version of " << file.string() << " could not be written to file "
               << grey_file << ".\n"
               << "Error: " << error_text.value() << "\n";
     return rcInputOutputError;
@@ -74,23 +74,27 @@ int gandalf_the_grey(const std::string& file)
   return 0;
 }
 
-std::string grey_name(const std::string& file)
+std::filesystem::path grey_name(std::filesystem::path path)
 {
   namespace fs = std::filesystem;
 
-  fs::path path(file);
-  const auto ext = path.extension().string();
-  const auto stem = path.stem().string();
+  const auto ext = path.extension();
+  const auto stem = path.stem();
 
-  fs::path grey(stem + std::string("_grey") + ext);
+  fs::path grey{stem};
+  grey += std::string("_grey");
+  grey += ext;
   path.replace_filename(grey);
   std::error_code error;
   uint_least32_t counter = 0;
   while (fs::exists(path, error) && !error)
   {
     ++counter;
-    grey = stem + std::string("_grey_") + std::to_string(counter) + ext;
+    grey = stem;
+    grey += std::string("_grey_");
+    grey += std::to_string(counter);
+    grey += ext;
     path.replace_filename(grey);
   }
-  return path.string();
+  return path;
 }

@@ -4,6 +4,10 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version 0.2.2 (2022-04-14)
+
+A problem with handling of special characters in path names on Windows is fixed.
+
 ## Version 0.2.1 (2022-07-03)
 
 The program's license is changed from GNU Lesser General Public License,
