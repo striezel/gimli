@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -29,7 +29,7 @@
 namespace gimli
 {
 
-nonstd::expected<Image, std::string> load_any(const std::string& path)
+nonstd::expected<Image, std::string> load_any(const std::filesystem::path& path)
 {
   const auto maybe_type = gimli::types::get_type(path);
   if (!maybe_type.has_value())
@@ -39,7 +39,7 @@ nonstd::expected<Image, std::string> load_any(const std::string& path)
   return load_any(path, maybe_type.value());
 }
 
-nonstd::expected<Image, std::string> load_any(const std::string& path, const types::ImageType type)
+nonstd::expected<Image, std::string> load_any(const std::filesystem::path& path, const types::ImageType type)
 {
   using namespace gimli::types;
 

@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -35,7 +35,7 @@ namespace gimli
  * \remarks Use this overload of load_any(), if you do not know the image type
  *          of the file. Otherwise use the overload with type parameter.
  */
-nonstd::expected<Image, std::string> load_any(const std::string& path);
+nonstd::expected<Image, std::string> load_any(const std::filesystem::path& path);
 
 /** \brief Loads an image of the specified type from the given path.
  *
@@ -46,7 +46,7 @@ nonstd::expected<Image, std::string> load_any(const std::string& path);
  * \remarks Use this overload of load_any(), if you know the image type.
  *          Otherwise use the overload without type parameter.
  */
-nonstd::expected<Image, std::string> load_any(const std::string& path, const types::ImageType type);
+nonstd::expected<Image, std::string> load_any(const std::filesystem::path& path, const types::ImageType type);
 
 }
 

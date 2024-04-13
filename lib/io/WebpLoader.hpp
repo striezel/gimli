@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -21,6 +21,7 @@
 #ifndef GIMLI_WEBP_LOADER_HPP
 #define GIMLI_WEBP_LOADER_HPP
 
+#include <filesystem>
 #include <string>
 #include "../../third-party/nonstd/expected.hpp"
 #include "../Image.hpp"
@@ -41,7 +42,7 @@ class WebpLoader
      * \return Returns an Image, if the image could be loaded.
      *         Returns an error message otherwise.
      */
-    static nonstd::expected<Image, std::string> load(const std::string& path)
+    static nonstd::expected<Image, std::string> load(const std::filesystem::path& path)
     {
       return nonstd::make_unexpected("Loading of WebP images is not implemented yet.");
     }

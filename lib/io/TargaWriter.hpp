@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -40,7 +40,7 @@ class TargaWriterGrey
      * \return Returns an empty optional, if the image was written successfully.
      *         Returns an error message otherwise.
      */
-    static std::optional<std::string> write(const std::string& path, const boost::gil::gray8_image_t& image)
+    static std::optional<std::string> write(const std::filesystem::path& path, const boost::gil::gray8_image_t& image)
     {
       using namespace boost::gil;
 
@@ -63,7 +63,7 @@ class TargaWriterGrey
           }
         }
 
-        write_view(path, const_view(image_rgb), boost::gil::targa_tag());
+        write_view(path.string(), const_view(image_rgb), boost::gil::targa_tag());
         return std::nullopt;
       }
       catch (const std::exception& ex)

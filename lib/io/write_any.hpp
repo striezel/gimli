@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -37,7 +37,7 @@ namespace gimli
  * \return Returns an empty optional, if the image was written successfully.
  *         Returns an error message otherwise.
  */
-std::optional<std::string> write_any_rgb(const std::string& path, const Image& image, const types::ImageType type);
+std::optional<std::string> write_any_rgb(const std::filesystem::path& path, const Image& image, const types::ImageType type);
 
 /** \brief Writes a greyscale image of the specified type to the given path.
  *
@@ -47,7 +47,7 @@ std::optional<std::string> write_any_rgb(const std::string& path, const Image& i
  * \return Returns an empty optional, if the image was written successfully.
  *         Returns an error message otherwise.
  */
-std::optional<std::string> write_any_grey(const std::string& path, const boost::gil::gray8_image_t& image, const types::ImageType type);
+std::optional<std::string> write_any_grey(const std::filesystem::path& path, const boost::gil::gray8_image_t& image, const types::ImageType type);
 
 }
 
