@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
 */
 
 #include "white.hpp"
-#include <filesystem>
 #include <iostream>
 #include "../return_codes.hpp"
 #include "../../lib/io/load_any.hpp"
@@ -27,27 +26,27 @@
 #include "../../lib/transforms/Greyscale.hpp"
 #include "../../lib/types/get_type.hpp"
 
-int gandalf_the_white(const std::string& file)
+int gandalf_the_white(const std::filesystem::path& file)
 {
   const auto img_type = gimli::types::get_type(file);
   if (!img_type.has_value())
   {
-    std::cout << "Warning: Could not determine image type of " << file
+    std::cout << "Warning: Could not determine image type of " << file.string()
               << "!\nError message: " << img_type.error() << "\n"
-              << "File will be skipped." << std::endl;
+              << "File will be skipped.\n";
     return 0;
   }
   if (img_type.value() == gimli::types::ImageType::Unknown)
   {
     std::cerr << "'I have no memory of this place.' - Gandalf\n"
-              << "Error: File " << file << " has an unknown or unsupported image format." << std::endl;
+              << "Error: File " << file.string() << " has an unknown or unsupported image format.\n";
     return rcUnsupportedFormat;
   }
 
   const auto maybe_image = gimli::load_any(file, img_type.value());
   if (!maybe_image.has_value())
   {
-    std::cerr << "Error: File " << file << " could not be loaded.\n"
+    std::cerr << "Error: File " << file.string() << " could not be loaded.\n"
               << "Error: " << maybe_image.error() << "\n";
     return rcInputOutputError;
   }
@@ -55,21 +54,21 @@ int gandalf_the_white(const std::string& file)
   const auto maybe_white = white_balance(maybe_image.value());
   if (!maybe_white.has_value())
   {
-    std::cerr << "Error: File " << file << " could not be transformed to greyscale image.\n"
+    std::cerr << "Error: File " << file.string() << " could not be transformed to greyscale image.\n"
               << "Error: " << maybe_white.error() << "\n";
     return rcInputOutputError;
   }
 
-  const std::string white_file = white_name(file);
+  const std::filesystem::path white_file = white_name(file);
   const auto error_text = gimli::write_any_rgb(white_file, maybe_white.value(), img_type.value());
   if (error_text.has_value())
   {
-    std::cerr << "Error: White-balanced version of " << file << " could not be written to file "
-              << white_file << ".\n"
+    std::cerr << "Error: White-balanced version of " << file.string()
+              << " could not be written to file " << white_file.string() << ".\n"
               << "Error: " << error_text.value() << "\n";
     return rcInputOutputError;
   }
-  std::cout << file << " -> " << white_file << "\n";
+  std::cout << file.string() << " -> " << white_file.string() << "\n";
 
   return 0;
 }
@@ -149,23 +148,27 @@ nonstd::expected<boost::gil::rgb8_image_t, std::string> white_balance(const boos
   }
 }
 
-std::string white_name(const std::string& file)
+std::filesystem::path white_name(std::filesystem::path path)
 {
   namespace fs = std::filesystem;
 
-  fs::path path(file);
-  const auto ext = path.extension().string();
-  const auto stem = path.stem().string();
+  const auto ext = path.extension();
+  const auto stem = path.stem();
 
-  fs::path white(stem + std::string("_white") + ext);
+  fs::path white{stem};
+  white += std::string("_white");
+  white += ext;
   path.replace_filename(white);
   std::error_code error;
   uint_least32_t counter = 0;
   while (fs::exists(path, error) && !error)
   {
     ++counter;
-    white = stem + std::string("_white_") + std::to_string(counter) + ext;
+    white = stem;
+    white += std::string("_white_");
+    white += std::to_string(counter);
+    white += ext;
     path.replace_filename(white);
   }
-  return path.string();
+  return path;
 }

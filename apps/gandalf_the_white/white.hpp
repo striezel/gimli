@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 #ifndef GIMLI_GANDALF_WHITE_HPP
 #define GIMLI_GANDALF_WHITE_HPP
 
+#include <filesystem>
 #include <string>
 #include <boost/gil/image.hpp>
 #include <boost/gil/typedefs.hpp>
@@ -32,7 +33,7 @@
  * \return Returns zero, if operation was successful.
  *         Returns non-zero exit code, if an error occurred.
  */
-int gandalf_the_white(const std::string& file);
+int gandalf_the_white(const std::filesystem::path& file);
 
 /** \brief White-balances an image.
  *
@@ -47,6 +48,6 @@ nonstd::expected<boost::gil::rgb8_image_t, std::string> white_balance(const boos
  * \param file   the original file name
  * \return Returns a suitable file name for the white-balanced image.
  */
-std::string white_name(const std::string& file);
+std::filesystem::path white_name(std::filesystem::path file);
 
 #endif // GIMLI_GANDALF_WHITE_HPP
