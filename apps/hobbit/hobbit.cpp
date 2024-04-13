@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,26 +27,26 @@
 #include "../../lib/transforms/Resize.hpp"
 #include "../../lib/types/get_type.hpp"
 
-int hobbit(const std::string& file, const boost::gil::point_t& new_size)
+int hobbit(const std::filesystem::path& file, const boost::gil::point_t& new_size)
 {
   const auto img_type = gimli::types::get_type(file);
   if (!img_type.has_value())
   {
-    std::cout << "Warning: Could not determine image type of " << file
+    std::cout << "Warning: Could not determine image type of " << file.string()
               << "!\nError message: " << img_type.error() << "\n"
               << "File will be skipped." << std::endl;
     return 0;
   }
   if (img_type.value() == gimli::types::ImageType::Unknown)
   {
-    std::cerr << "Error: File " << file << " has an unknown or unsupported image format." << std::endl;
+    std::cerr << "Error: File " << file.string() << " has an unknown or unsupported image format.\n";
     return rcUnsupportedFormat;
   }
 
   const auto maybe_image = gimli::load_any(file, img_type.value());
   if (!maybe_image.has_value())
   {
-    std::cerr << "Error: File " << file << " could not be loaded.\n"
+    std::cerr << "Error: File " << file.string() << " could not be loaded.\n"
               << "Error: " << maybe_image.error() << "\n";
     return rcInputOutputError;
   }
@@ -54,16 +54,16 @@ int hobbit(const std::string& file, const boost::gil::point_t& new_size)
   const auto maybe_resized = gimli::Resize::transform(maybe_image.value(), new_size);
   if (!maybe_resized.has_value())
   {
-    std::cerr << "Error: File " << file << " could not be resized.\n"
+    std::cerr << "Error: File " << file.string() << " could not be resized.\n"
               << "Error: " << maybe_resized.error() << "\n";
     return rcInputOutputError;
   }
 
-  const std::string resized_file = sized_name(file, new_size);
+  const std::filesystem::path resized_file = sized_name(file, new_size);
   const auto error_text = gimli::write_any_rgb(resized_file, maybe_resized.value(), img_type.value());
   if (error_text.has_value())
   {
-    std::cerr << "Error: Resized version of " << file << " could not be written to file "
+    std::cerr << "Error: Resized version of " << file.string() << " could not be written to file "
               << resized_file << ".\n"
               << "Error: " << error_text.value() << "\n";
     return rcInputOutputError;
@@ -117,24 +117,29 @@ nonstd::expected<boost::gil::point_t, std::string> parse_size(const std::string&
   return boost::gil::point_t(w, h);
 }
 
-std::string sized_name(const std::string& file, const boost::gil::point_t& dims)
+std::filesystem::path sized_name(std::filesystem::path path, const boost::gil::point_t& dims)
 {
   namespace fs = std::filesystem;
 
-  fs::path path(file);
-  const auto ext = path.extension().string();
-  const auto stem = path.stem().string();
+  const auto ext = path.extension();
+  const auto stem = path.stem();
 
   const auto size_string = "_" + std::to_string(dims.x) + "x" + std::to_string(dims.y);
-  fs::path sized(stem + size_string + ext);
+  fs::path sized{stem};
+  sized += size_string;
+  sized += ext;
   path.replace_filename(sized);
   std::error_code error;
   uint_least32_t counter = 0;
   while (fs::exists(path, error) && !error)
   {
     ++counter;
-    sized = stem + size_string + "_" + std::to_string(counter) + ext;
+    sized = stem;
+    sized += size_string;
+    sized += "_";
+    sized += std::to_string(counter);
+    sized += ext;
     path.replace_filename(sized);
   }
-  return path.string();
+  return path;
 }

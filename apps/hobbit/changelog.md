@@ -4,6 +4,10 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version 0.1.2 (2024-04-14)
+
+A problem with handling of special characters in path names on Windows is fixed.
+
 ## Version 0.1.1 (2024-01-26)
 
 The help message for the `--size` parameter is clarified to state that the size

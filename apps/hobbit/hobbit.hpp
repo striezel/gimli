@@ -21,6 +21,7 @@
 #ifndef GIMLI_HOBBIT_HPP
 #define GIMLI_HOBBIT_HPP
 
+#include <filesystem>
 #include <string>
 #include <boost/gil/point.hpp>
 #include "../../third-party/nonstd/expected.hpp"
@@ -32,7 +33,7 @@
  * \return Returns zero, if operation was successful.
  *         Returns non-zero exit code, if an error occurred.
  */
-int hobbit(const std::string& file, const boost::gil::point_t& new_size);
+int hobbit(const std::filesystem::path& file, const boost::gil::point_t& new_size);
 
 /** \brief Parses a string into a point / dimension data.
  *
@@ -48,6 +49,6 @@ nonstd::expected<boost::gil::point_t, std::string> parse_size(const std::string&
  * \param dims  dimensions of the image
  * \return Returns a suitable file name for the resized image.
  */
-std::string sized_name(const std::string& file, const boost::gil::point_t& dims);
+std::filesystem::path sized_name(std::filesystem::path file, const boost::gil::point_t& dims);
 
 #endif // GIMLI_HOBBIT_HPP
