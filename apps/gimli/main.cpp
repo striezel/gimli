@@ -18,6 +18,9 @@
  -------------------------------------------------------------------------------
 */
 
+#if defined(_WIN32) || defined(_WIN64)
+#include <cstdlib>
+#endif
 #include <filesystem>
 #include <iostream>
 #include <optional>
@@ -30,7 +33,7 @@
 
 void showVersion()
 {
-  std::cout << "gimli, version 0.2.0, 2022-03-22\n"
+  std::cout << "gimli, version 0.2.1, 2024-04-14\n"
             << "\n";
   library_versions();
 }
@@ -59,10 +62,8 @@ void showHelp()
 
 int main(int argc, char** argv)
 {
-  namespace fs = std::filesystem;
-
   std::optional<gimli::hash::algorithm> algorithm {std::nullopt};
-  std::vector<std::string> files;
+  std::vector<std::filesystem::path> files;
   if ((argc > 1) && (argv != nullptr))
   {
     for (int i = 1; i < argc; ++i)
@@ -122,13 +123,35 @@ int main(int argc, char** argv)
       else
       {
         // Parameter might be a file.
+        std::filesystem::path file;
+        try
+        {
+          #if !defined(_WIN32) && !defined(_WIN64)
+          file = param;
+          #else
+          std::wstring utf16(param.size(), L'\0');
+          const auto num_chars = std::mbstowcs(&utf16[0], param.c_str(), param.size());
+          if (num_chars == static_cast<std::size_t>(-1))
+          {
+            std::cerr << "Error: " << param << " is not a valid parameter!\n";
+            return rcInvalidParameter;
+          }
+          file = utf16;
+          #endif
+        }
+        catch (...)
+        {
+          std::cerr << "Error: " << param << " is neither a valid parameter "
+                    << "nor a valid file path!\n";
+          return rcInvalidParameter;
+        }
         std::error_code error;
-        if (!std::filesystem::exists(param, error) || error)
+        if (!std::filesystem::exists(file, error) || error)
         {
           std::cerr << "Error: File " << param << " does not exist!\n";
           return rcInvalidParameter;
         }
-        files.emplace_back(param);
+        files.emplace_back(file);
       }
     }
   } // if arguments are there

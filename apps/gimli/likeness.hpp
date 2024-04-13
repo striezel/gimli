@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 #define GIMLI_GIMLI_LIKENESS_HPP
 
 #include <cstdint>
+#include <filesystem>
 #include <functional>
 #include <string>
 #include <tuple>
@@ -38,7 +39,7 @@ using likeness_entry = std::tuple<std::string, std::string, float>;
  * \return Returns the loaded image, if operation was successful.
  *         Returns an exit code, if an error occurred.
  */
-nonstd::expected<boost::gil::gray8_image_t, int> load_to_grey(const std::string& file);
+nonstd::expected<boost::gil::gray8_image_t, int> load_to_grey(const std::filesystem::path& file);
 
 /** \brief Calculates the hash of the given image.
  *
@@ -47,7 +48,7 @@ nonstd::expected<boost::gil::gray8_image_t, int> load_to_grey(const std::string&
  * \return Returns zero, if operation was successful.
  *         Returns non-zero exit code, if an error occurred.
  */
-int calculate_hash(const std::string& file, std::unordered_map<std::string, uint64_t>& hashes, const gimli::hash::algorithm algo);
+int calculate_hash(const std::filesystem::path& file, std::unordered_map<std::string, uint64_t>& hashes, const gimli::hash::algorithm algo);
 
 /** \brief Sorts hashed files by similarity.
  *
