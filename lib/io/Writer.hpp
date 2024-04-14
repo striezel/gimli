@@ -48,7 +48,7 @@ class Writer
 
       try
       {
-        write_view(path, const_view(image), tag_t());
+        write_view(path.native(), const_view(image), tag_t());
         return std::nullopt;
       }
       catch (const std::exception& ex)

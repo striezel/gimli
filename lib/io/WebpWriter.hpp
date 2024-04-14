@@ -45,7 +45,7 @@ class WebpWriter
 
       try
       {
-        write_view(path, const_view(image), webp_tag());
+        write_view(path.native(), const_view(image), webp_tag());
         return std::nullopt;
       }
       catch (const std::exception& ex)
@@ -89,7 +89,7 @@ class WebpWriterGrey
           }
         }
 
-        /*write_view(path, const_view(image_rgb), boost::gil::webp_tag());
+        /*write_view(path.native(), const_view(image_rgb), boost::gil::webp_tag());
         return std::nullopt;*/
 
         return std::optional("Writing WebP images is not implemented yet.");

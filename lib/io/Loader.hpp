@@ -50,7 +50,7 @@ class Loader
       Image image;
       try
       {
-        read_and_convert_image(path, image, tag_t());
+        read_and_convert_image(path.native(), image, tag_t());
       }
       catch (const std::exception& ex)
       {
