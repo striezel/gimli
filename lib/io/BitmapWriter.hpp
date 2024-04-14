@@ -63,7 +63,7 @@ class BitmapWriterGrey
           }
         }
 
-        write_view(path.string(), const_view(image_rgb), boost::gil::bmp_tag());
+        write_view(path, const_view(image_rgb), boost::gil::bmp_tag());
         return std::nullopt;
       }
       catch (const std::exception& ex)
