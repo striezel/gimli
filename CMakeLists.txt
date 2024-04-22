@@ -47,6 +47,24 @@ if (CODE_COVERAGE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
 endif ()
 
+# option to enable sanitizers
+option(ENABLE_SANITIZER "Enable sanitizer options" OFF)
+# If ENABLE_SANITIZER is on (e. g. via `cmake -DENABLE_SANITIZER=ON`), then all
+# binaries are built with address sanitizer and undefined behaviour sanitizer.
+# The option is off by default.
+# Currently this only works with GCC and Clang.
+if (ENABLE_SANITIZER)
+  if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    message(FATAL_ERROR "Sanitizer builds need GCC or Clang compiler!")
+  endif()
+  message(STATUS "Enabling address sanitizer and the undefined behaviour sanitizer.")
+  add_compile_options(-fsanitize=address -fno-omit-frame-pointer
+                      -fsanitize=undefined -fno-sanitize-recover=all
+                      -g)
+  link_libraries(-fsanitize=address -fno-omit-frame-pointer
+                 -fsanitize=undefined -fno-sanitize-recover=all)
+endif (ENABLE_SANITIZER)
+
 # fix for failed MinGW detection on GitHub Actions
 if (NOT MINGW AND ${CMAKE_CXX_COMPILER} MATCHES "mingw")
   message(STATUS "Note: Applying MinGW detection fix for GHA.")
