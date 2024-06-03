@@ -5,7 +5,7 @@ on: push
 jobs:
   alpine:
     runs-on: ubuntu-22.04
-    container: alpine:latest
+    container: 'alpine:3.20'
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
       - uses: actions/checkout@v4
