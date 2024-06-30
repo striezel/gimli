@@ -12,7 +12,7 @@ Currently, the following libraries are here:
   licensed under the Boost Software License 1.0
   <https://opensource.org/licenses/BSL-1.0>
 
-* **nonstd/span.hpp**: span lite, version 0.10.3,
+* **nonstd/span.hpp**: span lite, version 0.11.0,
   by Martin Moene <https://github.com/martinmoene>,
   licensed under the Boost Software License 1.0
   <https://opensource.org/licenses/BSL-1.0>
