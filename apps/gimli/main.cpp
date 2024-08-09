@@ -36,6 +36,7 @@ void showVersion()
   std::cout << "gimli, version 0.2.1, 2024-04-14\n"
             << "\n";
   library_versions();
+  showLicenseInformation();
 }
 
 void showHelp()

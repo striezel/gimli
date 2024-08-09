@@ -35,3 +35,12 @@ void library_versions()
             #endif // LIBJPEG_TURBO_VERSION_NUMBER
             << "  * libpng " << png_get_header_ver(nullptr) << std::endl;
 }
+
+void showLicenseInformation(const std::string_view years)
+{
+  std::cout << "\nCopyright (C) " << years << "  Dirk Stolle\n"
+            << "License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>\n"
+            << "This is free software: you are free to change and redistribute it under the\n"
+            << "terms of the GNU General Public License version 3 or any later version.\n"
+            << "There is NO WARRANTY, to the extent permitted by law.\n";
+}

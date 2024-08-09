@@ -35,6 +35,7 @@ void showVersion()
   std::cout << "hobbit, version 0.1.2, 2024-04-14\n"
             << "\n";
   library_versions();
+  showLicenseInformation();
 }
 
 void showHelp()

@@ -34,6 +34,7 @@ void showVersion()
   std::cout << "gandalf-the-white, version 0.1.1, 2024-04-14\n"
             << "\n";
   library_versions();
+  showLicenseInformation("2023, 2024");
 }
 
 void showHelp()

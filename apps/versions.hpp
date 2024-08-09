@@ -21,8 +21,17 @@
 #ifndef GIMLI_APPS_VERSIONS_HPP
 #define GIMLI_APPS_VERSIONS_HPP
 
+#include <string_view>
+
 /** \brief Prints versions of the used libraries to the standard output.
  */
 void library_versions();
+
+/** \brief Shows license information on standard output.
+ *
+ * \param years   the years to show in the copyright message, e.g. "2022, 2023";
+ *                defaults to "2022 - 2024" if not specified
+ */
+void showLicenseInformation(const std::string_view years = "2022 - 2024");
 
 #endif // GIMLI_APPS_VERSIONS_HPP

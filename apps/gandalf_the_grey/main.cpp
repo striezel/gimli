@@ -34,6 +34,7 @@ void showVersion()
   std::cout << "gandalf-the-grey, version 0.2.2, 2024-04-14\n"
             << "\n";
   library_versions();
+  showLicenseInformation();
 }
 
 void showHelp()
