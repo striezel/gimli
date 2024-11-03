@@ -1,8 +1,8 @@
 docker_image_coverage:
-  image: docker:20
+  image: docker:27
   stage: build
   services:
-    - docker:20-dind
+    - docker:27-dind
   script:
     - cd ci/
     - docker build -t $CI_REGISTRY/striezel/gimli/coverage:deb12 . -f Dockerfile_coverage
@@ -43,10 +43,10 @@ coverage:
       - public
 
 docker_image_fedora:
-  image: docker:20
+  image: docker:27
   stage: build
   services:
-    - docker:20-dind
+    - docker:27-dind
   script:
     - cd ci/
     - docker build -t $CI_REGISTRY/striezel/gimli/fedora:f40 . -f Dockerfile_fedora
@@ -77,10 +77,10 @@ fedora:
     - ctest -V
 
 docker_image_boost_1_75:
-  image: docker:20
+  image: docker:27
   stage: build
   services:
-    - docker:20-dind
+    - docker:27-dind
   script:
     - cd ci/
     - docker build -t $CI_REGISTRY/striezel/gimli/boost_1_75:latest . -f Dockerfile_boost_1_75
@@ -111,10 +111,10 @@ boost_1_75:
     - ctest -V
 
 docker_image_boost_1_72:
-  image: docker:20
+  image: docker:27
   stage: build
   services:
-    - docker:20-dind
+    - docker:27-dind
   script:
     - cd ci/
     - docker build -t $CI_REGISTRY/striezel/gimli/boost_1_72:latest . -f Dockerfile_boost_1_72
