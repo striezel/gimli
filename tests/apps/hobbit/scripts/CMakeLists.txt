@@ -42,9 +42,15 @@ add_test(NAME hobbit_size_fails_to_parse
 add_test(NAME hobbit_size_but_no_numbers
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/size-but-no-numbers.${EXT} $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
 
-# test: resize of image fails
-add_test(NAME hobbit_resize_failure
-         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/resize-fail.${EXT} $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
+# Only test when sanitizer is not enabled. Resize failure is "implemented" by
+# requesting an image that is too large to fit into memory. This would trigger
+# a saniizer error with ASan enabled, but in "normal" mode it only throws an
+# exception from the failed allocation.
+if (NOT ENABLE_SANITIZER)
+  # test: resize of image fails
+  add_test(NAME hobbit_resize_failure
+           COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/resize-fail.${EXT} $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
+endif ()
 
 # test: file with name of resized image already exists
 add_test(NAME hobbit_target_file_exists

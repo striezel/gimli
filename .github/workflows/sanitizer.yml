@@ -1,0 +1,37 @@
+name: Sanitizers
+
+on: push
+
+jobs:
+  sani:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - version: 14
+            os: ubuntu-24.04
+    runs-on: ${{ matrix.os }}
+    steps:
+      # Checks-out the repository under $GITHUB_WORKSPACE.
+      - uses: actions/checkout@v4
+      - name: Install Debian packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y catch2 cmake g++-${{ matrix.version }} libjpeg-dev libpng-dev pkg-config
+          sudo apt-get install -y --no-install-recommends --no-install-suggests libboost-dev
+          sudo apt-get install -y libasan8 libubsan1
+      - name: Build with GNU GCC ${{ matrix.version }} and sanitizers enabled
+        run: |
+          export CXX=g++-${{ matrix.version }}
+          export CC=gcc-${{ matrix.version }}
+          cd $GITHUB_WORKSPACE
+          mkdir build
+          cd build
+          cmake ../ -DENABLE_SANITIZER=ON
+          cmake --build . -j2
+      - name: Tests
+        run: |
+          cd "$GITHUB_WORKSPACE"/build
+          ctest -V
+        env:
+          ASAN_OPTIONS: allocator_may_return_null=1
