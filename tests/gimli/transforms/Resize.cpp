@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the test suite for Generic Image Library (gimli).
-    Copyright (C) 2022, 2024  Dirk Stolle
+    Copyright (C) 2022, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -92,7 +92,7 @@ TEST_CASE("Resize")
     }
 
     #if !defined(__SANITIZE_ADDRESS__)
-    // Failure here is intended and forces by allocating a huge chunk of memory
+    // Failure here is intended and forced by allocating a huge chunk of memory
     // which usually is not available on normal machines, so the memory
     // allocation fails. That's intended to trigger a resize failure. However,
     // that causes a problem when ASan is run, because ASan aborts on allocation
