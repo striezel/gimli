@@ -59,3 +59,7 @@ add_test(NAME hobbit_target_file_exists
 # test: valid RGB JPEG file
 add_test(NAME hobbit_valid_jpeg_image
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/valid-file.${EXT} $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
+
+# test: special characters (umlauts) in file name
+add_test(NAME hobbit_file_name_with_umlauts
+         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/umlauts.${EXT} $<TARGET_FILE:hobbit> "${CMAKE_CURRENT_SOURCE_DIR}")
