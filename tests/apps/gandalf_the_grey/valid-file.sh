@@ -45,6 +45,6 @@ then
   exit 1
 fi
 
-rm "$2"/rgb_grey.jpeg
+unlink "$2"/rgb_grey.jpeg
 
 exit 0
