@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022, 2024  Dirk Stolle
+    Copyright (C) 2022, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
 */
 
 #if defined(_WIN32) || defined(_WIN64)
+#include <algorithm>
 #include <cstdlib>
 #endif
 #include <filesystem>
@@ -32,7 +33,7 @@
 
 void showVersion()
 {
-  std::cout << "hobbit, version 0.1.2, 2024-04-14\n"
+  std::cout << "hobbit, version 0.1.3, 2025-01-20\n"
             << "\n";
   library_versions();
   showLicenseInformation();
@@ -126,7 +127,7 @@ int main(int argc, char** argv)
             std::cerr << "Error: " << param << " is not a valid parameter!\n";
             return rcInvalidParameter;
           }
-          file = utf16;
+          file = utf16.substr(0, std::min(num_chars, utf16.size()));
           #endif
         }
         catch (...)
