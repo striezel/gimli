@@ -32,7 +32,7 @@ then
 fi
 
 EXECUTABLE="$1"
-"$EXECUTABLE" --size 12x34 "$2"/Ümläutß.jpeg
+"$EXECUTABLE" --size 12x34 "$2"/Ümläütß.jpeg
 if [ $? -ne 0 ]
 then
   echo "Executable did not exit with code 0."
