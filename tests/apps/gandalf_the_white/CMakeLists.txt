@@ -33,3 +33,7 @@ add_test(NAME gandalf_the_white_valid_jpeg_image
 # test: valid RGB JPEG file, but destination already exists
 add_test(NAME gandalf_the_white_file_name_with_number
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/file-name-with-number.${EXT} $<TARGET_FILE:gandalf-the-white> "${CMAKE_CURRENT_SOURCE_DIR}")
+
+# test: file with special characters in file name
+add_test(NAME gandalf_the_white_file_name_with_umlauts
+         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/umlauts.${EXT} $<TARGET_FILE:gandalf-the-white> "${CMAKE_CURRENT_SOURCE_DIR}")
