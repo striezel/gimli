@@ -31,7 +31,7 @@
 
 void showVersion()
 {
-  std::cout << "gandalf-the-white, version 0.1.1, 2024-04-14\n"
+  std::cout << "gandalf-the-white, version 0.1.2, 2025-01-20\n"
             << "\n";
   library_versions();
   showLicenseInformation("2023, 2024, 2025");
@@ -92,7 +92,7 @@ int main(int argc, char** argv)
             std::cerr << "Error: " << param << " is not a valid parameter!\n";
             return rcInvalidParameter;
           }
-          file = utf16;
+          file = utf16.substr(0, num_chars);
           #endif
         }
         catch (...)
