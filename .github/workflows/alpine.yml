@@ -7,8 +7,16 @@ jobs:
     runs-on: ubuntu-24.04
     container: 'alpine:3.21'
     steps:
+      - name: Prepare Git
+        run: |
+          apk update
+          apk add git
+          export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
       # Checks-out the repository under $GITHUB_WORKSPACE.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install packages
         run: |
           apk update
@@ -49,9 +57,19 @@ jobs:
           cp LICENSE artifacts/
           cp apps/readme.md artifacts/
           cp apps/third-party.md artifacts/
+          # prepare archive
+          apk add tar bzip2
+          VERSION=$(git describe --tags --always)
+          VERSION=${VERSION:-unknown_version}
+          ARCHIVE_MTIME=$(git log -1 --format="%cI")
+          ARCHIVE_MTIME=${ARCHIVE_MTIME:-1970-01-01 00:00:00 +0000}
+          DEST_NAME=gimli_${VERSION}
+          mv artifacts "$DEST_NAME"
+          tar cjf "${DEST_NAME}_linux-amd64-generic.tar.bz2" "$DEST_NAME" --sort=name --mtime="$ARCHIVE_MTIME" --owner=0 --group=0 --numeric-owner
       - name: Archive build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: gimli_vX.Y.Z_linux-amd64-generic
           path: |
-            artifacts/*
+            gimli_*.tar.bz2
+          if-no-files-found: 'error'
