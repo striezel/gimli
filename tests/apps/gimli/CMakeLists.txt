@@ -33,3 +33,7 @@ add_test(NAME gimli_duplicate_hash_parameter
 # test: valid RGB JPEG file
 add_test(NAME gimli_valid_jpeg_images
          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/valid-file.${EXT} $<TARGET_FILE:gimli> "${CMAKE_CURRENT_SOURCE_DIR}")
+
+# test: file name with umlauts
+add_test(NAME gimli_file_name_with_umlauts
+         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/umlauts.${EXT} $<TARGET_FILE:gimli> "${CMAKE_CURRENT_SOURCE_DIR}")
