@@ -1,0 +1,92 @@
+name: Alpine ARM
+
+on: push
+
+jobs:
+  alpine:
+    runs-on: ubuntu-24.04-arm
+    container:
+      image: 'alpine:3.21'
+      # Needed for Monkey-patch step.
+      volumes:
+        - /:/host
+    steps:
+      - name: Prepare Git
+        run: |
+          apk update
+          apk add git
+          export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Monkey-patch Alpine Node.js into runner
+        # This step is required because the actions refuse to run on ARM 64
+        # while in a container. So the OS ID is changed and the host's Node.js
+        # binary is replaced with the one from the container.
+        # Works for now, but may fail when Node or other stuff gets updated on
+        # the runner's side.
+        run: |
+          apk add nodejs
+          sed -i 's~ID=alpine~ID=nopine~g' /etc/os-release
+          cd /host/home/runner/runners/*/externals/
+          rm -rf node20/*
+          mkdir node20/bin
+          ln -s /usr/bin/node node20/bin/node
+      # Checks-out the repository under $GITHUB_WORKSPACE.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install packages
+        run: |
+          apk update
+          apk add boost-dev catch2 cmake g++ git make jpeg-dev libpng-dev pkgconf
+          apk add libjpeg-turbo-static libpng-static zlib-static
+      - name: Build statically linked binaries
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          mkdir build-static
+          cd build-static
+          export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
+          cmake ../ -DENABLE_LTO=ON -DENABLE_STATIC_LINKING=ON
+          cmake --build . -j2
+      - name: Run tests
+        run: |
+          cd "$GITHUB_WORKSPACE/build-static"
+          ctest -V
+      - name: Collect statically linked artifacts
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          # gandalf_the_grey
+          mkdir -p "$GITHUB_WORKSPACE"/artifacts/gandalf_the_grey
+          cp build-static/apps/gandalf_the_grey/gandalf-the-grey artifacts/gandalf_the_grey
+          cp apps/gandalf_the_grey/*.md artifacts/gandalf_the_grey
+          # gandalf_the_white
+          mkdir -p "$GITHUB_WORKSPACE"/artifacts/gandalf_the_white
+          cp build-static/apps/gandalf_the_white/gandalf-the-white artifacts/gandalf_the_white
+          cp apps/gandalf_the_white/*.md artifacts/gandalf_the_white
+          # gimli
+          mkdir -p "$GITHUB_WORKSPACE"/artifacts/gimli
+          cp build-static/apps/gimli/gimli artifacts/gimli
+          cp apps/gimli/*.md artifacts/gimli
+          # hobbit
+          mkdir -p "$GITHUB_WORKSPACE"/artifacts/hobbit
+          cp build-static/apps/hobbit/hobbit artifacts/hobbit
+          cp apps/hobbit/*.md artifacts/hobbit
+          # LICENSE + readme + third party notices
+          cp LICENSE artifacts/
+          cp apps/readme.md artifacts/
+          cp apps/third-party.md artifacts/
+          # prepare archive
+          apk add tar bzip2
+          VERSION=$(git describe --tags --always)
+          VERSION=${VERSION:-unknown_version}
+          ARCHIVE_MTIME=$(git log -1 --format="%cI")
+          ARCHIVE_MTIME=${ARCHIVE_MTIME:-1970-01-01 00:00:00 +0000}
+          DEST_NAME=gimli_${VERSION}
+          mv artifacts "$DEST_NAME"
+          tar cjf "${DEST_NAME}_linux-arm64-generic.tar.bz2" "$DEST_NAME" --sort=name --mtime="$ARCHIVE_MTIME" --owner=0 --group=0 --numeric-owner
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: gimli_vX.Y.Z_linux-arm64-generic
+          path: |
+            gimli_*.tar.bz2
+          if-no-files-found: 'error'
