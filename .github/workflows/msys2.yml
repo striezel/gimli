@@ -80,3 +80,4 @@ jobs:
           name: gimli_vX.Y.Z_win64
           path: |
             artifacts/*
+          if-no-files-found: 'error'

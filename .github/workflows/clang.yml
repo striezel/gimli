@@ -83,5 +83,6 @@ jobs:
           name: gimli_vX.Y.Z_linux-amd64-clang
           path: |
             artifacts/*
+          if-no-files-found: 'error'
         # Only run static build on latest version in the matrix.
         if: matrix.version == 18
