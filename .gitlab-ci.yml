@@ -5,9 +5,9 @@ docker_image_coverage:
     - docker:27-dind
   script:
     - cd ci/
-    - docker build -t $CI_REGISTRY/striezel/gimli/coverage:deb12 . -f Dockerfile_coverage
+    - docker build -t $CI_REGISTRY/striezel/gimli/coverage:deb13 . -f Dockerfile_coverage
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker push $CI_REGISTRY/striezel/gimli/coverage:deb12
+    - docker push $CI_REGISTRY/striezel/gimli/coverage:deb13
     - docker logout $CI_REGISTRY
   # Only build new image when the Dockerfile or the GitLab CI configuration
   # changes.
@@ -17,14 +17,14 @@ docker_image_coverage:
       - .gitlab-ci.yml
 
 coverage:
-  image: registry.gitlab.com/striezel/gimli/coverage:deb12
+  image: registry.gitlab.com/striezel/gimli/coverage:deb13
   stage: test
   before_script:
     - apt-get update && apt-get -y upgrade
   script:
     # build
-    - export CXX=g++-12
-    - export CC=gcc-12
+    - export CXX=g++-14
+    - export CC=gcc-14
     - mkdir build-coverage
     - cd build-coverage
     - cmake -DCODE_COVERAGE=ON ../
@@ -32,8 +32,8 @@ coverage:
     # tests
     - ctest -V
     # collect code coverage data
-    - lcov -c --directory . --output-file main_coverage.info
-    - lcov --remove main_coverage.info '/usr/include/*' '*tests/*' '*third-party/*' -o main_coverage_filtered.info
+    - lcov --ignore-errors inconsistent,inconsistent -c --directory . --output-file main_coverage.info
+    - lcov --ignore-errors inconsistent,inconsistent --remove main_coverage.info '/usr/include/*' '*tests/*' '*third-party/*' -o main_coverage_filtered.info
     - genhtml main_coverage_filtered.info --output-directory ../public
   coverage: /^[\t ]*lines\.*:\s*\d+.\d+\%/
   artifacts:
@@ -145,7 +145,7 @@ boost_1_72:
     - ctest -V
 
 pages:
-  image: debian:12-slim
+  image: debian:13-slim
   stage: deploy
   needs: ["coverage"]
   dependencies:
