@@ -81,7 +81,7 @@ jobs:
         # Only run static build on latest version in the matrix.
         if: matrix.version == 18
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: gimli_vX.Y.Z_linux-amd64-clang
           path: |

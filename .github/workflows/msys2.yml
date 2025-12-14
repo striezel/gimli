@@ -79,7 +79,7 @@ jobs:
           cp apps/readme.md artifacts/
           cp apps/third-party.md artifacts/
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: gimli_vX.Y.Z_win64
           path: |

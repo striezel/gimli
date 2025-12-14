@@ -92,7 +92,7 @@ jobs:
           mv artifacts "$DEST_NAME"
           tar cjf "${DEST_NAME}_linux-arm64-generic.tar.bz2" "$DEST_NAME" --sort=name --mtime="$ARCHIVE_MTIME" --owner=0 --group=0 --numeric-owner
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: gimli_vX.Y.Z_linux-arm64-generic
           path: |
