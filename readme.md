@@ -21,6 +21,7 @@ and its features. Currently, this includes the following applications:
 * [`gimli`](./apps/gimli/readme.md) - finds like images by hashes
 * [`hobbit`](./apps/hobbit/readme.md) - resizes images to smaller (or larger)
   dimensions
+* [`legolas`](./legolas/readme.md) - tests whether images are identical
 
 _Note that those example applications are licensed under GNU GPL v3, whereas the
 library code itself is licensed under the weaker copyleft license GNU LGPL v3._

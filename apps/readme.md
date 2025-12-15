@@ -16,6 +16,7 @@ and its features. Currently, this includes the following applications:
 * [`gimli`](./gimli/readme.md) - finds like images by hashes
 * [`hobbit`](./hobbit/readme.md) - resizes images to smaller (or larger)
   dimensions
+* [`legolas`](./legolas/readme.md) - tests whether images are identical
 
 ## Copyright and Licensing
 

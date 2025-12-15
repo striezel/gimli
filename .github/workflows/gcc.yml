@@ -71,6 +71,10 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE"/artifacts/hobbit
           cp build-static/apps/hobbit/hobbit artifacts/hobbit/
           cp apps/hobbit/*.md artifacts/hobbit/
+          # legolas
+          mkdir -p "$GITHUB_WORKSPACE"/artifacts/legolas
+          cp build-static/apps/legolas/legolas artifacts/legolas/
+          cp apps/legolas/*.md artifacts/legolas/
           # license and readme and third-party notices
           cp LICENSE artifacts/
           cp apps/readme.md artifacts/
