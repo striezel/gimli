@@ -41,7 +41,11 @@
 			<Add library="jpeg" />
 			<Add library="png" />
 		</Linker>
-		<Unit filename="../../lib/io/load_any.cpp" />
+		<Unit filename="../../lib/io/BitmapLoader.hpp" />
+		<Unit filename="../../lib/io/JpegLoader.hpp" />
+		<Unit filename="../../lib/io/PngLoader.hpp" />
+		<Unit filename="../../lib/io/TargaLoader.hpp" />
+		<Unit filename="../../lib/io/WebpLoader.hpp" />
 		<Unit filename="../../lib/io/load_any.hpp" />
 		<Unit filename="../../lib/types/get_type.cpp" />
 		<Unit filename="../../lib/types/get_type.hpp" />

@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -29,7 +29,8 @@ namespace gimli
 
 /** \brief Loads JPEG images.
  */
-using JpegLoader = Loader<boost::gil::jpeg_tag>;
+template<typename img_t = Image>
+using JpegLoader = Loader<boost::gil::jpeg_tag, img_t>;
 
 } // namespace
 

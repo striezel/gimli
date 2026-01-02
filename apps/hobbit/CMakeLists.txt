@@ -14,7 +14,7 @@ set(hobbit_sources
     ../../lib/io/WebpLoader.hpp
     ../../lib/io/WebpWriter.hpp
     ../../lib/io/Writer.hpp
-    ../../lib/io/load_any.cpp
+    ../../lib/io/load_any.hpp
     ../../lib/io/write_any.cpp
     ../../lib/transforms/Resize.hpp
     ../../lib/types/get_type.cpp

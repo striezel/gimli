@@ -17,7 +17,7 @@ set(gimli_tests_sources
     ../../lib/io/TargaLoader.hpp
     ../../lib/io/WebpLoader.hpp
     ../../lib/io/Writer.hpp
-    ../../lib/io/load_any.cpp
+    ../../lib/io/load_any.hpp
     ../../lib/io/write_any.cpp
     ../../lib/numeric/hamming.hpp
     ../../lib/transforms/Greyscale.cpp

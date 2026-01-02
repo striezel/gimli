@@ -9,7 +9,7 @@ set(legolas_sources
     ../../lib/io/PngLoader.hpp
     ../../lib/io/TargaLoader.hpp
     ../../lib/io/WebpLoader.hpp
-    ../../lib/io/load_any.cpp
+    ../../lib/io/load_any.hpp
     ../../lib/types/get_type.cpp
     ../../lib/types/is_bitmap.cpp
     ../../lib/types/is_jpeg.cpp

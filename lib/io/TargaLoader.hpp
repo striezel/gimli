@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -33,7 +33,8 @@ namespace gimli
  *          versions of Boost GIL. So make sure the image you try to load is
  *          really a targa file and not something else.
  */
-using TargaLoader = Loader<boost::gil::targa_tag>;
+template<typename img_t = Image>
+using TargaLoader = Loader<boost::gil::targa_tag, img_t>;
 
 } // namespace
 

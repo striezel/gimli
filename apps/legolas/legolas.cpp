@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2025  Dirk Stolle
+    Copyright (C) 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,10 +26,12 @@
 
 int legolas(const std::vector<std::filesystem::path>& files)
 {
+  using legolas_img_t = boost::gil::rgba8_image_t;
+
   // Main function already checked that at least two elements are in the vector,
   // so accessing element at index zero is not out of range.
   const auto& ref_path = files[0];
-  const auto maybe_reference_image = gimli::load_any(ref_path);
+  const auto maybe_reference_image = gimli::load_any<legolas_img_t>(ref_path);
   if (!maybe_reference_image.has_value())
   {
     std::cerr << "Error: File " << ref_path.string() << " could not be loaded.\n"
@@ -41,7 +43,7 @@ int legolas(const std::vector<std::filesystem::path>& files)
   const auto ref_view = const_view(reference_image);
   for (auto iter = std::next(files.begin()); iter != files.end(); ++iter)
   {
-    const auto maybe_image = gimli::load_any(*iter);
+    const auto maybe_image = gimli::load_any<legolas_img_t>(*iter);
     if (!maybe_image.has_value())
     {
       std::cerr << "Error: File " << iter->string() << " could not be loaded.\n"
@@ -66,7 +68,8 @@ int legolas(const std::vector<std::filesystem::path>& files)
       const auto ref_pixel = *ref_it;
       if ((get_color(img_pixel, boost::gil::red_t()) != get_color(ref_pixel, boost::gil::red_t()))
         || (get_color(img_pixel, boost::gil::green_t()) != get_color(ref_pixel, boost::gil::green_t()))
-        || (get_color(img_pixel, boost::gil::blue_t()) != get_color(ref_pixel, boost::gil::blue_t())))
+        || (get_color(img_pixel, boost::gil::blue_t()) != get_color(ref_pixel, boost::gil::blue_t()))
+        || (get_color(img_pixel, boost::gil::alpha_t()) != get_color(ref_pixel, boost::gil::alpha_t())))
       {
         std::cout << "Image " << iter->string() << " is different from the reference image " << ref_path.string() << ".\n";
         identical = false;

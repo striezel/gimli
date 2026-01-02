@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2022, 2024  Dirk Stolle
+    Copyright (C) 2022, 2024, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -33,21 +33,21 @@ namespace gimli
 
 /** \brief Template for loading a certain image type.
  */
-template<typename tag_t>
+template<typename tag_t, typename img_t = Image>
 class Loader
 {
   public:
     /** \brief Loads an image from the given path.
      *
      * \param path    the file path of the image to load
-     * \return Returns an Image, if the image could be loaded.
+     * \return Returns an image, if the image could be loaded.
      *         Returns an error message otherwise.
      */
-    static nonstd::expected<Image, std::string> load(const std::filesystem::path& path)
+    static nonstd::expected<img_t, std::string> load(const std::filesystem::path& path)
     {
       using namespace boost::gil;
 
-      Image image;
+      img_t image;
       try
       {
         read_and_convert_image(path.native(), image, tag_t());

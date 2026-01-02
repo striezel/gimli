@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the test suite for Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -32,7 +32,7 @@ TEST_CASE("JpegLoader")
   {
     SECTION("missing file")
     {
-      const auto result = JpegLoader::load("does-not-exist.jpeg");
+      const auto result = JpegLoader<boost::gil::rgb8_image_t>::load("does-not-exist.jpeg");
       REQUIRE_FALSE( result.has_value() );
       const auto& error = result.error();
       REQUIRE( error.find("failed to open") != std::string::npos );
@@ -51,7 +51,7 @@ TEST_CASE("JpegLoader")
         file.close();
       }
 
-      const auto result = JpegLoader::load(name);
+      const auto result = JpegLoader<boost::gil::rgb8_image_t>::load(name);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE( result.has_value() );
       const auto& img = result.value();
@@ -72,7 +72,7 @@ TEST_CASE("JpegLoader")
         file.close();
       }
 
-      const auto result = JpegLoader::load(name);
+      const auto result = JpegLoader<boost::gil::rgb8_image_t>::load(name);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE_FALSE( result.has_value() );
       const auto& error = result.error();

@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the Generic Image Library (gimli).
-    Copyright (C) 2025  Dirk Stolle
+    Copyright (C) 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,10 +31,10 @@
 
 void showVersion()
 {
-  std::cout << "legolas, version 0.1.0, 2025-12-15\n"
+  std::cout << "legolas, version 0.2.0, 2026-01-02\n"
             << "\n";
   library_versions();
-  showLicenseInformation("2025");
+  showLicenseInformation("2025, 2026");
 }
 
 void showHelp()

@@ -58,7 +58,6 @@
 		<Unit filename="../../lib/io/PngLoader.hpp" />
 		<Unit filename="../../lib/io/TargaLoader.hpp" />
 		<Unit filename="../../lib/io/WebpLoader.hpp" />
-		<Unit filename="../../lib/io/load_any.cpp" />
 		<Unit filename="../../lib/io/load_any.hpp" />
 		<Unit filename="../../lib/numeric/hamming.hpp" />
 		<Unit filename="../../lib/transforms/Greyscale.cpp" />

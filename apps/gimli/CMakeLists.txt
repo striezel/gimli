@@ -15,7 +15,7 @@ set(gimli_sources
     ../../lib/io/PngLoader.hpp
     ../../lib/io/TargaLoader.hpp
     ../../lib/io/WebpLoader.hpp
-    ../../lib/io/load_any.cpp
+    ../../lib/io/load_any.hpp
     ../../lib/numeric/hamming.hpp
     ../../lib/transforms/Greyscale.cpp
     ../../lib/types/get_type.cpp

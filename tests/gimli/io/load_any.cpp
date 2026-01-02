@@ -1,7 +1,7 @@
 /*
  -------------------------------------------------------------------------------
     This file is part of the test suite for Generic Image Library (gimli).
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -33,7 +33,7 @@ TEST_CASE("load_any")
   {
     SECTION("missing file")
     {
-      const auto result = load_any("does-not-exist.png");
+      const auto result = load_any<boost::gil::rgb8_image_t>("does-not-exist.png");
       REQUIRE_FALSE( result.has_value() );
     }
 
@@ -48,7 +48,7 @@ TEST_CASE("load_any")
         file.close();
       }
 
-      const auto result = load_any(name);
+      const auto result = load_any<boost::gil::rgb8_image_t>(name);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE( result.has_value() );
       const auto& img = result.value();
@@ -67,7 +67,7 @@ TEST_CASE("load_any")
         file.close();
       }
 
-      const auto result = load_any(name);
+      const auto result = load_any<boost::gil::rgb8_image_t>(name);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE( result.has_value() );
       const auto& img = result.value();
@@ -86,7 +86,7 @@ TEST_CASE("load_any")
         file.close();
       }
 
-      const auto result = load_any(name);
+      const auto result = load_any<boost::gil::rgb8_image_t>(name);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE( result.has_value() );
       const auto& img = result.value();
@@ -105,7 +105,7 @@ TEST_CASE("load_any")
         file.close();
       }
 
-      const auto result = load_any(name);
+      const auto result = load_any<boost::gil::rgb8_image_t>(name);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE( result.has_value() );
       const auto& img = result.value();
@@ -125,7 +125,7 @@ TEST_CASE("load_any")
         file.close();
       }
 
-      const auto result = load_any(name);
+      const auto result = load_any<boost::gil::rgb8_image_t>(name);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE( result.has_value() );
       const auto& img = result.value();
@@ -148,7 +148,7 @@ TEST_CASE("load_any")
         file.close();
       }
 
-      const auto result = load_any(name, types::ImageType::Unknown);
+      const auto result = load_any<boost::gil::rgb8_image_t>(name, types::ImageType::Unknown);
       REQUIRE( std::remove(name) == 0 );
       REQUIRE_FALSE( result.has_value() );
       const auto error = result.error();
