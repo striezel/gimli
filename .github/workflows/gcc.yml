@@ -82,7 +82,7 @@ jobs:
         # Only run static build on latest version in the matrix.
         if: matrix.version == 14
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: gimli_vX.Y.Z_linux-amd64-gcc
           path: |
