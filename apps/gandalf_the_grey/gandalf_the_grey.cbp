@@ -35,6 +35,7 @@
 			<Add option="-Wextra" />
 			<Add option="-Wall" />
 			<Add option="-std=c++17" />
+			<Add option="-Wold-style-cast" />
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Linker>
